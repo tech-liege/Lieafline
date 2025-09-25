@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://lieafline.vercel.app'],
+  origin: ['http://localhost:3000', 'http://localhost:5173', 'https://lieafline.vercel.app'],
   methods: 'GET,POST,PATCH,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, // only if you're using cookies or need credentials
@@ -18,15 +18,17 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.get('/api/health', (req, res) => {
+app.get('/server/health', (req, res) => {
   res.json({
-    text: 'Lieafline API running',
+    text: 'Lieafline server running',
     status: true,
   });
 });
 
 const authRoute = require('./routes/auth');
-app.use('/api/auth', authRoute);
+const userRoute = require('./routes/user');
+app.use('/server/auth', authRoute);
+app.use('/server/user', userRoute);
 
 // Connect to MongoDB and start the server
 

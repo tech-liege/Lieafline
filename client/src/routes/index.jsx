@@ -9,21 +9,69 @@ import ErrorPage from '../pages/ErrorPage';
 import Dashboard from '../pages/Dashboard';
 import About from '../pages/About';
 import Settings from '../pages/Settings';
+import PrivateRoute from '../component/PrivateRoute';
+import PublicOnly from '../component/PublicOnly';
 
 export const router = createBrowserRouter([
-  { path: '/authenticate', element: <Authenticate />, errorElement: <ErrorPage /> },
+  {
+    path: '/authenticate',
+    element: (
+      <PublicOnly>
+        <Authenticate />
+      </PublicOnly>
+    ),
+    errorElement: <ErrorPage />,
+  },
   {
     path: '/',
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'skills', element: <Skills /> },
-      { path: 'progress', element: <Progress /> },
-      { path: 'profile', element: <Profile /> },
-      { path: 'dashboard', element: <Dashboard /> },
-      { path: 'about', element: <About /> },
-      { path: 'settings', element: <Settings /> },
+      {
+        path: 'skills',
+        element: (
+          <PrivateRoute>
+            <Skills />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'progress',
+        element: (
+          <PrivateRoute>
+            <Progress />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'profile',
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'dashboard',
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'about',
+        element: <About />,
+      },
+      {
+        path: 'settings',
+        element: (
+          <PrivateRoute>
+            <Settings />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);
