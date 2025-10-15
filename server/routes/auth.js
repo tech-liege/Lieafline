@@ -7,24 +7,26 @@ const sendEmail = require('../utils/sendEmail');
 
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'secret123';
-const bcryptSaltRounds = process.env.BCRYPT_SALT_ROUNDS || 10;
+const bcryptSaltRounds = parseInt(process.env.SALT_ROUNDS);
 
 // Register a new user
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
+  const bcryptSalt = await bcrypt.genSalt(bcryptSaltRounds);
   try {
-    const existingUser = await User.findOne({ email });
+    var existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ message: 'Email has already been used' });
     existingUser = await User.findOne({ username });
     if (existingUser) return res.status(400).json({ message: 'Username already exists' });
 
-    const hashedPassword = await bcrypt.hash(password, bcryptSaltRounds);
+    const hashedPassword = await bcrypt.hash(password, bcryptSalt);
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
     const token = jwt.sign({ id: newUser._id }, JWT_SECRET);
     res.status(201).json({ token });
   } catch (error) {
     res.status(500).json({ message: 'Internal Server Error' });
+    console.log(error);
   }
 });
 
@@ -55,7 +57,7 @@ router.post('/forgot-password', async (req, res) => {
 
   const token = crypto.randomBytes(32).toString('hex');
   user.resetToken = token;
-  user.resetTokenExpiry = Date.now() + 1000 * 60 * 10; // 10 min
+  user.resetTokenExpiry = Date.now() + 1000 * 60 * 15; // 15 min
   await user.save();
 
   const link = `https://lieafline.vercel.app/reset-password/${token}`;

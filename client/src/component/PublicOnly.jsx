@@ -5,7 +5,7 @@ function PublicOnly({ children }) {
   if (!token) {
     return children;
   }
-  return <Navigate to='/' replace />;
+  return <Navigate to='/dashboard' replace />;
 }
 
 export default PublicOnly;

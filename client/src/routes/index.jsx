@@ -14,20 +14,33 @@ import PublicOnly from '../component/PublicOnly';
 
 export const router = createBrowserRouter([
   {
-    path: '/authenticate',
-    element: (
-      <PublicOnly>
-        <Authenticate />
-      </PublicOnly>
-    ),
+    path: '/authenticate/:mode',
+    element: <App />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: (
+          <PublicOnly>
+            <Authenticate />
+          </PublicOnly>
+        ),
+      },
+    ],
   },
   {
     path: '/',
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Home /> },
+      {
+        index: true,
+        element: (
+          <PublicOnly>
+            <Home />
+          </PublicOnly>
+        ),
+      },
       {
         path: 'skills',
         element: (

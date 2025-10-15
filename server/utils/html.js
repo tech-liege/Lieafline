@@ -13,7 +13,7 @@ const resetPassword = (user, link) => {
         overflow: hidden;
         text-align: center;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
       }
@@ -57,7 +57,7 @@ const resetPassword = (user, link) => {
   <body>
     <div class="email-container">
       <div class="email-header">
-        <h2 style="margin: 0;">Task Tracker</h2>
+        <h2 style="margin: 0;">Lieafline</h2>
       </div>
       <div class="email-greeting">
         <h1>Hi ${user.username}!</h1>

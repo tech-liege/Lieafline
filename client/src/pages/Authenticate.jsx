@@ -10,6 +10,9 @@ function AuthForm() {
   const [token, setToken] = useState();
 
   const AUTH_SERVER_URL = import.meta.env.VITE_AUTH_SERVER_URL;
+
+  console.log('url: ', AUTH_SERVER_URL);
+
   const handleSubmit = e => {
     e.preventDefault();
     setIsLoading(true);
@@ -21,7 +24,7 @@ function AuthForm() {
       document.body.style.cursor = 'default';
       return;
     }
-    if (mode === 'register' && !form.username) {
+    if (mode === 'signup' && !form.username) {
       toast.error('Username is required!');
       setIsLoading(false);
       document.body.style.cursor = 'default';
@@ -49,7 +52,7 @@ function AuthForm() {
           setIsLoading(false);
           document.body.style.cursor = 'default';
         });
-    } else if (mode === 'register') {
+    } else if (mode === 'signup') {
       register(AUTH_SERVER_URL, form.username, form.email, form.password)
         .then(data => {
           if (data.token) {

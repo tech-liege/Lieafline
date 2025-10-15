@@ -7,12 +7,11 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
 const corsOptions = {
   origin: ['http://localhost:3000', 'http://localhost:5173', 'https://lieafline.vercel.app'],
-  methods: 'GET,POST,PATCH,DELETE',
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true, // only if you're using cookies or need credentials
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
@@ -32,10 +31,29 @@ app.use('/server/user', userRoute);
 
 // Connect to MongoDB and start the server
 
-mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(
-    connected => console.log('MongoDB connected'),
-    () => app.listen(PORT, () => console.log(`Server running on ${PORT}`))
-  )
-  .catch(err => console.error(err));
+let loop = 0;
+
+const connectWithRetry = () => {
+  if (loop < 20) {
+    console.log('🕐 Attempting MongoDB connection...');
+    mongoose
+      .connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+      .then(() => {
+        console.log('✅ MongoDB connected.');
+        app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+      })
+      .catch(err => {
+        console.error('❌ MongoDB connection failed. Retrying in 5 seconds...', err.message);
+        setTimeout(connectWithRetry, 5000); // retry after 5 seconds
+      });
+  } else {
+    console.log('retry limited to avoid infinite loop');
+  }
+
+  loop += 1;
+};
+
+connectWithRetry();

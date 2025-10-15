@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 
 const sendMail = async (to, subject, html) => {
   const mailOptions = {
-    from: `"Task Tracker 👨‍💻" <${process.env.GMAIL_USER}>`,
+    from: `"Lieafline" <${process.env.GMAIL_USER}>`,
     to,
     subject,
     html,
