@@ -8,21 +8,39 @@ import App from '../App';
 import ErrorPage from '../pages/ErrorPage';
 import Dashboard from '../pages/Dashboard';
 import About from '../pages/About';
+import ForgotPassword from '../pages/ForgotPassword';
+import ResetPassword from '../pages/ResetPassword';
 import Settings from '../pages/Settings';
 import PrivateRoute from '../component/PrivateRoute';
 import PublicOnly from '../component/PublicOnly';
 
 export const router = createBrowserRouter([
   {
-    path: '/authenticate/:mode',
+    path: '/auth',
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
+        path: ':mode',
         element: (
           <PublicOnly>
             <Authenticate />
+          </PublicOnly>
+        ),
+      },
+      {
+        path: 'forgot-password',
+        element: (
+          <PublicOnly>
+            <ForgotPassword />
+          </PublicOnly>
+        ),
+      },
+      {
+        path: 'reset-password',
+        element: (
+          <PublicOnly>
+            <ResetPassword />
           </PublicOnly>
         ),
       },
