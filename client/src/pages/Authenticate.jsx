@@ -105,7 +105,7 @@ function AuthForm() {
       </p>
       {mode === 'login' && (
         <p>
-          Forgot your password? <Link to='/forgot-password'>Reset It</Link>
+          Forgot your password? <Link to='/auth/forgot-password'>Reset It</Link>
         </p>
       )}
     </form>

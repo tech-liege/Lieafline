@@ -13,7 +13,7 @@ const resetPassword = (user, link) => {
         overflow: hidden;
         text-align: center;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
       }
