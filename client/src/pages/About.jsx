@@ -1,4 +1,4 @@
-export default function About() {
+function About() {
   return (
     <div className='prose dark:prose-invert'>
       <h1>About Lieafline</h1>
@@ -6,3 +6,5 @@ export default function About() {
     </div>
   );
 }
+
+export default About;

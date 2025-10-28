@@ -23,9 +23,16 @@ export const forgotPassword = (url, email) =>
     body: JSON.stringify({ email: email }),
   }).then(res => res.json());
 
-export const resetPassword = (url, resetToken, newPassword) =>
+export const resetPasswordApi = (url, resetToken, newPassword) =>
   fetch(`${url}/reset-password/${resetToken}`, {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify({ newPassword: newPassword }),
+  }).then(res => res.json());
+
+export const verifyResetToken = (url, resetToken) =>
+  fetch(`${url}/verifyResetToken`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify({ token: resetToken }),
   }).then(res => res.json());

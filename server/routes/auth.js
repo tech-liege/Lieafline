@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ id: user._id }, JWT_SECRET);
     res.status(200).json({ token });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', err: error });
   }
 });
 
@@ -60,12 +60,24 @@ router.post('/forgot-password', async (req, res) => {
   user.resetTokenExpiry = Date.now() + 1000 * 60 * 15; // 15 min
   await user.save();
 
-  const link = `https://lieafline.vercel.app/reset-password/${token}`;
+  const link = `https://lieafline.vercel.app/auth/reset-password/${token}`;
   const { resetPassword } = require('../utils/html.js');
   const html = resetPassword(user, link);
   await sendEmail(user.email, 'Reset Your Password', html);
 
   res.json({ message: 'Reset link sent' });
+});
+
+router.post('/verifyResetToken', async (req, res) => {
+  const { token } = req.body;
+  const user = await User.findOne({
+    resetToken: token,
+    resetTokenExpiry: { $gt: Date.now() },
+  });
+
+  if (!user) return res.status(400).json({ isValid: false });
+
+  res.json({ isValid: true });
 });
 
 router.post('/reset-password/:token', async (req, res) => {

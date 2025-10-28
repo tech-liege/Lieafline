@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function Home() {
+function Home() {
   return (
     <div className='m-4 lg:container'>
       <div className='flex flex-row flex-wrap w-full h-auto m-auto'>
@@ -20,4 +20,5 @@ export default function Home() {
     </div>
   );
 }
-// This page will be used as hero page
+
+export default Home;

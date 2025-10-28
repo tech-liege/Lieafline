@@ -1,6 +1,6 @@
 import ProgressBar from './ProgressBar';
 
-export default function SkillCard({ title, desc, percent = 0, tags = [] }) {
+function SkillCard({ title, desc, percent = 0, tags = [] }) {
   return (
     <div className='rounded-xl border p-4 shadow-sm hover:shadow transition-shadow'>
       <div className='mb-2 flex items-center justify-between'>
@@ -21,3 +21,5 @@ export default function SkillCard({ title, desc, percent = 0, tags = [] }) {
     </div>
   );
 }
+
+export default SkillCard;

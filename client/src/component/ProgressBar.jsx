@@ -1,4 +1,4 @@
-export default function ProgressBar({ value = 0 }) {
+function ProgressBar({ value = 0 }) {
   const clamped = Math.max(0, Math.min(100, value));
   return (
     <div className='w-full'>
@@ -9,3 +9,5 @@ export default function ProgressBar({ value = 0 }) {
     </div>
   );
 }
+
+export default ProgressBar;

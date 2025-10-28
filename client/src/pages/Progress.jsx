@@ -1,4 +1,4 @@
-export default function Progress() {
+function Progress() {
   return (
     <div>
       <h2>Progress Page</h2>
@@ -6,4 +6,5 @@ export default function Progress() {
     </div>
   );
 }
-// 
+
+export default Progress;

@@ -3,27 +3,26 @@ import Sidebar from './component/Layout/Sidebar';
 import Footer from './component/Layout/Footer';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 export default function App() {
-  const [token, setToken] = useState('');
-  if (localStorage.getItem('token')) {
-    setToken(localStorage.getItem('token'));
-  }
+  const [token, setToken] = useState(() => localStorage.getItem('token') || '');
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setToken(localStorage.getItem('token') || '');
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   return (
     <div className=''>
       <Navbar />
       <div className=''>
-        {token ? (
-          <div className=''>
-            <Sidebar />
-          </div>
-        ) : (
-          ''
-        )}
+        {token && <Sidebar />}
         <div className=''>
           <Outlet />
         </div>

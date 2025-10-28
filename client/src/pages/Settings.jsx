@@ -1,4 +1,4 @@
-export default function Settings() {
+function Settings() {
   return (
     <div className='space-y-4'>
       <h1 className='text-2xl font-bold'>Settings</h1>
@@ -6,3 +6,5 @@ export default function Settings() {
     </div>
   );
 }
+
+export default Settings;

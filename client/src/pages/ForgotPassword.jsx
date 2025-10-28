@@ -39,7 +39,7 @@ function ForgotPassword() {
           {isLoading ? 'Sending...' : 'Send Reset Link'}
         </button>
         <p>
-          Remembered your password? <Link to='/authenticate/login'>Login</Link>
+          Remembered your password? <Link to='/auth/login'>Login</Link>
         </p>
       </form>
     </div>

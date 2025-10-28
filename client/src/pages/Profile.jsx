@@ -1,9 +1,10 @@
-export default function Skills() {
+function Profile() {
   return (
     <div>
-      <h2>Skills Page</h2>
-      <p>Your skills will be displayed here.</p>
+      <h2>Profile Page</h2>
+      <p>Your profile will be displayed here.</p>
     </div>
   );
 }
-//
+
+export default Profile;
