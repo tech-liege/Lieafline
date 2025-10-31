@@ -13,12 +13,21 @@ import ResetPassword from '../pages/ResetPassword';
 import Settings from '../pages/Settings';
 import PrivateRoute from '../component/PrivateRoute';
 import PublicOnly from '../component/PublicOnly';
+import { AuthProvider } from '../context/AuthContext';
 
 export const router = createBrowserRouter([
   {
     path: '/auth',
-    element: <App />,
-    errorElement: <ErrorPage />,
+    element: (
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    ),
+    errorElement: (
+      <AuthProvider>
+        <ErrorPage />
+      </AuthProvider>
+    ),
     children: [
       {
         path: ':mode',
@@ -48,8 +57,16 @@ export const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <App />,
-    errorElement: <ErrorPage />,
+    element: (
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    ),
+    errorElement: (
+      <AuthProvider>
+        <ErrorPage />
+      </AuthProvider>
+    ),
     children: [
       {
         index: true,

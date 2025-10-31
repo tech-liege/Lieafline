@@ -26,8 +26,10 @@ app.get('/server/health', (req, res) => {
 
 const authRoute = require('./routes/auth');
 const userRoute = require('./routes/user');
+const skillRoute = require('./routes/skill');
 app.use('/server/auth', authRoute);
 app.use('/server/user', userRoute);
+app.use('/server/skill', skillRoute);
 
 // Connect to MongoDB and start the server
 
@@ -47,7 +49,7 @@ const connectWithRetry = () => {
       })
       .catch(err => {
         console.error('❌ MongoDB connection failed. Retrying in 5 seconds...', err.message);
-        setTimeout(connectWithRetry, 5000); // retry after 5 seconds
+        setTimeout(connectWithRetry, 10000); // retry after 10 seconds
       });
   } else {
     console.log('retry limited to avoid infinite loop');

@@ -3,32 +3,24 @@ import Sidebar from './component/Layout/Sidebar';
 import Footer from './component/Layout/Footer';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { useEffect, useState } from 'react';
+import { useAuth } from './hooks/useAuth';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 export default function App() {
-  const [token, setToken] = useState(() => localStorage.getItem('token') || '');
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setToken(localStorage.getItem('token') || '');
-    };
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+  const { token } = useAuth();
 
   return (
     <div className=''>
       <Navbar />
-      <div className=''>
+      <div className='flex flex-row min-h-screen'>
         {token && <Sidebar />}
-        <div className=''>
+        <div className='body'>
           <Outlet />
         </div>
       </div>
       <Footer />
-      <ToastContainer position={window.innerWidth < 600 ? 'bottom-center' : 'top-right'} autoClose={3000} />
+      <ToastContainer position={window.innerWidth < 768 ? 'bottom-center' : 'top-right'} autoClose={3000} />
     </div>
   );
 }

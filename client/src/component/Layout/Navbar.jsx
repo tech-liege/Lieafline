@@ -1,21 +1,12 @@
-import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function Navbar() {
-  const [token, setToken] = useState(() => localStorage.getItem('token') || '');
+  const { logout, token } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setToken(localStorage.getItem('token') || '');
-    };
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
-
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    setToken('');
+    logout();
     navigate('/auth/login');
   };
 
@@ -30,7 +21,7 @@ export default function Navbar() {
       </div>
 
       <div className='flex-1'>
-        <Link to='/' className='text-xl text-gray-800 hover:text-gray-900'>
+        <Link to='/' className='text-xl text-gray-300 font-bold font-serif  hover:text-gray-200'>
           Lieafline
         </Link>
       </div>
@@ -72,10 +63,10 @@ export default function Navbar() {
               </div>
               <ul tabIndex={0} className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow'>
                 <li>
-                  <a>Profile</a>
+                  <Link to={'/profile'}>Profile</Link>
                 </li>
                 <li>
-                  <a>Settings</a>
+                  <Link to={'/settings'}>Settings</Link>
                 </li>
                 <li>
                   <button onClick={handleLogout}>Logout</button>

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-body {
-  @apply bg-gray-300 text-base-content
+.body {
+  @apply bg-base-300 text-base-content w-full p-10 m-0 min-h-screen
 }
