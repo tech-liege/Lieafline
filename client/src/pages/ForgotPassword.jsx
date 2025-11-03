@@ -3,11 +3,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { forgotPassword } from '../services/authApi';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const AUTH_SERVER_URL = import.meta.env.VITE_AUTH_SERVER_URL;
+  const { AUTH_SERVER_URL } = useAuth();
 
   const handleSubmit = async e => {
     e.preventDefault();

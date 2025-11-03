@@ -24,12 +24,21 @@ app.get('/server/health', (req, res) => {
   });
 });
 
+// routes
 const authRoute = require('./routes/auth');
 const userRoute = require('./routes/user');
 const skillRoute = require('./routes/skill');
 app.use('/server/auth', authRoute);
 app.use('/server/user', userRoute);
 app.use('/server/skill', skillRoute);
+
+
+// error handling
+const { notFound, errorHandler } = require('./middleware/errorM');
+
+app.use(notFound);
+app.use(errorHandler);
+
 
 // Connect to MongoDB and start the server
 

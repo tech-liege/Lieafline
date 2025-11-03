@@ -10,9 +10,8 @@ function AuthForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const { loginContext } = useAuth();
+  const { loginContext, AUTH_SERVER_URL } = useAuth();
 
-  const AUTH_SERVER_URL = import.meta.env.VITE_AUTH_SERVER_URL;
   const m = useParams().mode;
 
   useEffect(() => {

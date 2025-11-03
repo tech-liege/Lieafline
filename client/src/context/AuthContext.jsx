@@ -6,6 +6,11 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem('token') || '');
 
+  const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
+  const SKILL_SERVER_URL = import.meta.env.VITE_SKILL_SERVER_URL;
+  const AUTH_SERVER_URL = import.meta.env.VITE_AUTH_SERVER_URL;
+  const USER_SERVER_URL = import.meta.env.VITE_USER_SERVER_URL;
+
   if (token) {
     try {
       const { exp } = jwtDecode(token);
@@ -18,15 +23,6 @@ export function AuthProvider({ children }) {
       setToken('');
     }
   }
-
-  const mock = [
-    { title: 'JavaScript Fundamentals', desc: 'Syntax, arrays, objects, ES6+', percent: 70, tags: ['JS', 'Core'] },
-    { title: 'React Basics', desc: 'Hooks, components, props/state', percent: 45, tags: ['React'] },
-    { title: 'Data Structures', desc: 'Trees, graphs, maps', percent: 25, tags: ['CS'] },
-    { title: 'JavaScript Advanced', desc: 'Syntax, arrays, objects, ES6+', percent: 7, tags: ['JS', 'Core'] },
-    { title: 'React Advanced', desc: 'Hooks, components, props/state', percent: 5, tags: ['React'] },
-    { title: 'Data Structures Advanced', desc: 'Trees, graphs, maps', percent: 10, tags: ['CS'] },
-  ];
 
   useEffect(() => {
     // keep token in sync across tabs
@@ -45,7 +41,21 @@ export function AuthProvider({ children }) {
     setToken('');
   };
 
-  return <AuthContext.Provider value={{ token, mock, loginContext, logout, isAuthenticated: !!token }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        token,
+        BASE_SERVER_URL,
+        SKILL_SERVER_URL,
+        AUTH_SERVER_URL,
+        USER_SERVER_URL,
+        loginContext,
+        logout,
+        isAuthenticated: !!token,
+      }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export const AuthContexts = AuthContext;

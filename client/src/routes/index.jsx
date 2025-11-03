@@ -2,6 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import Authenticate from '../pages/Authenticate';
 import Home from '../pages/Home';
 import Skills from '../pages/Skills';
+import CreateSkill from '../pages/CreateSkill';
+import EditSkill from '../pages/EditSkill';
 import Progress from '../pages/Progress';
 import Profile from '../pages/Profile';
 import App from '../App';
@@ -81,6 +83,30 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Skills />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'skills/:skillId',
+        element: (
+          <PrivateRoute>
+            <Skills />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'createSkill',
+        element: (
+          <PrivateRoute>
+            <CreateSkill />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'editSkill/:skillId',
+        element: (
+          <PrivateRoute>
+            <EditSkill />
           </PrivateRoute>
         ),
       },
