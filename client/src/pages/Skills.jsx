@@ -1,5 +1,5 @@
 import SkillCard from '../component/SkillCard';
-import SkillTree from '../component/SkillTree/SkillTree';
+import { SkillTree } from '../component/SkillTree/SkillTree';
 import Stats from '../component/Stats';
 import { Link, useParams } from 'react-router-dom';
 import { getCUSkills, getOneSkill } from '../services/skillApi';
