@@ -24,6 +24,8 @@ export default function EditSkill() {
             tags: skill.tags.join(', '),
             phases: skill.phases || [],
           });
+        } else if (data.message === 'Skill not found') {
+          toast.error('Skill not found')
         }
       })
       .catch(err => {
@@ -107,6 +109,9 @@ export default function EditSkill() {
     return <Navigate to='/skills' replace />;
   }
 
+  if (!form.title) {
+    return <div>Skill Not Found</div>
+  }
   return (
     <div className='max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md'>
       <h2 className='text-2xl font-semibold text-gray-800 mb-6 text-center'>Edit Skill</h2>
