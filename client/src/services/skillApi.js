@@ -3,11 +3,11 @@ const getHeaders = token => ({
   Authorization: `Bearer ${token}`,
 });
 
-export const createSkill = (url, token, title, description, tags, phases) =>
+export const createSkill = (url, token, data) =>
   fetch(`${url}/create`, {
     method: 'POST',
     headers: getHeaders(token),
-    body: JSON.stringify({ title, description, tags, phases }),
+    body: JSON.stringify(data),
   }).then(res => res.json());
 
 export const getCUSkills = (url, token) =>
