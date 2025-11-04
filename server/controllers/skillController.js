@@ -4,7 +4,6 @@ const Skill = require('../model/Skill');
 exports.createSkill = async (req, res) => {
   try {
     const { title, description, tags, phases } = req.body;
-    console.log('current User: ',req.user);
 
     const skill = new Skill({
       title,
@@ -17,7 +16,6 @@ exports.createSkill = async (req, res) => {
     const savedSkill = await skill.save();
     res.status(201).json({ skill: savedSkill, message: 'success' });
   } catch (error) {
-    console.error('failed to create', error)
     res.status(500).json({ message: 'Failed to create skill', error: error.message });
   }
 };

@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/User');
 const JWT_SECRET = process.env.JWT_SECRET || 'secret123';
 
-const authM = (req, res, next) => {
+const authM = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
     return res.status(401).json({ message: 'Unauthorized' });
@@ -12,7 +12,7 @@ const authM = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    const user = User.findById(decoded.id);
+    const user = await User.findById(decoded.id).select('-password');
     if (user) {
       req.user = user;
       next();
