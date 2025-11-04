@@ -10,7 +10,7 @@ exports.createSkill = async (req, res) => {
       description,
       tags,
       phases,
-      createdBy: req.user.id, // from auth middleware
+      createdBy: req.user._id, // from auth middleware
     });
 
     const savedSkill = await skill.save();
