@@ -18,7 +18,9 @@ export const SkillTree = ({ skillsData }) => {
     const nodes = [];
     const links = [];
 
-    skillsData.forEach(skill => {
+    const skillsArray = Array.isArray(skillsData) ? skillsData : [skillsData];
+
+    skillsArray.forEach(skill => {
       const skillId = `skill-${skill._id}`;
       nodes.push({
         id: skillId,
