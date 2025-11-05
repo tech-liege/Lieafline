@@ -1,28 +1,27 @@
 import { NavLink } from 'react-router-dom';
+import { LayoutDashboard, Code2, BarChart3 } from 'lucide-react'; // Optional icons (if lucide-react is installed)
 
 export default function Sidebar() {
-  const link = 'px-3 py-2 rounded hover:bg-green-700 dark:hover:bg-green-700';
-  const active = 'bg-green-600 dark:bg-green-600';
+  const baseLink =
+    'flex items-center gap-3 px-4 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200';
+  const activeLink = 'bg-blue-100 text-blue-600 font-medium shadow-sm';
+
+  const navItems = [
+    { to: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} /> },
+    { to: '/skills', label: 'Skills', icon: <Code2 size={18} /> },
+    { to: '/progress', label: 'Progress', icon: <BarChart3 size={18} /> },
+  ];
 
   return (
-    <aside className='w-40 bg-green-800  p-4 h-screen hidden md:block'>
-      <ul>
-        <li className='mb-3'>
-          <NavLink to='/dashboard' className={({ isActive }) => `${link} ${isActive && active}`}>
-            Dashboard
+    <div className='h-full p-6 bg-white border-r border-gray-200'>
+      <nav className='space-y-2'>
+        {navItems.map(({ to, label, icon }) => (
+          <NavLink key={to} to={to} className={({ isActive }) => `${baseLink} ${isActive ? activeLink : ''}`}>
+            {icon}
+            <span>{label}</span>
           </NavLink>
-        </li>
-        <li className='mb-3'>
-          <NavLink to='/skills' className={({ isActive }) => `${link} ${isActive && active}`}>
-            Skills
-          </NavLink>
-        </li>
-        <li className='mb-3'>
-          <NavLink to='/progress' className={({ isActive }) => `${link} ${isActive && active}`}>
-            Progress
-          </NavLink>
-        </li>
-      </ul>
-    </aside>
+        ))}
+      </nav>
+    </div>
   );
 }

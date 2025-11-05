@@ -1,7 +1,7 @@
 import SkillCard from '../component/SkillCard';
 import { SkillTree } from '../component/SkillTree/SkillTree';
 import Stats from '../component/Stats';
-import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { getCUSkills, getOneSkill } from '../services/skillApi';
 import { useAuth } from '../hooks/useAuth';
 import { useEffect, useState } from 'react';
@@ -13,11 +13,14 @@ function Skills() {
   const [CUSkills, setCUSkills] = useState([]);
   const [delSkill, setDelSkill] = useState({ skillTitle: '', id: '' });
   const [modState, setModState] = useState('hidden');
+
   const { token, SKILL_SERVER_URL } = useAuth();
   const { skillId } = useParams();
   const [searchParams, _] = useSearchParams();
+  const navigate = useNavigate();
 
-  const { delSuccess, delSkillTitle } = searchParams;
+  const delSuccess = searchParams.get('delSuccess');
+  const delSkillTitle = searchParams.get('delSkillTitle');
 
   useEffect(() => {
     async function fetchData() {
@@ -104,7 +107,7 @@ function Skills() {
                 key={skill._id || skill.title}
                 {...skill}
                 onEdit={() => {
-                  return <Navigate to={`/editSkill/${skill._id}`} />;
+                  navigate(`/editSkill/${skill._id}`);
                 }}
                 onDelete={() => {
                   openDeleteModal(skill._id, skill.title);
@@ -133,7 +136,7 @@ function Skills() {
               className='mt-4 inline-flex items-center gap-2 rounded-lg bg-red-500 text-white text-sm font-medium px-4 py-2 shadow-sm hover:bg-red-600 transition-colors'>
               Delete
             </Link>
-            <div className='btn btn-neutral' onClick={closeDeleteModal()}>
+            <div className='btn btn-neutral' onClick={closeDeleteModal}>
               Cancel
             </div>
           </div>

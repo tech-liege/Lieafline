@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { Menu, Bell, User } from 'lucide-react'; // modern minimal icons
 
 export default function Navbar() {
   const { logout, token } = useAuth();
@@ -11,84 +12,69 @@ export default function Navbar() {
   };
 
   return (
-    <div className='navbar bg-base-100 shadow-sm'>
-      <div className='flex-none'>
-        <button className='btn btn-square btn-ghost lg:hidden'>
-          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' className='inline-block h-5 w-5 stroke-current'>
-            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M4 6h16M4 12h16M4 18h16'></path>
-          </svg>
-        </button>
-      </div>
+    <nav className='w-full bg-white border-b border-gray-200 shadow-sm'>
+      <div className='max-w-7xl mx-auto px-4 md:px-8 flex justify-between items-center h-16'>
+        {/* Left Section */}
+        <div className='flex items-center gap-2'>
+          <button className='md:hidden p-2 text-gray-500 hover:text-gray-700 rounded-lg transition'>
+            <Menu className='h-5 w-5' />
+          </button>
 
-      <div className='flex-1'>
-        <Link to='/' className='text-xl text-gray-300 font-bold font-serif  hover:text-gray-200'>
-          Lieafline
-        </Link>
-      </div>
+          <Link to='/' className='text-xl font-bold tracking-tight bg-gradient-to-r from-blue-700 to-black bg-clip-text text-transparent'>
+            Lieafline
+          </Link>
+        </div>
 
-      <div className='flex gap-2'>
-        {token ? (
-          <>
-            {/* Notifications */}
-            <div className='dropdown dropdown-end'>
-              <div tabIndex={0} role='button' className='btn btn-ghost btn-circle'>
-                <div className='indicator'>
-                  <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth='2'
-                      d='M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z'
-                    />
-                  </svg>
-                  <span className='badge badge-sm indicator-item'>8</span>
-                </div>
-              </div>
-              <div tabIndex={0} className='card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow'>
-                <div className='card-body'>
-                  <span className='text-lg font-bold'>8 Notifications</span>
-                  <div className='card-actions'>
-                    <button className='btn btn-primary btn-block'>View Notifications</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Profile Dropdown */}
-            <div className='dropdown dropdown-end'>
-              <div tabIndex={0} role='button' className='btn btn-ghost btn-circle avatar'>
-                <div className='w-10 rounded-full'>
-                  <img alt='Avatar' src='/avatar/batperson.webp' />
-                </div>
-              </div>
-              <ul tabIndex={0} className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow'>
-                <li>
-                  <Link to={'/profile'}>Profile</Link>
-                </li>
-                <li>
-                  <Link to={'/settings'}>Settings</Link>
-                </li>
-                <li>
-                  <button onClick={handleLogout}>Logout</button>
-                </li>
-              </ul>
-            </div>
-          </>
-        ) : (
-          <>
-            <Link to='/auth/login'>
-              <button className='btn border-[2px] border-primary bg-inherit text-primary hover:bg-primary hover:text-primary-content'>
-                Login
+        {/* Right Section */}
+        <div className='flex items-center gap-4'>
+          {token ? (
+            <>
+              {/* Notifications */}
+              <button className='relative p-2 text-gray-500 hover:text-gray-700 rounded-lg transition' aria-label='Notifications'>
+                <Bell className='h-5 w-5' />
+                <span className='absolute -top-1 -right-1 bg-blue-600 text-white text-xs font-semibold px-1.5 py-0.5 rounded-full'>8</span>
               </button>
-            </Link>
-            <Link to='/auth/signup'>
-              <button className='btn border-[2px] border-primary bg-inherit text-primary hover:bg-primary hover:text-primary-content'>
-                Sign Up
-              </button>
-            </Link>
-          </>
-        )}
+
+              {/* Profile Dropdown */}
+              <div className='relative group'>
+                <button className='flex items-center focus:outline-none'>
+                  <img src='/avatar/batperson.webp' alt='Avatar' className='h-9 w-9 rounded-full border border-gray-300 object-cover' />
+                </button>
+
+                {/* Dropdown Menu */}
+                <ul className='absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-xl shadow-md opacity-0 group-hover:opacity-100 group-hover:translate-y-1 transition-all transform origin-top-right duration-200 z-20'>
+                  <li>
+                    <Link to='/profile' className='block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-t-xl'>
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to='/settings' className='block px-4 py-2 text-gray-700 hover:bg-gray-100'>
+                      Settings
+                    </Link>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout} className='w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-b-xl'>
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </>
+          ) : (
+            <>
+              <Link to='/auth/login'>
+                <button className='px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition'>
+                  Login
+                </button>
+              </Link>
+              <Link to='/auth/signup'>
+                <button className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition'>Sign Up</button>
+              </Link>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </nav>
   );
 }
