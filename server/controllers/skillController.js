@@ -70,7 +70,7 @@ exports.deleteSkill = async (req, res) => {
     }
 
     await skill.deleteOne();
-    res.status(200).json({ message: 'Skill deleted successfully' });
+    res.status(200).json({ message: 'Skill deleted successfully', skill: skill });
   } catch (error) {
     res.status(500).json({ message: 'Failed to delete skill', error: error.message });
   }

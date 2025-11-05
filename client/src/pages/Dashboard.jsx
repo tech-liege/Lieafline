@@ -1,64 +1,56 @@
-import SkillCard from '../component/SkillCard';
-import { getCUSkills } from '../services/skillApi';
-import { useAuth } from '../hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { getCUSkills } from '../services/skillApi';
+import { useAuth } from '../hooks/useAuth';
+import SkillCard from '../component/SkillCard';
 
-function Dashboard() {
-  const [fetched, setFetched] = useState(false);
-  const [CUSkills, setCUSkills] = useState(null);
+export default function Dashboard() {
+  const [loading, setLoading] = useState(true);
+  const [CUSkills, setCUSkills] = useState([]);
   const { token, SKILL_SERVER_URL } = useAuth();
 
   useEffect(() => {
-    getCUSkills(SKILL_SERVER_URL, token)
-      .then(data => {
+    const fetchSkills = async () => {
+      try {
+        const data = await getCUSkills(SKILL_SERVER_URL, token);
         if (data.message === 'Failed to fetch user skills') {
-          toast.error(data.message);
+          toast.error('Failed to fetch your skills');
         } else {
           setCUSkills(data);
         }
-      })
-      .catch(() => {
+      } catch {
         toast.error('Internal Server Error');
-      })
-      .finally(() => {
-        setFetched(true);
-      });
-  });
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (!fetched) {
-    return <div className='placeholder'> Fetching ...</div>;
-  }
+    fetchSkills();
+  }, [SKILL_SERVER_URL, token]);
 
-  if (CUSkills) {
-    return (
-      <div className='space-y-6'>
-        <header>
-          <h1 className='text-2xl font-bold'>Dashboard</h1>
-          <p className='text-sm text-gray-500'>Your active branches and progress</p>
-        </header>
+  return (
+    <div className='min-h-screen bg-gray-50 text-gray-800 px-6 py-8'>
+      <header className='mb-6'>
+        <h1 className='text-3xl font-semibold text-blue-600'>Dashboard</h1>
+        <p className='text-sm text-gray-500 mt-1'>Your active branches and progress</p>
+      </header>
 
-        <section className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6'>
-          {CUSkills.map(m => (
-            <SkillCard key={m.title} {...m} />
+      {loading ? (
+        <div className='flex items-center justify-center h-64'>
+          <div className='animate-pulse text-gray-500 text-lg'>Fetching your skills...</div>
+        </div>
+      ) : CUSkills && CUSkills.length > 0 ? (
+        <section className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6'>
+          {CUSkills.map(skill => (
+            <SkillCard key={skill.title} {...skill} />
           ))}
         </section>
-      </div>
-    );
-  } else {
-    return (
-      <div className='space-y-6'>
-        <header>
-          <h1 className='text-2xl font-bold'>Dashboard</h1>
-          <p className='text-sm text-gray-500'>Your active branches and progress</p>
-        </header>
-
-        <section className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6'>
-          No Skills Yet
-        </section>
-      </div>
-    );
-  }
+      ) : (
+        <div className='flex flex-col items-center justify-center h-64 text-center'>
+          <p className='text-gray-500 text-lg'>No skills added yet 🌱</p>
+          <p className='text-sm text-gray-400 mt-1'>Start by exploring your first skill branch.</p>
+        </div>
+      )}
+    </div>
+  );
 }
-
- export default Dashboard;

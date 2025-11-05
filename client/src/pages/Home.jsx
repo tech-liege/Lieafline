@@ -2,22 +2,31 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   return (
-    <div className='m-4 lg:container'>
-      <div className='flex flex-row flex-wrap w-full h-auto m-auto'>
-        <div className='w-full h-auto lg:h-1/3 lg:w-2/3 p-2 justify-self-center self-center flex flex-col justify between'>
-          <div>
-            <h1 className='text-3xl font-bold text-center font-serif'>Welcome to Lieafline 🌱</h1>
-            <p className='text-center mt-4 text-gray-700 font-mono'>Start tracking your growth, one skill at a time.</p>
-          </div>
-          <Link to={'/authenticate'} className='btn btn-secondary w-auto self-center m-4 lg:self-start'>
+    <section className='hero min-h-[80vh] bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white overflow-hidden'>
+      <div className='hero-content flex-col lg:flex-row-reverse items-center gap-8 lg:gap-16'>
+        {/* Right Side Image */}
+        <img
+          src='/Lieafline_hero_banner_1.png'
+          alt='Lieafline Growth Illustration'
+          className='max-w-sm lg:max-w-md rounded-2xl shadow-lg hover:scale-105 transition-transform duration-500'
+        />
+
+        {/* Left Side Text */}
+        <div className='text-center lg:text-left max-w-lg'>
+          <h1 className='text-4xl md:text-5xl font-extrabold font-serif leading-tight'>
+            Welcome to <span className='text-green-400'>Lieafline</span> 🌱
+          </h1>
+          <p className='py-6 text-gray-300 font-mono text-lg'>
+            Track your growth, one skill at a time — and watch your journey flourish 🌿
+          </p>
+          <Link
+            to='/authenticate'
+            className='btn btn-secondary btn-lg normal-case font-semibold shadow-md hover:shadow-xl transition-all duration-300'>
             Get Started
           </Link>
         </div>
-        <div className='w-1/3 h-1/3 hidden lg:block'>
-          <img src='/mtn-fx.jpg' alt='placeholder' />
-        </div>
       </div>
-    </div>
+    </section>
   );
 }
 

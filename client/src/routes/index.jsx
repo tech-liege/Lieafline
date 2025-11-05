@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import Skills from '../pages/Skills';
 import CreateSkill from '../pages/CreateSkill';
 import EditSkill from '../pages/EditSkill';
+import DeleteSkill from '../pages/DeleteSkill';
 import Progress from '../pages/Progress';
 import Profile from '../pages/Profile';
 import App from '../App';
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: ':mode',
+        path: ':routeMode',
         element: (
           <PublicOnly>
             <Authenticate />
@@ -107,6 +108,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <EditSkill />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'deleteSkill/:skillId',
+        element: (
+          <PrivateRoute>
+            <DeleteSkill />
           </PrivateRoute>
         ),
       },
