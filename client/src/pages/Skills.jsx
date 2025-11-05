@@ -132,7 +132,7 @@ function Skills() {
           <h3 className='inline-block'>{delSkill.skillTitle}</h3>
           <div>
             <Link
-              to={`./deleteSkill/${delSkill.id}`}
+              to={`/deleteSkill/${delSkill.id}`}
               className='mt-4 inline-flex items-center gap-2 rounded-lg bg-red-500 text-white text-sm font-medium px-4 py-2 shadow-sm hover:bg-red-600 transition-colors'>
               Delete
             </Link>

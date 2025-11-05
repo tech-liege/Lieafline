@@ -20,7 +20,7 @@ function Home() {
             Track your growth, one skill at a time — and watch your journey flourish 🌿
           </p>
           <Link
-            to='/authenticate'
+            to='/auth/login'
             className='btn btn-secondary btn-lg normal-case font-semibold shadow-md hover:shadow-xl transition-all duration-300'>
             Get Started
           </Link>

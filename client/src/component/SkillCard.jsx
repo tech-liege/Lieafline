@@ -1,9 +1,12 @@
 import { Edit2, Trash2 } from 'lucide-react';
 import ProgressBar from './ProgressBar';
+import { Link } from 'react-router-dom';
 
-function SkillCard({ title, desc, percent = 0, tags = [], onEdit, onDelete }) {
+function SkillCard({ _id, title, desc, percent = 0, tags = [], onEdit, onDelete }) {
   return (
-    <div className='relative group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1'>
+    <Link
+      to={`/skills/${_id}`}
+      className='relative group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1'>
       {/* Header */}
       <div className='mb-2 flex items-center justify-between'>
         <h3 className='text-lg font-semibold text-gray-800'>{title}</h3>
@@ -44,7 +47,7 @@ function SkillCard({ title, desc, percent = 0, tags = [], onEdit, onDelete }) {
           <Trash2 size={16} />
         </button>
       </div>
-    </div>
+    </Link>
   );
 }
 
