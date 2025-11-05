@@ -11,7 +11,7 @@ function Skills() {
   const [loading, setLoading] = useState(true);
   const [skill, setSkill] = useState(null);
   const [CUSkills, setCUSkills] = useState([]);
-  const [delSkill, setDelSkill] = useState();
+  const [delSkill, setDelSkill] = useState({ skillTitle: '', id: '' });
   const [modState, setModState] = useState('hidden');
   const { token, SKILL_SERVER_URL } = useAuth();
   const { skillId } = useParams();

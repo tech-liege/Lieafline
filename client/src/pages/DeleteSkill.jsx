@@ -9,7 +9,7 @@ export default function EditSkill() {
   const [deleting, setDeleting] = useState(true);
   const [success, setSuccess] = useState(false);
   const [res, setRes] = useState(null);
-  const [skillTitle, setSkillTitle] = useState(null);
+  const [skillTitle, setSkillTitle] = useState('');
 
   const { skillId } = useParams();
   const { token, SKILL_SERVER_URL } = useAuth();
