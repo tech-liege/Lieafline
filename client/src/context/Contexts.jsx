@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = createContext();
+const VarContext = createContext();
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem('token') || '');
@@ -58,4 +59,16 @@ export function AuthProvider({ children }) {
   );
 }
 
+export function VarProvider({ children }) {
+  const [isSideActive, setIsSideActive] = useState(false);
+  const notifications = ['Verily', 'are', 'kipade'];
+
+  const toggleSidebar = () => () => {
+    setIsSideActive(!isSideActive);
+  };
+
+  return <VarContext.Provider value={{ notifications, isSideActive, toggleSidebar }}>{children}</VarContext.Provider>;
+}
+
 export const AuthContexts = AuthContext;
+export const VarContexts = VarContext;

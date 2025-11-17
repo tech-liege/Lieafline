@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className='w-full bg-white border-t border-gray-200 shadow-sm mt-auto'>
+    <footer className='w-full bg-white border-t border-gray-200 shadow-sm mt-auto z-20'>
       <div className='max-w-7xl mx-auto px-4 md:px-8 py-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500'>
         <p>
           © {new Date().getFullYear()} <span className='font-semibold text-gray-700'>Lieafline</span> — Built with ❤️
