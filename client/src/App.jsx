@@ -17,10 +17,10 @@ export default function App() {
       <Navbar />
 
       {/* Main Layout */}
-      <div className='flex flex-1 mt-16'>
+      <div className='flex flex-1 mt-16 min-h-[80vh]'>
         {/* Sidebar (only when logged in) */}
         {token && isSideActive && (
-          <aside className='fixed block w-full h-full md:w-64' onClick={window.innerWidth < 768 ? toggleSidebar() : ''}>
+          <aside className='fixed block w-full h-full md:w-64' onClick={window.innerWidth < 768 ? toggleSidebar : ''}>
             <Sidebar />
             <div className='opacity-40 bg-black w-full h-full md:hidden'></div>
           </aside>

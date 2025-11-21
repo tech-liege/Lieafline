@@ -1,11 +1,14 @@
 import { createContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import { getUser } from '../services/userApi';
+import { toast } from 'react-toastify';
 
 const AuthContext = createContext();
 const VarContext = createContext();
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem('token') || '');
+  const [user, setUser] = useState({});
 
   const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
   const SKILL_SERVER_URL = import.meta.env.VITE_SKILL_SERVER_URL;
@@ -23,6 +26,22 @@ export function AuthProvider({ children }) {
       localStorage.removeItem('token'); // invalid token format
       setToken('');
     }
+  }
+
+  if (token && !user._id) {
+    getUser(USER_SERVER_URL, token)
+      .then(data => {
+        if (!data.message) {
+          setUser(data);
+        } else {
+          setUser({});
+          toast.error(data.message || 'Failed to fetch user data');
+        }
+      })
+      .catch(() => {
+        setUser({});
+        toast.error('Failed to fetch user data');
+      });
   }
 
   useEffect(() => {
@@ -46,6 +65,7 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         token,
+        user,
         BASE_SERVER_URL,
         SKILL_SERVER_URL,
         AUTH_SERVER_URL,
@@ -63,7 +83,7 @@ export function VarProvider({ children }) {
   const [isSideActive, setIsSideActive] = useState(false);
   const notifications = ['Verily', 'are', 'kipade'];
 
-  const toggleSidebar = () => () => {
+  const toggleSidebar = () => {
     setIsSideActive(!isSideActive);
   };
 

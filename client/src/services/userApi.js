@@ -3,17 +3,17 @@ const getHeaders = token => ({
   Authorization: `Bearer ${token}`,
 });
 
-export const getUserPreferences = (url, token) =>
-  fetch(`${url}/preferences`, {
+export const getUserSettings = (url, token) =>
+  fetch(`${url}/settings`, {
     method: 'GET',
     headers: getHeaders(token),
   }).then(res => res.json());
 
-export const updateUserPreferences = (url, token, preferences) =>
-  fetch(`${url}/preferences`, {
+export const updateUserSettings = (url, token, settings) =>
+  fetch(`${url}/settings`, {
     method: 'PATCH',
     headers: getHeaders(token),
-    body: JSON.stringify(preferences),
+    body: JSON.stringify(settings),
   }).then(res => res.json());
 
 export const getUser = (url, token) =>

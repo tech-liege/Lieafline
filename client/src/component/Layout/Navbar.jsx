@@ -1,9 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth, useVar } from '../../hooks/useAuth';
 import { Menu, Bell, User } from 'lucide-react'; // modern minimal icons
+import { useState } from 'react';
 
 export default function Navbar() {
-  const { logout, token } = useAuth();
+  const [PDNActive, setPDNActive] = useState(false);
+
+  const { logout, token, user } = useAuth();
   const { notifications, toggleSidebar } = useVar();
   const navigate = useNavigate();
 
@@ -12,14 +15,20 @@ export default function Navbar() {
     navigate('/auth/login');
   };
 
+  const togglePDN = () => {
+    setPDNActive(!PDNActive);
+  };
+
   return (
     <nav className='w-full bg-white border-b border-gray-200 shadow-sm fixed z-20'>
       <div className='max-w-7xl mx-auto px-4 md:px-8 flex justify-between items-center h-16'>
         {/* Left Section */}
         <div className='flex items-center gap-2'>
-          <button className='p-2 text-gray-500 hover:text-gray-700 rounded-lg transition' onClick={toggleSidebar()}>
-            <Menu className='h-5 w-5' />
-          </button>
+          {token && (
+            <button className='p-2 text-gray-500 hover:text-gray-700 rounded-lg transition' onClick={toggleSidebar}>
+              <Menu className='h-5 w-5' />
+            </button>
+          )}
 
           <Link to='/' className='text-xl font-bold tracking-tight bg-gradient-to-r from-blue-700 to-black bg-clip-text text-transparent'>
             Lieafline
@@ -42,12 +51,19 @@ export default function Navbar() {
 
               {/* Profile Dropdown */}
               <div className='dropdown dropdown-end'>
-                <button className='flex items-center focus:outline-none'>
-                  <img src='/avatar/batperson.webp' alt='Avatar' className='h-9 w-9 rounded-full border border-gray-300 object-cover' />
+                <button className='flex items-center focus:outline-none' onClick={togglePDN}>
+                  {user.profilePic ? (
+                    <img src={user.profilePic} alt='Avatar' className='h-9 w-9 rounded-full border border-gray-300 object-cover' />
+                  ) : (
+                    <User className='h-5 w-5' />
+                  )}
                 </button>
 
                 {/* Dropdown Menu */}
-                <ul className='absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-xl shadow-md opacity-0 group-hover:opacity-100 group-hover:translate-y-1 transition-all transform origin-top-right duration-200 z-20'>
+                <ul
+                  className={` ${
+                    PDNActive ? 'block' : 'hidden'
+                  } absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-xl shadow-md group-hover:translate-y-1 transition-all transform origin-top-right duration-200 z-20`}>
                   <li>
                     <Link to='/profile' className='block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-t-xl'>
                       Profile

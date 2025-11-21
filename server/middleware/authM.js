@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/User');
 const JWT_SECRET = process.env.JWT_SECRET || 'secret123';
 
-const authM = async (req, res, next) => {
+exports.authM = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
     return res.status(401).json({ message: 'Unauthorized' });
@@ -23,5 +23,3 @@ const authM = async (req, res, next) => {
     res.status(401).json({ message: 'Unauthorized User' });
   }
 };
-
-module.exports = authM;
