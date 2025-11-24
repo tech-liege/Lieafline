@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { getOneSkill, updateSkill } from '../services/skillApi';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth, useVar } from '../hooks/useAuth';
 import { toast } from 'react-toastify';
 
 export default function EditSkill() {
   const [form, setForm] = useState({ title: '', description: '', tags: '', phases: [] });
-  const [isLoading, setIsLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [success, setSuccess] = useState(false);
 
   const { skillId } = useParams();
   const { token, SKILL_SERVER_URL } = useAuth();
+  const { loading, toggleLoading } = useVar();
 
   useEffect(() => {
     getOneSkill(SKILL_SERVER_URL, token, skillId)
@@ -25,7 +25,7 @@ export default function EditSkill() {
             phases: skill.phases || [],
           });
         } else if (data.message === 'Skill not found') {
-          toast.error('Skill not found')
+          toast.error('Skill not found');
         }
       })
       .catch(err => {
@@ -37,11 +37,11 @@ export default function EditSkill() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setIsLoading(true);
+    toggleLoading(true);
 
     if (!form.title || !form.description || !form.tags) {
       toast.error('Title, description, and tags are required');
-      setIsLoading(false);
+      toggleLoading(false);
       return;
     }
 
@@ -59,7 +59,7 @@ export default function EditSkill() {
       toast.error('Update failed. Check network.');
       console.error(error);
     } finally {
-      setIsLoading(false);
+      toggleLoading(false);
     }
   };
 
@@ -110,7 +110,7 @@ export default function EditSkill() {
   }
 
   if (!form.title) {
-    return <div>Skill Not Found</div>
+    return <div>Skill Not Found</div>;
   }
   return (
     <div className='max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md'>
@@ -233,8 +233,8 @@ export default function EditSkill() {
           </button>
         </section>
 
-        <button type='submit' disabled={isLoading} className='btn btn-primary w-full mt-5'>
-          {isLoading ? 'Saving...' : 'Save Changes'}
+        <button type='submit' disabled={loading} className='btn btn-primary w-full mt-5'>
+          {loading ? 'Saving...' : 'Save Changes'}
         </button>
       </form>
     </div>

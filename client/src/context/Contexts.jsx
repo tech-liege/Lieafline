@@ -80,14 +80,26 @@ export function AuthProvider({ children }) {
 }
 
 export function VarProvider({ children }) {
+  const [loading, setLoading] = useState(false);
   const [isSideActive, setIsSideActive] = useState(false);
   const notifications = ['Verily', 'are', 'kipade'];
+
+  const toggleLoading = mode => {
+    if (mode === true || mode == false) {
+      setLoading(mode);
+      mode ? (document.body.style.cursor = 'wait') : (document.body.style.cursor = 'default');
+    } else {
+      setLoading(false);
+    }
+  };
 
   const toggleSidebar = () => {
     setIsSideActive(!isSideActive);
   };
 
-  return <VarContext.Provider value={{ notifications, isSideActive, toggleSidebar }}>{children}</VarContext.Provider>;
+  return (
+    <VarContext.Provider value={{ notifications, isSideActive, toggleSidebar, loading, toggleLoading }}>{children}</VarContext.Provider>
+  );
 }
 
 export const AuthContexts = AuthContext;

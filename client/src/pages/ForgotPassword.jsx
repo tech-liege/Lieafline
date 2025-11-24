@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { forgotPassword } from '../services/authApi';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth, useVar } from '../hooks/useAuth';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
+  const { loading, toggleLoading } = useVar();
   const { AUTH_SERVER_URL } = useAuth();
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setLoading(true);
+    toggleLoading(true);
 
     try {
       const data = await forgotPassword(AUTH_SERVER_URL, email);
@@ -26,12 +26,12 @@ function ForgotPassword() {
     } catch {
       toast.error('Failed to send reset email');
     } finally {
-      setLoading(false);
+      toggleLoading(false);
     }
   };
 
   return (
-    <main className='flex min-h-screen items-center justify-center bg-gray-50 p-6'>
+    <main className='flex min-h-[80vh] items-center justify-center bg-gray-50 p-6'>
       <div className='w-full max-w-md bg-white rounded-2xl shadow-sm border border-gray-200 p-8'>
         <h2 className='text-2xl font-bold text-gray-800 mb-2 text-center'>Forgot Password</h2>
         <p className='text-sm text-gray-500 mb-6 text-center'>

@@ -1,6 +1,7 @@
 import Navbar from './component/Layout/Navbar';
 import Sidebar from './component/Layout/Sidebar';
 import Footer from './component/Layout/Footer';
+import LoadingOverlay from './component/LoadingOverlay';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { useAuth, useVar } from './hooks/useAuth';
@@ -9,7 +10,7 @@ import './App.css';
 
 export default function App() {
   const { token } = useAuth();
-  const { isSideActive, toggleSidebar } = useVar();
+  const { isSideActive, toggleSidebar, loading } = useVar();
 
   return (
     <div className='min-h-screen flex flex-col bg-gray-50 text-gray-800'>
@@ -17,7 +18,7 @@ export default function App() {
       <Navbar />
 
       {/* Main Layout */}
-      <div className='flex flex-1 mt-16 min-h-[80vh]'>
+      <div className='flex flex-1 mt-16'>
         {/* Sidebar (only when logged in) */}
         {token && isSideActive && (
           <aside className='fixed block w-full h-full md:w-64' onClick={window.innerWidth < 768 ? toggleSidebar : ''}>
@@ -39,6 +40,9 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Loading Overlay */}
+      {loading && <LoadingOverlay />}
 
       {/* Toast Notifications */}
       <ToastContainer

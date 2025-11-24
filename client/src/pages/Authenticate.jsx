@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import { Navigate, Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { login, register } from '../services/authApi';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth, useVar } from '../hooks/useAuth';
 
 export default function AuthForm() {
   const [mode, setMode] = useState('Login');
   const [form, setForm] = useState({ username: '', email: '', password: '' });
-  const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
   const { loginContext, AUTH_SERVER_URL } = useAuth();
+  const { loading, toggleLoading } = useVar();
   const { routeMode } = useParams();
 
   useEffect(() => {
@@ -24,8 +25,7 @@ export default function AuthForm() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setIsLoading(true);
-    document.body.style.cursor = 'wait';
+    toggleLoading(true);
 
     try {
       if (!form.email || !form.password) {
@@ -55,15 +55,14 @@ export default function AuthForm() {
     } catch {
       toast.error(`${mode} failed. Check your network.`);
     } finally {
-      setIsLoading(false);
-      document.body.style.cursor = 'default';
+      toggleLoading(false);
     }
   };
 
   if (success) return <Navigate to='/dashboard' />;
 
   return (
-    <div className='min-h-screen flex items-center justify-center bg-gray-50 px-4'>
+    <div className='min-h-[80vh] flex items-center justify-center bg-gray-50 px-4'>
       <form
         onSubmit={handleSubmit}
         className='w-full max-w-md bg-white rounded-2xl shadow-lg p-8 border border-gray-100 transition-all duration-300'>
@@ -107,11 +106,11 @@ export default function AuthForm() {
         {/* Submit button */}
         <button
           type='submit'
-          disabled={isLoading}
+          disabled={loading}
           className={`w-full py-2.5 font-medium rounded-md text-white transition ${
-            isLoading ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+            loading ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
           }`}>
-          {isLoading ? 'Please wait...' : mode}
+          {loading ? 'Please wait...' : mode}
         </button>
 
         {/* Switch between modes */}

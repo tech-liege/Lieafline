@@ -1,12 +1,22 @@
 const mongoose = require('mongoose');
 
+const taskSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    description: String,
+    todo: { type: String },
+    completed: { type: Boolean, default: false },
+  },
+  { timestamps: true }
+);
 const lessonSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     description: String,
     notes: String, // user's learning notes
     resources: [String], // links, PDFs, videos, etc.
-    completed: { type: Boolean, default: false },
+    tasks: [taskSchema],
+    progress: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

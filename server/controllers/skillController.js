@@ -107,11 +107,14 @@ exports.updateSkill = async (req, res) => {
   // Recalculate nested progress values
   updatedSkill.phases.forEach(phase => {
     phase.modules.forEach(module => {
-      // Each module's progress = average of completed lessons
-      if (module.lessons && module.lessons.length > 0) {
-        const completedCount = module.lessons.filter(l => l.completed).length;
-        module.progress = Math.round((completedCount / module.lessons.length) * 100);
-      }
+      module.lessons.forEach(lesson => {
+        // Each lesson's progress = average of completed tasks
+        if (lesson.tasks && lesson.tasks.length > 0) {
+          const completedCount = lesson.tasks.filter(l => l.completed).length;
+          lesson.progress = Math.round((completedCount / lessons.tasks.length) * 100);
+        }
+      });
+      module.progress = calculateAverage(module.lessons);
     });
 
     // Each phase's progress = average of its modules

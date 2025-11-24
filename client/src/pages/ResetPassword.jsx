@@ -2,16 +2,19 @@ import { useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { resetPasswordApi, verifyResetToken } from '../services/authApi';
 import { toast } from 'react-toastify';
+import { useAuth, useVar } from '../hooks/useAuth';
 
 function ResetPassword() {
   const [resetToken, setResetToken] = useState('');
   const [valid, setValid] = useState(false);
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
   const [checking, setChecking] = useState(true);
   const [success, setSuccess] = useState(false);
 
-  const { token, AUTH_SERVER_URL } = useParams();
+  const { token } = useParams();
+
+  const { AUTH_SERVER_URL } = useAuth();
+  const { loading, toggleLoading } = useVar();
 
   useEffect(() => {
     setResetToken(token || '');
@@ -36,7 +39,7 @@ function ResetPassword() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setLoading(true);
+    toggleLoading(true);
 
     try {
       const data = await resetPasswordApi(AUTH_SERVER_URL, resetToken, password);
@@ -51,7 +54,7 @@ function ResetPassword() {
     } catch {
       toast.error('Failed to reset password');
     } finally {
-      setLoading(false);
+      toggleLoading(false);
     }
   };
 
@@ -77,7 +80,7 @@ function ResetPassword() {
 
   // ✅ Main Reset Form
   return (
-    <main className='flex min-h-screen items-center justify-center bg-gray-50 p-6'>
+    <main className='flex min-h-[80vh] items-center justify-center bg-gray-50 p-6'>
       <div className='w-full max-w-md bg-white rounded-2xl shadow-sm border border-gray-200 p-8'>
         <h2 className='text-2xl font-bold text-gray-800 mb-2 text-center'>Reset Password</h2>
         <p className='text-sm text-gray-500 mb-6 text-center'>Enter a new password to secure your account.</p>

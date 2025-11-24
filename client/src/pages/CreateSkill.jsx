@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { createSkill } from '../services/skillApi';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth, useVar } from '../hooks/useAuth';
 import { toast } from 'react-toastify';
 
 export default function CreateSkill() {
@@ -11,18 +11,19 @@ export default function CreateSkill() {
     tags: '',
     phases: [],
   });
-  const [isLoading, setIsLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+
+  const navigate = useNavigate();
 
   const { token, SKILL_SERVER_URL } = useAuth();
+  const { loading, toggleLoading } = useVar();
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setIsLoading(true);
+    toggleLoading(true);
 
     if (!form.title || !form.description || !form.tags) {
       toast.error('Title, description, and tags are required');
-      setIsLoading(false);
+      toggleLoading(false);
       return;
     }
 
@@ -34,13 +35,13 @@ export default function CreateSkill() {
       });
       if (data.message === 'success') {
         toast.success('Skill created successfully!');
-        setSuccess(true);
+        navigate('/skills');
       }
     } catch (error) {
       toast.error('Skill creation failed. Check network.');
       console.error(error);
     } finally {
-      setIsLoading(false);
+      toggleLoading(false);
     }
   };
 
@@ -72,7 +73,7 @@ export default function CreateSkill() {
 
   const addLesson = (pIndex, mIndex) => {
     const newPhases = [...form.phases];
-    newPhases[pIndex].modules[mIndex].lessons.push({ title: '' });
+    newPhases[pIndex].modules[mIndex].lessons.push({ title: '', description: '', tasks: [] });
     setForm({ ...form, phases: newPhases });
   };
 
@@ -82,9 +83,17 @@ export default function CreateSkill() {
     setForm({ ...form, phases: newPhases });
   };
 
-  if (success) {
-    return <Navigate to='/skills' replace />;
-  }
+  const addTask = (pIndex, mIndex, lIndex) => {
+    const newPhases = [...form.phases];
+    newPhases[pIndex].modules[mIndex].lessons[lIndex].tasks.push({ title: '' });
+    setForm({ ...form, phases: newPhases });
+  };
+
+  const removeTask = (pIndex, mIndex, lIndex, tIndex) => {
+    const newPhases = [...form.phases];
+    newPhases[pIndex].modules[mIndex].lessons[lIndex].tasks.splice(tIndex, 1);
+    setForm({ ...form, phases: newPhases });
+  };
 
   return (
     <div className='max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md'>
@@ -184,8 +193,43 @@ export default function CreateSkill() {
                           setForm({ ...form, phases: newPhases });
                         }}
                       />
+                      <input
+                        type='text'
+                        placeholder='Lesson description'
+                        className='input input-bordered flex-1'
+                        value={lesson.description}
+                        onChange={e => {
+                          const newPhases = [...form.phases];
+                          newPhases[pIndex].modules[mIndex].lessons[lIndex].description = e.target.value;
+                          setForm({ ...form, phases: newPhases });
+                        }}
+                      />
                       <button type='button' onClick={() => removeLesson(pIndex, mIndex, lIndex)} className='btn btn-xs btn-error'>
                         ✕
+                      </button>
+                      {lesson.tasks.map((task, tIndex) => {
+                        <div key={tIndex} className='flex gap-2 items-center'>
+                          <input
+                            type='text'
+                            placeholder='Lesson title'
+                            className='input input-bordered flex-1'
+                            value={task.title}
+                            onChange={e => {
+                              const newPhases = [...form.phases];
+                              newPhases[pIndex].modules[mIndex].lessons[lIndex].tasks[tIndex].title = e.target.value;
+                              setForm({ ...form, phases: newPhases });
+                            }}
+                          />
+                          <button type='button' onClick={() => removeTask(pIndex, mIndex, lIndex, tIndex)} className='btn btn-xs btn-error'>
+                            ✕
+                          </button>
+                        </div>;
+                      })}
+                      <button
+                        type='button'
+                        onClick={() => addTask(pIndex, mIndex, lIndex)}
+                        className='btn btn-sm btn-outline btn-info mt-2'>
+                        + Add Task
                       </button>
                     </div>
                   ))}
@@ -207,8 +251,8 @@ export default function CreateSkill() {
           </button>
         </section>
 
-        <button type='submit' disabled={isLoading} className='btn btn-primary w-full mt-5'>
-          {isLoading ? 'Creating...' : 'Create Skill'}
+        <button type='submit' disabled={loading} className='btn btn-primary w-full mt-5'>
+          {loading ? 'Creating...' : 'Create Skill'}
         </button>
       </form>
     </div>
