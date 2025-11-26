@@ -17,13 +17,13 @@ export const updateUserSettings = (url, token, settings) =>
   }).then(res => res.json());
 
 export const getUser = (url, token) =>
-  fetch(`${url}/user`, {
+  fetch(`${url}/getUser`, {
     method: 'GET',
     headers: getHeaders(token),
   }).then(res => res.json());
 
 export const updateUser = (url, token, userData) =>
-  fetch(`${url}/user`, {
+  fetch(`${url}/updateUser`, {
     method: 'PATCH',
     headers: getHeaders(token),
     body: JSON.stringify(userData),
