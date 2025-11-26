@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { deleteOneSkill } from '../services/skillApi';
 import { useAuth } from '../hooks/useAuth';
 import { toast } from 'react-toastify';
@@ -7,12 +7,12 @@ import { toast } from 'react-toastify';
 export default function EditSkill() {
   // const [isLoading, setIsLoading] = useState(false);
   const [deleting, setDeleting] = useState(true);
-  const [success, setSuccess] = useState(false);
   const [res, setRes] = useState(null);
   const [skillTitle, setSkillTitle] = useState('');
 
   const { skillId } = useParams();
   const { token, SKILL_SERVER_URL } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     deleteOneSkill(SKILL_SERVER_URL, token, skillId)
@@ -21,7 +21,7 @@ export default function EditSkill() {
           setSkillTitle(data.skill.title);
           toast.success('Skill deleted successfully');
           setRes('Skill deleted successfully');
-          setSuccess(true);
+          navigate(`/skills?delSuccess=true&delSkillTitle=${skillTitle}`);
         } else if (data.message === 'Unauthorized to delete this skill') {
           toast.error('Unauthorized to delete this skill');
           setRes('Unauthorized to delete this skill');
@@ -36,22 +36,10 @@ export default function EditSkill() {
         console.error(err);
       })
       .finally(() => setDeleting(false));
-  }, [skillId, token, SKILL_SERVER_URL]);
+  }, [skillId, token, SKILL_SERVER_URL, skillTitle]);
 
   if (deleting) {
     return <div className='flex justify-center items-center h-screen text-gray-500'>Deleting skill...</div>;
-  }
-
-  if (success) {
-    return (
-      <Navigate
-        to={{
-          pathname: '/skills',
-          search: `?delSuccess=true&delSkillTitle=${skillTitle}`,
-        }}
-        replace
-      />
-    );
   }
 
   if (res) {

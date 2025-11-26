@@ -75,56 +75,72 @@ exports.deleteSkill = async (req, res) => {
     res.status(500).json({ message: 'Failed to delete skill', error: error.message });
   }
 };
-
-// Utility function to compute averages safely
-const calculateAverage = (arr, key = 'progress') => {
-  if (!arr || arr.length === 0) return 0;
+// Utility: safely compute an average
+const calculateAverage = (arr, key = "progress") => {
+  if (!Array.isArray(arr) || arr.length === 0) return 0;
   const sum = arr.reduce((acc, item) => acc + (item[key] || 0), 0);
   return Math.round(sum / arr.length);
 };
 
-// @desc    Update a skill (e.g. progress, title, phases, etc.)
-// @route   PATCH /api/skills/:id
-// @access  Private
 exports.updateSkill = async (req, res) => {
   const { id } = req.params;
 
-  // Check if skill exists and belongs to user
-  const skill = await Skill.findById(id);
-  if (!skill) {
-    res.status(404);
-    throw new Error('Skill not found');
-  }
+  try {
+    // Find skill
+    const skill = await Skill.findById(id);
+    if (!skill) {
+      return res.status(404).json({ message: "Skill not found" });
+    }
 
-  if (skill.user.toString() !== req.user._id.toString()) {
-    res.status(403);
-    throw new Error('Not authorized to update this skill');
-  }
+    // Ensure the user owns this skill
+    if (skill.createdBy.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "Not authorized to update this skill" });
+    }
 
-  // Apply updates (merge existing + new)
-  const updatedSkill = await Skill.findByIdAndUpdate(id, { $set: req.body }, { new: true, runValidators: true });
+    // Apply updates (merge incoming fields)
+    const updatedSkill = await Skill.findByIdAndUpdate(
+      id,
+      { $set: req.body },
+      { new: true, runValidators: true }
+    );
 
-  // Recalculate nested progress values
-  updatedSkill.phases.forEach(phase => {
-    phase.modules.forEach(module => {
-      module.lessons.forEach(lesson => {
-        // Each lesson's progress = average of completed tasks
-        if (lesson.tasks && lesson.tasks.length > 0) {
-          const completedCount = lesson.tasks.filter(l => l.completed).length;
-          lesson.progress = Math.round((completedCount / lessons.tasks.length) * 100);
-        }
+    // Recalculate progress for all nested structures
+    updatedSkill.phases.forEach((phase) => {
+      phase.modules.forEach((module) => {
+        module.lessons.forEach((lesson) => {
+          // Lesson progress = % of completed tasks
+          if (Array.isArray(lesson.tasks) && lesson.tasks.length > 0) {
+            const completedCount = lesson.tasks.filter((t) => t.completed).length;
+            lesson.progress = Math.round((completedCount / lesson.tasks.length) * 100);
+          } else {
+            lesson.progress = 0;
+          }
+        });
+
+        // Module progress = average of its lessons
+        module.progress = calculateAverage(module.lessons);
       });
-      module.progress = calculateAverage(module.lessons);
+
+      // Phase progress = average of its modules
+      phase.progress = calculateAverage(phase.modules);
     });
 
-    // Each phase's progress = average of its modules
-    phase.progress = calculateAverage(phase.modules);
-  });
+    // Skill progress = average of phases
+    updatedSkill.progress = calculateAverage(updatedSkill.phases);
 
-  // Skill progress = average of its phases
-  updatedSkill.progress = calculateAverage(updatedSkill.phases);
+    // Save updated structure
+    const savedSkill = await updatedSkill.save();
 
-  const savedSkill = await updatedSkill.save();
-
-  res.json(savedSkill);
+    return res.status(200).json({
+      message: "Skill updated successfully",
+      skill: savedSkill,
+    });
+  } catch (error) {
+    console.error("Update Skill Error:", error.message);
+    res.status(500).json({
+      message: "Failed to update skill",
+      error: error.message,
+    });
+  }
 };
+

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getOneSkill, updateSkill } from '../services/skillApi';
 import { useAuth, useVar } from '../hooks/useAuth';
 import { toast } from 'react-toastify';
@@ -7,11 +7,11 @@ import { toast } from 'react-toastify';
 export default function EditSkill() {
   const [form, setForm] = useState({ title: '', description: '', tags: '', phases: [] });
   const [fetching, setFetching] = useState(true);
-  const [success, setSuccess] = useState(false);
 
   const { skillId } = useParams();
   const { token, SKILL_SERVER_URL } = useAuth();
   const { loading, toggleLoading } = useVar();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getOneSkill(SKILL_SERVER_URL, token, skillId)
@@ -53,7 +53,7 @@ export default function EditSkill() {
       });
       if (data.message === 'success') {
         toast.success('Skill updated successfully!');
-        setSuccess(true);
+        navigate('/skills');
       }
     } catch (error) {
       toast.error('Update failed. Check network.');
@@ -103,10 +103,6 @@ export default function EditSkill() {
 
   if (fetching) {
     return <div className='flex justify-center items-center h-screen text-gray-500'>Fetching skill data...</div>;
-  }
-
-  if (success) {
-    return <Navigate to='/skills' replace />;
   }
 
   if (!form.title) {

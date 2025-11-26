@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, Link, useParams } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { login, register } from '../services/authApi';
 import { useAuth, useVar } from '../hooks/useAuth';
@@ -7,11 +7,11 @@ import { useAuth, useVar } from '../hooks/useAuth';
 export default function AuthForm() {
   const [mode, setMode] = useState('Login');
   const [form, setForm] = useState({ username: '', email: '', password: '' });
-  const [success, setSuccess] = useState(false);
 
   const { loginContext, AUTH_SERVER_URL } = useAuth();
   const { loading, toggleLoading } = useVar();
   const { routeMode } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (routeMode === 'signup') setMode('Sign Up');
@@ -48,7 +48,7 @@ export default function AuthForm() {
         toast.success(
           mode === 'Login' ? 'Login successful! Welcome back 🎉' : `Registration successful! Welcome ${form.username || form.email} 🎉`
         );
-        setSuccess(true);
+        navigate('/dashboard');
       } else {
         toast.error(data.message || `${mode} failed`);
       }
@@ -58,8 +58,6 @@ export default function AuthForm() {
       toggleLoading(false);
     }
   };
-
-  if (success) return <Navigate to='/dashboard' />;
 
   return (
     <div className='min-h-[80vh] flex items-center justify-center bg-gray-50 px-4'>

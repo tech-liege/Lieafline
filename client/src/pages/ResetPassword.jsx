@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { resetPasswordApi, verifyResetToken } from '../services/authApi';
 import { toast } from 'react-toastify';
 import { useAuth, useVar } from '../hooks/useAuth';
@@ -9,12 +9,12 @@ function ResetPassword() {
   const [valid, setValid] = useState(false);
   const [password, setPassword] = useState('');
   const [checking, setChecking] = useState(true);
-  const [success, setSuccess] = useState(false);
 
   const { token } = useParams();
 
   const { AUTH_SERVER_URL } = useAuth();
   const { loading, toggleLoading } = useVar();
+  const navigate = useNavigate()
 
   useEffect(() => {
     setResetToken(token || '');
@@ -49,7 +49,7 @@ function ResetPassword() {
       } else if (data.message === 'Password reset successful') {
         toast.success('Password reset successful');
         setPassword('');
-        setSuccess(true);
+        navigate('/auth/login')
       }
     } catch {
       toast.error('Failed to reset password');
@@ -72,10 +72,6 @@ function ResetPassword() {
         </p>
       </div>
     );
-  }
-
-  if (success) {
-    return <Navigate to='/auth/login' replace />;
   }
 
   // ✅ Main Reset Form
