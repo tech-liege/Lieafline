@@ -2,7 +2,7 @@ const User = require('../model/User.js');
 const Skill = require('../model/Skill.js');
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const authM = require('../middleware/authM.js');
+const { authM } = require('../middleware/authM.js');
 const { createSkill, getMySkills, getUserSkills, getSkillById, deleteSkill, updateSkill } = require('../controllers/skillController');
 
 const router = express.Router();
