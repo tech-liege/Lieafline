@@ -2,6 +2,7 @@ import Navbar from './component/Layout/Navbar';
 import Sidebar from './component/Layout/Sidebar';
 import Footer from './component/Layout/Footer';
 import LoadingOverlay from './component/LoadingOverlay';
+import { Analytics } from '@vercel/analytics/react';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { useAuth, useVar } from './hooks/useAuth';
@@ -51,6 +52,7 @@ export default function App() {
         theme='light'
         toastClassName='!bg-white !text-gray-800 !shadow-md !rounded-xl'
       />
+      <Analytics />
     </div>
   );
 }
