@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { getUser } from '../services/userApi';
 import { toast } from 'react-toastify';
+import usePolling from "../hooks/usePolling";
 
 const AuthContext = createContext();
 const VarContext = createContext();
@@ -9,6 +10,7 @@ const VarContext = createContext();
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem('token') || '');
   const [user, setUser] = useState({});
+  const [isServerActive, setIsServerActive] = useState(false);
 
   const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
   const SKILL_SERVER_URL = import.meta.env.VITE_SKILL_SERVER_URL;
@@ -19,15 +21,26 @@ export function AuthProvider({ children }) {
     try {
       const { exp } = jwtDecode(token);
       if (Date.now() >= exp * 1000) {
-        localStorage.removeItem('token'); // expired, clear it
-        setToken('');
+        localStorage.removeItem("token"); // expired, clear it
+        setToken("");
       }
     } catch {
-      localStorage.removeItem('token'); // invalid token format
-      setToken('');
+      localStorage.removeItem("token"); // invalid token format
+      setToken("");
     }
   }
 
+  usePolling(() => {
+    fetch(BASE_SERVER_URL, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(res => res.json())
+      .then(() => setIsServerActive(true))
+      .catch(() => {
+        setIsServerActive(false);
+      });
+  }, 10000);
   if (token && !user._id) {
     getUser(USER_SERVER_URL, token)
       .then(data => {
@@ -35,30 +48,30 @@ export function AuthProvider({ children }) {
           setUser(data);
         } else {
           setUser({});
-          toast.error(data.message || 'Failed to fetch user data');
+          toast.error(data.message || "Failed to fetch user data");
         }
       })
       .catch(() => {
         setUser({});
-        toast.error('Failed to fetch user data');
+        toast.error("Failed to fetch user data");
       });
   }
 
   useEffect(() => {
     // keep token in sync across tabs
-    const handleStorageChange = () => setToken(localStorage.getItem('token') || '');
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    const handleStorageChange = () => setToken(localStorage.getItem("token") || "");
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   const loginContext = newToken => {
-    localStorage.setItem('token', newToken);
+    localStorage.setItem("token", newToken);
     setToken(newToken);
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
-    setToken('');
+    localStorage.removeItem("token");
+    setToken("");
   };
 
   return (
@@ -70,6 +83,7 @@ export function AuthProvider({ children }) {
         SKILL_SERVER_URL,
         AUTH_SERVER_URL,
         USER_SERVER_URL,
+        isServerActive,
         loginContext,
         logout,
         isAuthenticated: !!token,

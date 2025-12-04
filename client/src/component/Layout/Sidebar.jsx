@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Code2, BarChart3 } from 'lucide-react';
+import { LayoutDashboard, Code2, BarChart3 } from "lucide-react";
 
 export default function Sidebar() {
   const baseLink =
