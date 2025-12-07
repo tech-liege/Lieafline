@@ -28,3 +28,9 @@ export const updateUser = (url, token, userData) =>
     headers: getHeaders(token),
     body: JSON.stringify(userData),
   }).then(res => res.json());
+
+export const increaseStreak = (url, token) =>
+  fetch(`${url}/streak`, {
+    method: "PATCH",
+    headers: getHeaders(token),
+  }).then(res => res.json());

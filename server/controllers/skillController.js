@@ -1,22 +1,31 @@
 const Skill = require('../model/Skill');
+const skillData = {
+  allCategories: { 0: "IT", 1: "AI" },
+  allNiches: {
+    IT: { 0: "CyberSecurities", 1: "Web Development", 2: "Software Development" },
+    AI: { 0: "Prompt Engineering", 1: "AI Jail Breaking" },
+  },
+};
 
 // ✅ Create a new skill
 exports.createSkill = async (req, res) => {
   try {
-    const { title, description, tags, phases } = req.body;
+    const { title, description, tags, category, niche, phases } = req.body;
 
     const skill = new Skill({
       title,
       description,
       tags,
+      category,
+      niche,
       phases,
       createdBy: req.user._id, // from auth middleware
     });
 
     const savedSkill = await skill.save();
-    res.status(201).json({ skill: savedSkill, message: 'success' });
+    res.status(201).json({ skill: savedSkill, message: "success" });
   } catch (error) {
-    res.status(500).json({ message: 'Failed to create skill', error: error.message });
+    res.status(500).json({ message: "Failed to create skill", error: error.message });
   }
 };
 
@@ -26,7 +35,7 @@ exports.getMySkills = async (req, res) => {
     const skills = await Skill.find({ createdBy: req.user.id }).sort({ createdAt: -1 });
     res.status(200).json(skills);
   } catch (error) {
-    res.status(500).json({ message: 'Failed to fetch user skills', error: error.message });
+    res.status(500).json({ message: "Failed to fetch user skills", error: error.message });
   }
 };
 
@@ -38,6 +47,25 @@ exports.getUserSkills = async (req, res) => {
     res.status(200).json(skills);
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch that user's skills", error: error.message });
+  }
+};
+
+// Get Categories
+exports.getCategories = async (req, res) => {
+  try {
+    res.status(201).json({ categories: skillData.allCategories });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to load" });
+  }
+};
+
+// Get Niches
+exports.getNiches = async (req, res) => {
+  try {
+    const { category } = req.body;
+    res.status(201).json({ niches: skillData.allNiches[category] });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to load" });
   }
 };
 
