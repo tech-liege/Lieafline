@@ -3,18 +3,29 @@ const Skill = require('../model/Skill.js');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { authM } = require('../middleware/authM.js');
-const { createSkill, getMySkills, getUserSkills, getSkillById, deleteSkill, updateSkill } = require('../controllers/skillController');
+const {
+  createSkill,
+  getMySkills,
+  getUserSkills,
+  getSkillById,
+  deleteSkill,
+  updateSkill,
+  getCategories,
+  getNiches,
+} = require("../controllers/skillController");
 
 const router = express.Router();
 
 // Protected routes (require login)
-router.post('/create', authM, createSkill);
-router.get('/user', authM, getMySkills);
-router.delete('/:id', authM, deleteSkill);
-router.patch('/:id', authM, updateSkill);
-
+router.post("/create", authM, createSkill);
+router.get("/user", authM, getMySkills);
+router.delete("/:id", authM, deleteSkill);
+router.patch("/:id/skill", authM, updateSkill);
 // Public routes
-router.get('/user/:userId', getUserSkills);
-router.get('/:id', getSkillById);
+router.get("/user/:userId", getUserSkills);
+router.get("/:id", getSkillById);
+router.get("/getCategories", getCategories);
+router.get("/getNiches", getNiches);
+
 
 module.exports = router;

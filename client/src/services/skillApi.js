@@ -23,8 +23,8 @@ export const deleteOneSkill = (url, token, skillId) =>
   }).then(res => res.json());
 
 export const updateSkill = (url, token, skillId, data) =>
-  fetch(`${url}/${skillId}`, {
-    method: 'PATCH',
+  fetch(`${url}/${skillId}/skill`, {
+    method: "PATCH",
     headers: getHeaders(token),
     body: JSON.stringify(data),
   }).then(res => res.json());
@@ -39,4 +39,17 @@ export const getOneSkill = (url, token, skillId) =>
   fetch(`${url}/${skillId}`, {
     method: 'GET',
     headers: getHeaders(token),
+  }).then(res => res.json());
+
+export const getCategories = (url, token) =>
+  fetch(`${url}/getCategories`, {
+    method: "GET",
+    headers: getHeaders(token),
+  }).then(res => res.json());
+
+export const getNiches = (url, token, category) =>
+  fetch(`${url}/getNiches`, {
+    method: "GET",
+    headers: getHeaders(token),
+    body: JSON.stringify({ category }),
   }).then(res => res.json());

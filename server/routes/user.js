@@ -9,5 +9,6 @@ router.patch('/updateUser', authM, updateUser);
 
 router.get('/settings', authM, getUserSettings);
 router.patch('/settings', authM, updateUserSettings);
+router.patch("/streak", authM, increaseStreak);
 
 module.exports = router;
