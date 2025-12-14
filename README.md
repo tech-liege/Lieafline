@@ -69,7 +69,7 @@ MIT License. Feel free to fork, modify, or collab — just don’t steal it and 
 📌 Project Status
 🚧 In Progress
 
-🎯 Goal: Full-stack MVP by August 31st, 2025
+🎯 Goal: Full-stack MVP by December 31st, 2025
 
 ✨ Slogan
 "Track growth. Level up. Stay rooted."
