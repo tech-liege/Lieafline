@@ -1,32 +1,52 @@
 const mongoose = require('mongoose');
 
-const q_aSchema = new mongoose.Schema(
+const optionsSchema = new mongoose.Schema(
   {
-    nature: { type: String, required: true },
-    question: { type: String, required: true },
-    options: [String],
-    answer: { type: String, required: true },
+    a: String,
+    b: String,
+    c: String,
+    d: String,
   },
   { timestamps: true }
 );
 
+const q_aSchema = new mongoose.Schema(
+  {
+    nature: { type: String, required: true },
+    question: { type: String, required: true },
+    options: { type: optionsSchema, required: true },
+    answer: {
+      type: String,
+      maxlength: 1,
+      required: true,
+      // either 'a', 'b', 'c' or 'd'
+    },
+  },
+  { timestamps: true }
+);
+
+const todoSchema = new mongoose.Schema({
+  ofType: String, // read/video/question
+  notes: String,
+  videos: String,
+  q_a: [q_aSchema],
+});
+
 const taskSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true },
-    description: String,
-    nature: { type: String, required: true },
-    notes: String, // user's learning notes
-    videos: String,
-    q_a: [q_aSchema],
     xpScore: Number,
+    todos: [todoSchema],
     completed: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
 const lessonSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true },
-    description: String,
+    title: { type: String },
+    description: {
+      type: String,
+      maxlength: 300,
+    },
     resources: [String], // links, PDFs, videos, etc.
     tasks: [taskSchema],
     progress: { type: Number, default: 0 },
@@ -37,7 +57,10 @@ const lessonSchema = new mongoose.Schema(
 const moduleSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    description: String,
+    note: {
+      type: String,
+      maxlength: 30000,
+    },
     progress: { type: Number, default: 0 },
     lessons: [lessonSchema],
   },
@@ -47,7 +70,10 @@ const moduleSchema = new mongoose.Schema(
 const phaseSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    description: String,
+    description: {
+      type: String,
+      maxlength: 300,
+    },
     progress: { type: Number, default: 0 },
     modules: [moduleSchema],
   },
@@ -57,14 +83,17 @@ const phaseSchema = new mongoose.Schema(
 const skillSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    description: String,
+    description: {
+      type: String,
+      maxlength: 300,
+    },
     tags: [String],
     category: { type: String, required: true },
     niche: { type: String, required: true },
     progress: { type: Number, default: 0 },
     phases: [phaseSchema],
     private: { type: Boolean, default: true },
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );

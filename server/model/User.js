@@ -35,7 +35,6 @@ const userSchema = new mongoose.Schema(
     bio: {
       type: String,
       maxlength: 300,
-      default: "No bio yet",
     },
     dob: {
       type: Date,
