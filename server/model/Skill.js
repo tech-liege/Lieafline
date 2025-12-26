@@ -1,29 +1,16 @@
 const mongoose = require('mongoose');
 
-const optionsSchema = new mongoose.Schema(
-  {
-    a: String,
-    b: String,
-    c: String,
-    d: String,
+const q_aSchema = new mongoose.Schema({
+  nature: { type: String, required: true }, // default=multichoice/bool/etc..
+  question: { type: String, required: true },
+  options: { a: { type: String, required: true }, b: { type: String, required: true }, c: String, d: String },
+  answer: {
+    type: String,
+    maxlength: 1,
+    required: true,
+    // either 'a', 'b', 'c' or 'd'
   },
-  { timestamps: true }
-);
-
-const q_aSchema = new mongoose.Schema(
-  {
-    nature: { type: String, required: true },
-    question: { type: String, required: true },
-    options: { type: optionsSchema, required: true },
-    answer: {
-      type: String,
-      maxlength: 1,
-      required: true,
-      // either 'a', 'b', 'c' or 'd'
-    },
-  },
-  { timestamps: true }
-);
+});
 
 const todoSchema = new mongoose.Schema({
   ofType: String, // read/video/question
@@ -34,7 +21,7 @@ const todoSchema = new mongoose.Schema({
 
 const taskSchema = new mongoose.Schema(
   {
-    xpScore: Number,
+    xp: Number,
     todos: [todoSchema],
     completed: { type: Boolean, default: false },
   },

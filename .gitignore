@@ -143,6 +143,7 @@ node_modules
 dist
 dist-ssr
 *.local
+jsconfig.json
 
 # Editor directories and files
 .vscode/

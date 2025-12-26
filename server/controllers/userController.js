@@ -21,6 +21,34 @@ exports.getUser = async (req, res) => {
   }
 };
 
+exports.bookmarkSkill = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    user.bookmarks.push(req.params.skillId);
+    await user.save();
+    res.json({ message: "Bookmarked Successfully", bookmarks: user.bookmarks });
+  } catch (err) {
+    res.status(500).json({
+      message: "Server Error",
+      error: err.message,
+    });
+  }
+};
+
+exports.archiveSkill = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    user.archives.push(req.params.skillId);
+    await user.save();
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({
+      message: "Server Error",
+      error: err.message,
+    });
+  }
+};
+
 // PATCH /user
 exports.updateUser = async (req, res) => {
   try {

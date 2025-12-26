@@ -20,7 +20,7 @@ const router = express.Router();
 router.post("/create", authM, createSkill);
 router.get("/user", authM, getMySkills);
 router.delete("/:id", authM, deleteSkill);
-router.patch("/:id/skill", authM, updateSkill);
+router.patch("/:id", authM, updateSkill);
 // Public routes
 router.get("/user/:userId", getUserSkills);
 router.get("/:id", getSkillById);

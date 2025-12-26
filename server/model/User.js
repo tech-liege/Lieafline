@@ -36,21 +36,23 @@ const userSchema = new mongoose.Schema(
       type: String,
       maxlength: 300,
     },
-    dob: {
-      type: Date,
-    },
     password: {
       type: String,
       required: true,
     },
+    dob: {
+      type: Date,
+    },
     profilePic: {
       type: String,
     },
+    bookmarks: [String], //skill Ids
+    archives: [String], //skill Ids
+    xp: [xpSchema],
     streaks: [streakSchema],
-    // streakFreezes:{type:Number,default=0},
+    streakFreezes: { type: Number, default: 0 },
     currentStreak: { type: Number, default: 0 },
     highestStreak: { type: Number, default: 0 },
-    xp: [xpSchema],
     settings: {
       appearance: {
         darkmode: {

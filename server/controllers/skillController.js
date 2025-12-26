@@ -33,7 +33,7 @@ exports.createSkill = async (req, res) => {
 exports.getMySkills = async (req, res) => {
   try {
     const skills = await Skill.find({ createdBy: req.user.id }).sort({ createdAt: -1 });
-    res.status(200).json(skills);
+    res.status(200).json({ message: "All My Skill", skills: skills });
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch user skills", error: error.message });
   }
@@ -75,12 +75,12 @@ exports.getSkillById = async (req, res) => {
     const skill = await Skill.findById(req.params.id);
 
     if (!skill) {
-      return res.status(404).json({ message: 'Skill not found' });
+      return res.status(404).json({ message: "Skill not found" });
     }
 
-    res.status(201).json({ skill: skill, message: 'success' });
+    res.status(201).json({ skill: skill, message: "Single Skill" });
   } catch (error) {
-    res.status(500).json({ message: 'Failed to fetch skill', error: error.message });
+    res.status(500).json({ message: "Failed to fetch skill", error: error.message });
   }
 };
 
