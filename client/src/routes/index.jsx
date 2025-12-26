@@ -5,6 +5,7 @@ import Skills from '../pages/Skills';
 import CreateSkill from '../pages/CreateSkill';
 import EditSkill from '../pages/EditSkill';
 import DeleteSkill from '../pages/DeleteSkill';
+import Phases from "../pages/Phases";
 import Progress from '../pages/Progress';
 import Profile from '../pages/Profile';
 import App from '../App';
@@ -20,7 +21,7 @@ import { AuthProvider, VarProvider } from '../context/Contexts';
 
 export const router = createBrowserRouter([
   {
-    path: '/auth',
+    path: "/auth",
     element: (
       <AuthProvider>
         <VarProvider>
@@ -37,7 +38,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: ':routeMode',
+        path: ":routeMode",
         element: (
           <PublicOnly>
             <Authenticate />
@@ -45,7 +46,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'forgot-password',
+        path: "forgot-password",
         element: (
           <PublicOnly>
             <ForgotPassword />
@@ -53,7 +54,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'reset-password/:token',
+        path: "reset-password/:token",
         element: (
           <PublicOnly>
             <ResetPassword />
@@ -63,7 +64,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/',
+    path: "/",
     element: (
       <AuthProvider>
         <VarProvider>
@@ -88,7 +89,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'skills',
+        path: "skills",
         element: (
           <PrivateRoute>
             <Skills />
@@ -96,7 +97,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'skills/:skillId',
+        path: "skills/:skillId",
         element: (
           <PrivateRoute>
             <Skills />
@@ -104,7 +105,15 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'createSkill',
+        path: "phases/:phaseId",
+        element: (
+          <PrivateRoute>
+            <Phases />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "createSkill",
         element: (
           <PrivateRoute>
             <CreateSkill />
@@ -112,7 +121,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'editSkill/:skillId',
+        path: "editSkill/:skillId",
         element: (
           <PrivateRoute>
             <EditSkill />
@@ -120,7 +129,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'deleteSkill/:skillId',
+        path: "deleteSkill/:skillId",
         element: (
           <PrivateRoute>
             <DeleteSkill />
@@ -128,7 +137,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'progress',
+        path: "progress",
         element: (
           <PrivateRoute>
             <Progress />
@@ -136,7 +145,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'profile',
+        path: "profile",
         element: (
           <PrivateRoute>
             <Profile />
@@ -144,7 +153,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'dashboard',
+        path: "dashboard",
         element: (
           <PrivateRoute>
             <Dashboard />
@@ -152,11 +161,11 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'about',
+        path: "about",
         element: <About />,
       },
       {
-        path: 'settings',
+        path: "settings",
         element: (
           <PrivateRoute>
             <Settings />

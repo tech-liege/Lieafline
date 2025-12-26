@@ -23,7 +23,7 @@ export const deleteOneSkill = (url, token, skillId) =>
   }).then(res => res.json());
 
 export const updateSkill = (url, token, skillId, data) =>
-  fetch(`${url}/${skillId}/skill`, {
+  fetch(`${url}/${skillId}`, {
     method: "PATCH",
     headers: getHeaders(token),
     body: JSON.stringify(data),

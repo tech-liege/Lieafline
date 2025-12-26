@@ -14,26 +14,28 @@ export default function App() {
   const { isSideActive, toggleSidebar, loading } = useVar();
 
   return (
-    <div className='min-h-screen flex flex-col bg-gray-50 text-gray-800'>
+    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-800">
       {/* Navbar */}
       <Navbar />
 
       {/* Main Layout */}
-      <div className='flex flex-1 mt-16'>
+      <div className="flex flex-1 mt-16">
         {/* Sidebar (only when logged in) */}
         {token && isSideActive && (
-          <aside className='fixed block w-full h-full md:w-64' onClick={window.innerWidth < 768 ? toggleSidebar : ''}>
+          <aside
+            className="fixed block w-full h-full md:w-[13%]"
+            onClick={window.innerWidth < 768 ? toggleSidebar : ""}>
             <Sidebar />
-            <div className='opacity-40 bg-black w-full h-full md:hidden'></div>
+            <div className="opacity-40 bg-black w-full h-full md:hidden"></div>
           </aside>
         )}
 
         {/* Main Content Area */}
         <main
-          className={`flex-1 bg-white rounded-tl-3xl shadow-sm p-6 md:p-8 transition-colors ${
-            isSideActive && window.innerWidth >= 768 && 'ml-64'
+          className={`flex-1 bg-white rounded-tl-3xl shadow-md p-6 md:p-8 transition-colors ${
+            isSideActive && window.innerWidth >= 768 && "ml-[13%]"
           }`}>
-          <div className='max-w-6xl mx-auto'>
+          <div className="w-full mx-auto">
             <Outlet />
           </div>
         </main>
@@ -47,10 +49,11 @@ export default function App() {
 
       {/* Toast Notifications */}
       <ToastContainer
-        position={window.innerWidth < 768 ? 'bottom-center' : 'top-right'}
+        position={window.innerWidth < 768 ? "bottom-center" : "top-right"}
         autoClose={3000}
-        theme='light'
-        toastClassName='!bg-white !text-gray-800 !shadow-md !rounded-xl'
+        theme="light"
+        toastClassName="!bg-white !text-gray-800 !shadow-md !rounded-xl"
+        newestOnTop={true}
       />
       <Analytics />
     </div>

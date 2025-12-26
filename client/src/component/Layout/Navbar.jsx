@@ -20,19 +20,21 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full bg-white border-b border-gray-200 shadow-sm fixed z-20">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 flex justify-between items-center h-16">
+    <nav className="w-full px-10 bg-white border-b border-gray-200 shadow-sm fixed z-20">
+      <div className="px-10 md:px-20 flex justify-between items-center h-16">
         {/* Left Section */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 ">
           {token && (
-            <button className="p-2 text-gray-500 hover:text-gray-700 rounded-lg transition" onClick={toggleSidebar}>
+            <button
+              className="p-2 text-3xl text-gray-500 hover:text-gray-700 rounded-lg transition"
+              onClick={toggleSidebar}>
               <Menu className="h-5 w-5" />
             </button>
           )}
 
           <Link
             to="/"
-            className="text-xl font-bold cursor-pointer tracking-tight bg-gradient-to-r from-blue-700 to-black bg-clip-text text-transparent">
+            className="text-3xl font-bold cursor-pointer tracking-tight bg-gradient-to-r to-blue-700 from-green-700 bg-clip-text text-transparent">
             Lieafline
           </Link>
         </div>

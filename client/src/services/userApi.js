@@ -22,6 +22,18 @@ export const getUser = (url, token) =>
     headers: getHeaders(token),
   }).then(res => res.json());
 
+export const bookmarkSkill = (url, token, skillId) =>
+  fetch(`${url}/bookmarkSkill/${skillId}`, {
+    method: "GET",
+    headers: getHeaders(token),
+  }).then(res => res.json());
+
+export const archiveSkill = (url, token, skillId) =>
+  fetch(`${url}/archiveSkill/${skillId}`, {
+    method: "GET",
+    headers: getHeaders(token),
+  }).then(res => res.json());
+
 export const updateUser = (url, token, userData) =>
   fetch(`${url}/updateUser`, {
     method: 'PATCH',

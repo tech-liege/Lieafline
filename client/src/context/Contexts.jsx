@@ -1,14 +1,15 @@
-import { createContext, useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode';
-import { getUser } from '../services/userApi';
-import { toast } from 'react-toastify';
+import { createContext, useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
+import { getUser } from "../services/userApi";
+import { toast } from "react-toastify";
 import usePolling from "../hooks/usePolling";
+import skillSample from "../utils/skillsample.json";
 
 const AuthContext = createContext();
 const VarContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(() => localStorage.getItem('token') || '');
+  const [token, setToken] = useState(() => localStorage.getItem("token") || "");
   const [user, setUser] = useState({});
   const [isServerActive, setIsServerActive] = useState(false);
   const [toaster, setToaster] = useState();
@@ -18,18 +19,18 @@ export function AuthProvider({ children }) {
   const AUTH_SERVER_URL = import.meta.env.VITE_AUTH_SERVER_URL;
   const USER_SERVER_URL = import.meta.env.VITE_USER_SERVER_URL;
 
-  if (token) {
-    try {
-      const { exp } = jwtDecode(token);
-      if (Date.now() >= exp * 1000) {
-        localStorage.removeItem("token"); // expired, clear it
-        setToken("");
-      }
-    } catch {
-      localStorage.removeItem("token"); // invalid token format
-      setToken("");
-    }
-  }
+  // if (token) {
+  //   try {
+  //     const { exp } = jwtDecode(token);
+  //     if (Date.now() >= exp * 1000) {
+  //       localStorage.removeItem("token"); // expired, clear it
+  //       setToken("");
+  //     }
+  //   } catch {
+  //     localStorage.removeItem("token"); // invalid token format
+  //     setToken("");
+  //   }
+  // }
 
   usePolling(() => {
     fetch(`${BASE_SERVER_URL}/health`, {
@@ -42,7 +43,7 @@ export function AuthProvider({ children }) {
         toast.dismiss(toaster);
         toast("Server Connected");
       })
-      .catch((err) => {
+      .catch(err => {
         toast.dismiss(toaster) && setToaster(toast.loading("Server Disconnected. Reconnecting..."));
         console.log(err);
         setIsServerActive(false);
@@ -102,13 +103,15 @@ export function AuthProvider({ children }) {
 
 export function VarProvider({ children }) {
   const [loading, setLoading] = useState(false);
+  const [loadingText, setLoadingText] = useState(false);
   const [isSideActive, setIsSideActive] = useState(false);
-  const notifications = ['Verily', 'are', 'kipade'];
+  const notifications = ["Verily", "are", "kipade"];
 
-  const toggleLoading = mode => {
+  const toggleLoading = (mode, text = "") => {
     if (mode === true || mode == false) {
       setLoading(mode);
-      mode ? (document.body.style.cursor = 'wait') : (document.body.style.cursor = 'default');
+      setLoadingText(text);
+      mode ? (document.body.style.cursor = "wait") : (document.body.style.cursor = "default");
     } else {
       setLoading(false);
     }
@@ -119,7 +122,10 @@ export function VarProvider({ children }) {
   };
 
   return (
-    <VarContext.Provider value={{ notifications, isSideActive, toggleSidebar, loading, toggleLoading }}>{children}</VarContext.Provider>
+    <VarContext.Provider
+      value={{ notifications, isSideActive, toggleSidebar, loading, loadingText, toggleLoading, skillSample }}>
+      {children}
+    </VarContext.Provider>
   );
 }
 
