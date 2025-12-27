@@ -8,6 +8,8 @@ import { ToastContainer } from 'react-toastify';
 import { useAuth, useVar } from './hooks/useAuth';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import { FileUploaderMinimal } from '@uploadcare/react-uploader';
+import '@uploadcare/react-uploader/core.css';
 
 export default function App() {
   const { token } = useAuth();
@@ -56,6 +58,14 @@ export default function App() {
         newestOnTop={true}
       />
       <Analytics />
+      <div>
+        <FileUploaderMinimal
+           sourceList="local, camera, facebook, gdrive"
+           cloudImageEditorAutoOpen={true}
+           classNameUploader="uc-light"
+           pubkey="eebd6ea77cac80e9dcdd"
+        />
+      </div>
     </div>
   );
 }
