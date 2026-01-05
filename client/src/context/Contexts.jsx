@@ -21,15 +21,15 @@ export function AuthProvider({ children }) {
   const AUTH_SERVER_URL = import.meta.env.VITE_AUTH_SERVER_URL;
   const USER_SERVER_URL = import.meta.env.VITE_USER_SERVER_URL;
 
-  // if (token) {
-  //   try {
-  //     const { exp } = jwtDecode(token);
-  //     console.log(exp);
-  //   } catch {
-  //     localStorage.removeItem("token"); // invalid token format
-  //     setToken("");
-  //   }
-  // }
+  if (token) {
+    try {
+      const { exp } = jwtDecode(token);
+      console.log(exp);
+    } catch {
+      localStorage.removeItem("token"); // invalid token format
+      setToken("");
+    }
+  }
 
   usePolling(() => {
     fetch(`${BASE_SERVER_URL}/health`, {
@@ -109,7 +109,7 @@ export function VarProvider({ children }) {
   const [inLoading, setInLoading] = useState(false);
   const [inLoadingText, setInLoadingText] = useState(false);
   const [isSideActive, setIsSideActive] = useState(false);
-  const [inFullScreen, setInFullScreen] = useState(true);
+  const [inFullScreen, setInFullScreen] = useState(false);
   const [fullScreenHeader, setFullScreenHeader] = useState("Full Screen");
   const notifications = ["Verily", "are", "kipade"];
 
