@@ -2,19 +2,29 @@ import { Archive, BookmarkPlus } from "lucide-react";
 import ProgressBar from "./ProgressBar";
 import { Link } from "react-router-dom";
 
-function SkillCard({ _id, title, description, progress = 0, tags = [], type = "skill", bookmark, archive }) {
+function SkillCard({
+  id,
+  title,
+  description,
+  progress = 0,
+  tags = [],
+  bookmark,
+  archive,
+}) {
   return (
     <Link
-      to={type === "skill" ? `/skills/${_id}` : `/phases/${_id}`}
-      className="relative group z-10 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+      to={`/skills/${id}`}
+      className="relative group z-10 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+    >
       {/* Header */}
       <div className="mb-2 flex items-center justify-between">
         <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
-        <span className="text-sm font-medium text-gray-500">{progress}%</span>
       </div>
 
       {/* Description */}
-      {description && <p className="mb-3 text-sm text-gray-600">{description}</p>}
+      {description && (
+        <p className="mb-3 text-sm text-gray-600">{description}</p>
+      )}
 
       {/* Progress */}
       <ProgressBar value={progress} />
@@ -22,10 +32,11 @@ function SkillCard({ _id, title, description, progress = 0, tags = [], type = "s
       {/* Tags */}
       {tags?.length > 0 && (
         <div className="mt-4 flex flex-wrap gap-2">
-          {tags.map(t => (
+          {tags.map((t) => (
             <span
               key={t}
-              className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-emerald-50 hover:text-emerald-600">
+              className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-emerald-50 hover:text-emerald-600"
+            >
               {t}
             </span>
           ))}
@@ -33,22 +44,22 @@ function SkillCard({ _id, title, description, progress = 0, tags = [], type = "s
       )}
 
       {/* Action Buttons (appear on hover) */}
-      {type === "skill" && (
-        <div className="absolute right-3 top-3 hidden items-center gap-2 rounded-md bg-white/70 p-1 shadow-sm backdrop-blur group-hover:flex">
-          <button
-            onClick={bookmark}
-            className="rounded-md p-1.5 text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 transition-colors"
-            title="Bookmark">
-            <BookmarkPlus size={16} />
-          </button>
-          <button
-            onClick={archive}
-            className="rounded-md p-1.5 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
-            title="Archive">
-            <Archive size={16} />
-          </button>
-        </div>
-      )}
+      <div className="absolute right-3 top-3 hidden items-center gap-2 rounded-md bg-white/70 p-1 shadow-sm backdrop-blur group-hover:flex">
+        <button
+          onClick={bookmark}
+          className="rounded-md p-1.5 text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 transition-colors"
+          title="Bookmark"
+        >
+          <BookmarkPlus size={16} />
+        </button>
+        <button
+          onClick={archive}
+          className="rounded-md p-1.5 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
+          title="Archive"
+        >
+          <Archive size={16} />
+        </button>
+      </div>
     </Link>
   );
 }

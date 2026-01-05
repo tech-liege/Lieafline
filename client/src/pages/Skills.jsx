@@ -2,7 +2,7 @@ import SkillCard from '../component/SkillCard';
 import PhaseCard from "../component/PhaseCard";
 import Stats from "../component/Stats";
 import { Link, useParams } from "react-router-dom";
-import { getCUSkills, getOneSkill } from "../services/skillApi";
+import { getCUSkills, getPhases } from "../services/skillApi";
 import { useAuth, useVar } from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -10,7 +10,6 @@ import { archiveSkill, bookmarkSkill } from "../services/userApi";
 
 function Skills() {
   const [skill, setSkill] = useState(null);
-  const [prevComp, setPrevComp] = useState(true);
   const [CUSkills, setCUSkills] = useState([]);
 
   const { token, SKILL_SERVER_URL } = useAuth();
@@ -18,18 +17,27 @@ function Skills() {
   const { skillId } = useParams();
 
   useEffect(() => {
-    toggleLoading(true, "Fetching Tasks");
+    toggleLoading(true, "Fetching Skills...");
     async function fetchData() {
-      const action = skillId ? getOneSkill : getCUSkills;
-      const args = skillId ? [SKILL_SERVER_URL, token, skillId] : [SKILL_SERVER_URL, token];
+      const action = skillId ? getPhases : getCUSkills;
+      const args = skillId
+        ? [SKILL_SERVER_URL, token, skillId]
+        : [SKILL_SERVER_URL, token];
       try {
         const data = await action(args);
-        if (data && data.message === "Single Skill") setSkill(data);
-        if (data && data.message === "All My Skill") setCUSkills(data);
+        if (data && data.message === "Phases") {
+          setSkill(data.skill);
+        } else if (data && data.message === "All My Skill") {
+          setCUSkills(data.skills);
+        } else {
+          setSkill(skillSample);
+          setCUSkills([skillSample]);
+        }
       } catch (error) {
         console.error(error.message || error);
         toast.error("Failed to load skills. Please try again.");
         setSkill(skillSample);
+        setCUSkills([skillSample]);
       } finally {
         toggleLoading(false);
       }
@@ -38,7 +46,7 @@ function Skills() {
     fetchData();
   }, [token, skillId, SKILL_SERVER_URL]);
 
-  const bookmark = skillId => async () => {
+  const bookmark = (skillId) => async () => {
     try {
       const data = await bookmarkSkill(SKILL_SERVER_URL, token, skillId);
       data.bookmarks ? toast("bookmarked!") : toast.error("failed to bookmark");
@@ -47,7 +55,7 @@ function Skills() {
       console.error(err.message);
     }
   };
-  const archive = skillId => async () => {
+  const archive = (skillId) => async () => {
     try {
       const data = await archiveSkill(SKILL_SERVER_URL, token, skillId);
       data.archives ? toast("archiveed!") : toast.error("failed to archive");
@@ -65,12 +73,24 @@ function Skills() {
           {/* Skill Tree Section */}
           <section className="lg:col-span-3 bg-transparent rounded-2xl shadow-sm p-6">
             <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
-              <h1 className="text-2xl font-bold text-green-900">{skill.title}</h1>
+              <h1 className="text-2xl font-bold text-green-900">
+                {skill ? skill.title : "no skill"}
+              </h1>
             </header>
-            {skill.phases.map((phase, index) => {
-              <PhaseCard key={phase._id || phase.title} {...phase} index={index} disabled={prevComp} />;
-              setPrevComp(phase.progress >= 100);
-            })}
+            <div
+              id="phase"
+              className="relative flex flex-col gap-8 mt-8
+             before:absolute before:left-3 before:top-0
+             before:h-full before:w-px before:bg-emerald-200"
+            >
+              {skill?.phases?.map((phase, ind) => (
+                <PhaseCard
+                  key={phase.id || phase.title}
+                  {...phase}
+                  index={ind}
+                />
+              ))}
+            </div>
           </section>
 
           {/* Sidebar / Stats */}
@@ -91,18 +111,18 @@ function Skills() {
         <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <h1 className="text-2xl font-bold text-gray-800">My Skills</h1>
           <Link
-            to="/createSkill"
-            className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 text-white text-sm font-medium px-4 py-2 shadow-sm hover:bg-emerald-600 transition-colors">
+            to="/exploreSkill"
+            className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 text-white text-sm font-medium px-4 py-2 shadow-sm hover:bg-emerald-600 transition-colors"
+          >
             <span className="text-lg font-bold leading-none">+</span> Add Skill
           </Link>
         </header>
-
         {/* Skill Grid */}
         {CUSkills.length > 0 ? (
           <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {CUSkills.map(skill => (
+            {CUSkills.map((skill) => (
               <SkillCard
-                key={skill._id || skill.title}
+                key={skill.id || skill.title}
                 {...skill}
                 bookmark={bookmark(skill.id)}
                 archive={archive(skill.id)}
@@ -113,9 +133,11 @@ function Skills() {
           <section className="flex flex-col items-center justify-center h-[60vh] text-gray-500">
             <p className="text-sm">No skills added yet.</p>
             <Link
-              to="/createSkill"
-              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-emerald-500 text-white text-sm font-medium px-4 py-2 shadow-sm hover:bg-emerald-600 transition-colors">
-              <span className="text-lg font-bold leading-none">+</span> Add Skill
+              to="/exploreSkill"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-emerald-500 text-white text-sm font-medium px-4 py-2 shadow-sm hover:bg-emerald-600 transition-colors"
+            >
+              <span className="text-lg font-bold leading-none">+</span> Add
+              Skill
             </Link>
           </section>
         )}

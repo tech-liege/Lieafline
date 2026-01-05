@@ -53,3 +53,17 @@ export const getNiches = (url, token, category) =>
     headers: getHeaders(token),
     body: JSON.stringify({ category }),
   }).then(res => res.json());
+
+export const getPhases = (url, token, skillId) =>
+  fetch(`${url}/getPhases`, {
+    method: "GET",
+    headers: getHeaders(token),
+    body: JSON.stringify({ id: skillId }),
+  }).then((res) => res.json());
+
+export const getExtPhase = (url, token, phaseId) =>
+  fetch(`${url}/getExtPhase`, {
+    method: "GET",
+    headers: getHeaders(token),
+    body: JSON.stringify({ id: phaseId }),
+  }).then((res) => res.json());

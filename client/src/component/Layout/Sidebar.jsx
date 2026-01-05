@@ -13,10 +13,16 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="h-full p-6 bg-white border-r border-gray-200 w-full z-10 absolute">
+    <div className="h-full p-6 bg-white border-r border-gray-200 w-[50%] md:w-[10%] z-200 absolute">
       <nav className="space-y-2">
         {navItems.map(({ to, label, icon }) => (
-          <NavLink key={to} to={to} className={({ isActive }) => `${baseLink} ${isActive ? activeLink : ""}`}>
+          <NavLink
+            key={to}
+            to={to}
+            className={({ isActive }) =>
+              `${baseLink} ${isActive ? activeLink : ""}`
+            }
+          >
             {icon}
             <span>{label}</span>
           </NavLink>

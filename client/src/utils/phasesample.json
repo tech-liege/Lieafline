@@ -1,0 +1,128 @@
+{
+  "id": "u67th6jjgjyt",
+  "title": "Sample Phase 2",
+  "description": "Sample description for sample phase 2",
+  "locked": false,
+  "index": 2,
+  "progress": 40,
+  "modules": [
+    {
+      "id": "756uyh6u6",
+      "title": "Sample Module 1 of Sample Phase 2",
+      "note": "Note for sample module 1 of sample phase 2",
+      "index": 1,
+      "lessons": [
+        {
+          "id": "54645thf5yb45by4",
+          "progress": 40,
+          "locked": false,
+          "tasks": [
+            { "xp": 20, "id": "efsf" },
+            { "xp": 20, "id": "33fte" },
+            { "xp": 30, "id": "3t343" },
+            { "xp": 20, "id": "4t3t4r3t3t3" },
+            { "xp": 30, "id": "3t43t4et34t" }
+          ]
+        },
+        {
+          "id": "4353dg564g5r",
+          "progress": 40,
+          "locked": false,
+          "tasks": [
+            { "xp": 20, "id": "4tt4t3t3" },
+            { "xp": 30, "id": "et436ry56" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "757ythtr65y",
+      "title": "Sample Module 2 of Sample Phase 2",
+      "note": "Note for sample module 2 of sample phase 2",
+      "index": 2,
+      "lessons": [
+        {
+          "id": "3534trgrg",
+          "progress": 40,
+          "locked": true,
+          "tasks": [
+            { "xp": 20, "id": "354vt54543" },
+            { "xp": 20, "id": "453535" },
+            { "xp": 30, "id": "3453534" }
+          ]
+        },
+        {
+          "id": "5645rtgt",
+          "progress": 40,
+          "locked": true,
+          "tasks": [
+            { "xp": 20, "id": "4354et463" },
+            { "xp": 20, "id": "343534535" },
+            { "xp": 30, "id": "34535c345545f3" }
+          ]
+        },
+        {
+          "id": "456g646g54646gg",
+          "progress": 40,
+          "locked": true,
+          "tasks": [
+            { "xp": 20, "id": "6576h775" },
+            { "xp": 30, "id": "6g4645g" }
+          ]
+        },
+        {
+          "id": "54g456hg65hhj",
+          "progress": 40,
+          "locked": true,
+          "tasks": [
+            { "xp": 20, "id": "645645g6gv" },
+            { "xp": 30, "id": "46g46g456g46" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uy5y6h56yh5",
+      "title": "Sample Module 3 of Sample Phase 2",
+      "note": "Note for sample module 3 of sample phase 2",
+      "index": 3,
+      "lessons": [
+        {
+          "progress": 40,
+          "locked": true,
+          "tasks": [
+            { "xp": 20, "id": "" },
+            { "xp": 20, "id": "" },
+            { "xp": 30, "id": "" }
+          ]
+        },
+        {
+          "progress": 40,
+          "locked": true,
+          "tasks": [
+            { "xp": 20, "id": "" },
+            { "xp": 20, "id": "" },
+            { "xp": 30, "id": "" }
+          ]
+        },
+        {
+          "progress": 40,
+          "locked": true,
+          "tasks": [
+            { "xp": 20, "id": "" },
+            { "xp": 20, "id": "" },
+            { "xp": 30, "id": "" }
+          ]
+        },
+        {
+          "progress": 40,
+          "locked": true,
+          "tasks": [
+            { "xp": 20, "id": "" },
+            { "xp": 30, "id": "" }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,27 +1,61 @@
 import { Link } from "react-router-dom";
 import ProgressBar from "./ProgressBar";
 
-export default function PhaseCard(_id, title, description, progress, index, disabled) {
+export default function PhaseCard({
+  id,
+  title,
+  description,
+  progress = 0,
+  locked = false,
+  index,
+}) {
   return (
     <div
-      className={`rounded-3xl border shadow-md min-h-fit flex flex-col justify-around content-around ${
-        disabled
-          ? "border-dashed border-gray-700 shadow-gray-800 bg-gray-50 text-gray-600"
-          : "border-green-900 shadow-emerald-800 bg-white text-gray-800"
-      }`}>
-      <header className="font-bold text-4xl mx-auto">
-        Phase {index} - <span className={!disabled && "text-emerald-900"}> {title} </span>
-      </header>
-      <div className="desc 3-line-clip">{description}</div>
-      <ProgressBar value={progress} />
-      <Link
-        to={`/phases/${_id}`}
-        className={
-          "btn btn-md hover:btn-lg border cursor-pointer " +
-          (disabled ? "bg-gray-600 border-gray-800" : "bg-emerald-600 border-emerald-800 ")
-        }>
-        Go
-      </Link>
+      className={`relative group rounded-2xl p-6 w-full border transition-all duration-300
+        ${
+          locked
+            ? "bg-gray-100 border-gray-200 text-gray-500"
+            : "bg-white border-emerald-200 hover:shadow-lg hover:-translate-y-1"
+        }`}
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="text-xl font-semibold">
+          <span className="text-gray-400 mr-1">Phase {index + 1}</span>
+          <span className={locked ? "text-gray-500" : "text-emerald-900"}>
+            {title}
+          </span>
+        </h3>
+
+        {locked && (
+          <span className="text-xs px-2 py-1 rounded-full bg-gray-300 text-gray-700">
+            Locked
+          </span>
+        )}
+      </div>
+
+      {/* Description */}
+      {description && (
+        <p className="text-sm text-gray-600 mb-4 line-clamp-2">{description}</p>
+      )}
+
+      {/* Progress */}
+      <ProgressBar value={progress} disabled={locked} />
+
+      {/* Action */}
+      <div className="mt-4 flex justify-end">
+        <Link
+          to={`/phases/${id}`}
+          className={`text-sm md:text-lg font-medium px-4 py-2 rounded-lg transition-colors
+            ${
+              locked
+                ? "bg-gray-400 cursor-not-allowed pointer-events-none"
+                : "bg-emerald-600 text-white hover:bg-emerald-700"
+            }`}
+        >
+          {locked ? "Locked" : "Continue"}
+        </Link>
+      </div>
     </div>
   );
 }

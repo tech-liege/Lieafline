@@ -1,4 +1,5 @@
-const User = require('../model/User');
+const Progress = require("../model/Progress");
+const User = require("../model/User");
 
 // GET /user
 exports.getUser = async (req, res) => {
@@ -52,9 +53,10 @@ exports.archiveSkill = async (req, res) => {
 // PATCH /user
 exports.updateUser = async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.user.id, req.body, { new: true, runValidators: true }).select(
-      "-password"
-    );
+    const user = await User.findByIdAndUpdate(req.user.id, req.body, {
+      new: true,
+      runValidators: true,
+    }).select("-password");
 
     res.json(user);
   } catch (err) {
@@ -73,6 +75,23 @@ exports.getUserSettings = async (req, res) => {
     if (!user) return res.status(404).json({ message: "User not found" });
 
     res.json(user.settings || {});
+  } catch (err) {
+    res.status(500).json({
+      message: "Server error",
+      error: err.message,
+    });
+  }
+};
+
+// GET /progress
+exports.getUserProgress = async (req, res) => {
+  try {
+    const progress = await Progress.find({ userId: req.user.id });
+
+    if (!progress)
+      return res.status(404).json({ message: "No progress found" });
+
+    res.json(progress);
   } catch (err) {
     res.status(500).json({
       message: "Server error",
@@ -114,7 +133,8 @@ exports.increaseStreak = async (req, res) => {
       if (user.streaks[-1].createdAt + 1000 * 60 * 60 * 24 * 2 > Date.now()) {
         user.streaks = [...user.streaks, {}];
         user.currentStreak += 1;
-        user.currentStreak > user.highestStreak && (user.highestStreak = user.currentStreak);
+        user.currentStreak > user.highestStreak &&
+          (user.highestStreak = user.currentStreak);
         await user.save();
       } else {
         user.currentStreak = 0;
@@ -123,7 +143,9 @@ exports.increaseStreak = async (req, res) => {
 
       res.status(201).json({ message: "success", streak: streak.days });
     } else {
-      res.status(200).json({ message: "streak already updated today", streak: streak.days });
+      res
+        .status(200)
+        .json({ message: "streak already updated today", streak: streak.days });
     }
   } catch (err) {
     res.status(500).json({ message: "Failed to update" });

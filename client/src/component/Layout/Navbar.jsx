@@ -15,8 +15,8 @@ export default function Navbar() {
     navigate('/auth/login');
   };
 
-  const togglePDN = () => {
-    setPDNActive(!PDNActive);
+  const togglePDN = (val) =>  () => {
+    if (val === true || val ===false){setPDNActive(val)} else {setPDNActive(!PDNActive)}
   };
 
   return (
@@ -57,7 +57,7 @@ export default function Navbar() {
 
               {/* Profile Dropdown */}
               <div className="dropdown dropdown-end">
-                <button className="flex items-center focus:outline-none" onClick={togglePDN}>
+                <button className="flex items-center focus:outline-none" onClick={togglePDN()}>
                   {user.profilePic ? (
                     <img
                       src={user.profilePic}
@@ -70,7 +70,7 @@ export default function Navbar() {
                 </button>
 
                 {/* Dropdown Menu */}
-                <ul
+                <ul onClick={togglePDN(false)}
                   className={` ${
                     PDNActive ? "block" : "hidden"
                   } absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-xl shadow-md group-hover:translate-y-1 transition-all transform origin-top-right duration-200 z-20`}>

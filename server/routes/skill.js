@@ -12,6 +12,8 @@ const {
   updateSkill,
   getCategories,
   getNiches,
+  getExtPhase,
+  getPhases,
 } = require("../controllers/skillController");
 
 const router = express.Router();
@@ -26,6 +28,8 @@ router.get("/user/:userId", getUserSkills);
 router.get("/:id", getSkillById);
 router.get("/getCategories", getCategories);
 router.get("/getNiches", getNiches);
+router.get("/getExtPhase", getExtPhase);
+router.get("/getPhases", getPhases);
 
 
 module.exports = router;

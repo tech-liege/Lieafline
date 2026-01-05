@@ -1,4 +1,8 @@
 const mongoose = require('mongoose');
+const getIdSchema = require("../utils/getIdSchema");
+
+const skillId = getIdSchema("Skill");
+const progressId = getIdSchema("Progress");
 
 const streakSchema = new mongoose.Schema(
   {
@@ -46,8 +50,10 @@ const userSchema = new mongoose.Schema(
     profilePic: {
       type: String,
     },
-    bookmarks: [String], //skill Ids
-    archives: [String], //skill Ids
+    skills: [skillId],
+    progress: [progressId],
+    bookmarks: [skillId],
+    archives: [skillId],
     xp: [xpSchema],
     streaks: [streakSchema],
     streakFreezes: { type: Number, default: 0 },

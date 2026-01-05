@@ -14,10 +14,12 @@ exports.registerUser = async (req, res) => {
   try {
     // Check duplicates
     let existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ message: 'Email has already been used' });
+    if (existingUser)
+      return res.status(400).json({ message: "Email has already been used" });
 
     existingUser = await User.findOne({ username });
-    if (existingUser) return res.status(400).json({ message: 'Username already exists' });
+    if (existingUser)
+      return res.status(400).json({ message: "Username already exists" });
 
     // Hash password
     const bcryptSalt = await bcrypt.genSalt(bcryptSaltRounds);
@@ -28,11 +30,11 @@ exports.registerUser = async (req, res) => {
     await newUser.save();
 
     // Sign token
-    const token = jwt.sign({ id: newUser._id }, JWT_SECRET);
+    const token = jwt.sign({ id: newUser.id }, JWT_SECRET);
     res.status(201).json({ token });
   } catch (error) {
-    console.error('Register Error:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    console.error("Register Error:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -41,16 +43,17 @@ exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: 'Invalid credentials' });
+    if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET);
+    const token = jwt.sign({ id: user.id }, JWT_SECRET);
     res.status(200).json({ token });
   } catch (error) {
-    console.error('Login Error:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    console.error("Login Error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 

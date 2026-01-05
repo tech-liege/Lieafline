@@ -4,6 +4,8 @@ import { getUser } from "../services/userApi";
 import { toast } from "react-toastify";
 import usePolling from "../hooks/usePolling";
 import skillSample from "../utils/skillsample.json";
+import phaseSample from "../utils/phasesample.json";
+import todoSample from "../utils/todosample.json";
 
 const AuthContext = createContext();
 const VarContext = createContext();
@@ -22,10 +24,7 @@ export function AuthProvider({ children }) {
   // if (token) {
   //   try {
   //     const { exp } = jwtDecode(token);
-  //     if (Date.now() >= exp * 1000) {
-  //       localStorage.removeItem("token"); // expired, clear it
-  //       setToken("");
-  //     }
+  //     console.log(exp);
   //   } catch {
   //     localStorage.removeItem("token"); // invalid token format
   //     setToken("");
@@ -37,20 +36,21 @@ export function AuthProvider({ children }) {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(() => {
         setIsServerActive(true);
         toast.dismiss(toaster);
         toast("Server Connected");
       })
-      .catch(err => {
-        toast.dismiss(toaster) && setToaster(toast.loading("Server Disconnected. Reconnecting..."));
+      .catch((err) => {
+        toast.dismiss(toaster) &&
+          setToaster(toast.loading("Server Disconnected. Reconnecting..."));
         console.log(err);
         setIsServerActive(false);
       });
     if (token && !user.id) {
       getUser(USER_SERVER_URL, token)
-        .then(data => {
+        .then((data) => {
           if (!data.message) {
             setUser(data);
           } else {
@@ -67,12 +67,13 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     // keep token in sync across tabs
-    const handleStorageChange = () => setToken(localStorage.getItem("token") || "");
+    const handleStorageChange = () =>
+      setToken(localStorage.getItem("token") || "");
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
-  const loginContext = newToken => {
+  const loginContext = (newToken) => {
     localStorage.setItem("token", newToken);
     setToken(newToken);
   };
@@ -95,7 +96,8 @@ export function AuthProvider({ children }) {
         loginContext,
         logout,
         isAuthenticated: !!token,
-      }}>
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -104,16 +106,40 @@ export function AuthProvider({ children }) {
 export function VarProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState(false);
+  const [inLoading, setInLoading] = useState(false);
+  const [inLoadingText, setInLoadingText] = useState(false);
   const [isSideActive, setIsSideActive] = useState(false);
+  const [inFullScreen, setInFullScreen] = useState(true);
+  const [fullScreenHeader, setFullScreenHeader] = useState("Full Screen");
   const notifications = ["Verily", "are", "kipade"];
+
+  const toggleInFullScreen = (mode, header = "") => {
+    if (mode === true || mode == false) {
+      setInFullScreen(mode);
+      setFullScreenHeader(header);
+    } else {
+      setInFullScreen(false);
+      setFullScreenHeader("");
+    }
+  };
 
   const toggleLoading = (mode, text = "") => {
     if (mode === true || mode == false) {
       setLoading(mode);
       setLoadingText(text);
-      mode ? (document.body.style.cursor = "wait") : (document.body.style.cursor = "default");
     } else {
       setLoading(false);
+      setLoadingText("");
+    }
+  };
+
+  const toggleInLoading = (mode, text = "") => {
+    if (mode === true || mode == false) {
+      setInLoading(mode);
+      setInLoadingText(text);
+    } else {
+      setInLoading(false);
+      setInLoadingText("");
     }
   };
 
@@ -123,7 +149,24 @@ export function VarProvider({ children }) {
 
   return (
     <VarContext.Provider
-      value={{ notifications, isSideActive, toggleSidebar, loading, loadingText, toggleLoading, skillSample }}>
+      value={{
+        notifications,
+        isSideActive,
+        toggleSidebar,
+        inFullScreen,
+        fullScreenHeader,
+        toggleInFullScreen,
+        loading,
+        loadingText,
+        toggleLoading,
+        inLoading,
+        inLoadingText,
+        toggleInLoading,
+        skillSample,
+        phaseSample,
+        todoSample,
+      }}
+    >
       {children}
     </VarContext.Provider>
   );

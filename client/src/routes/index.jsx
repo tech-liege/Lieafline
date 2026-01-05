@@ -2,22 +2,25 @@ import { createBrowserRouter } from 'react-router-dom';
 import Authenticate from '../pages/Authenticate';
 import Home from '../pages/Home';
 import Skills from '../pages/Skills';
-import CreateSkill from '../pages/CreateSkill';
-import EditSkill from '../pages/EditSkill';
-import DeleteSkill from '../pages/DeleteSkill';
+import ExploreSkills from "../pages/ExploreSkills";
+import CreateSkill from "../pages/CreateSkill";
+import EditSkill from "../pages/EditSkill";
+import DeleteSkill from "../pages/DeleteSkill";
 import Phases from "../pages/Phases";
-import Progress from '../pages/Progress';
-import Profile from '../pages/Profile';
-import App from '../App';
-import ErrorPage from '../pages/ErrorPage';
-import Dashboard from '../pages/Dashboard';
-import About from '../pages/About';
-import ForgotPassword from '../pages/ForgotPassword';
-import ResetPassword from '../pages/ResetPassword';
-import Settings from '../pages/Settings';
-import PrivateRoute from '../component/PrivateRoute';
-import PublicOnly from '../component/PublicOnly';
-import { AuthProvider, VarProvider } from '../context/Contexts';
+import Progress from "../pages/Progress";
+import Profile from "../pages/Profile";
+import App from "../App";
+import ErrorPage from "../pages/ErrorPage";
+import Dashboard from "../pages/Dashboard";
+import About from "../pages/About";
+import ForgotPassword from "../pages/ForgotPassword";
+import ResetPassword from "../pages/ResetPassword";
+import Settings from "../pages/Settings";
+import PrivateRoute from "../component/PrivateRoute";
+import PublicOnly from "../component/PublicOnly";
+import Render from "../component/Render";
+import { AuthProvider, VarProvider } from "../context/Contexts";
+import Lesson from "../pages/Lesson";
 
 export const router = createBrowserRouter([
   {
@@ -92,47 +95,55 @@ export const router = createBrowserRouter([
         path: "skills",
         element: (
           <PrivateRoute>
-            <Skills />
+            <Render />
           </PrivateRoute>
         ),
+        children: [
+          {
+            index: true,
+            element: <Skills />,
+          },
+          {
+            path: ":skillId",
+            element: <Skills />,
+          },
+          {
+            path: "explore",
+            element: <ExploreSkills />,
+          },
+          {
+            path: "create",
+            element: <CreateSkill />,
+          },
+          {
+            path: "edit/:skillId",
+            element: <EditSkill />,
+          },
+          {
+            path: "delete/:skillId",
+            element: <DeleteSkill />,
+          },
+        ],
       },
       {
-        path: "skills/:skillId",
+        path: "phases",
         element: (
           <PrivateRoute>
-            <Skills />
+            <Render />
           </PrivateRoute>
         ),
+        children: [
+          {
+            path: ":phaseId",
+            element: <Phases />,
+          },
+        ],
       },
       {
-        path: "phases/:phaseId",
+        path: "lesson/:lessonId",
         element: (
           <PrivateRoute>
-            <Phases />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "createSkill",
-        element: (
-          <PrivateRoute>
-            <CreateSkill />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "editSkill/:skillId",
-        element: (
-          <PrivateRoute>
-            <EditSkill />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "deleteSkill/:skillId",
-        element: (
-          <PrivateRoute>
-            <DeleteSkill />
+            <Lesson />
           </PrivateRoute>
         ),
       },
