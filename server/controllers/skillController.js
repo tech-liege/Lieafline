@@ -3,22 +3,25 @@ const Phase = require("../model/Skill/Phase");
 const Module = require("../model/Skill/Module");
 const Lesson = require("../model/Skill/Lesson");
 const Task = require("../model/Skill/Task");
-const Todo = require("../model/Skill/ToDo");
+const ToDo = require("../model/Skill/ToDo");
 const User = require("../model/User");
-const categories = require("../utils/categories.json");
+const Taxonomy = require("../utils/taxonomy.json");
 const niches = require("../utils/niches.json");
 
 // ✅ Create a new skill
 exports.createSkill = async (req, res) => {
   try {
-    const { title, description, tags, category, niche, phases } = req.body;
+    const { title, description, tags, domainInd, phases } = req.body;
+
+    if (Taxonomy.domains[domainInd] === undefined) {
+      return res.status(400).json({ message: "Invalid domainInd" });
+    }
 
     const skill = new Skill({
       title,
       description,
       tags,
-      category,
-      niche,
+      domainInd,
       createdBy: req.user.id, // from auth middleware
     });
     const savedSkill = await skill.save();
@@ -127,22 +130,34 @@ exports.getUserSkills = async (req, res) => {
   }
 };
 
-// Get Categories
-exports.getCategories = async (req, res) => {
+// Get Domains
+exports.getDomains = async (req, res) => {
   try {
-    res.status(201).json({ categories: categories });
+    res.status(201).json({ domains: Taxonomy.domains, message: "Domains" });
   } catch (err) {
     res.status(500).json({ message: "Failed to load" });
   }
 };
 
-// Get Niches
-exports.getNiches = async (req, res) => {
+exports.getTodos = async (req, res) => {
   try {
-    const { category } = req.body;
-    res.status(201).json({ niches: niches[category] });
+    const task = await Task.findById(req.params.id);
+    if (!task) return res.status(404).json({ message: "Task not found" });
+
+    const todos = await ToDo.find({ taskId: task.id });
+    if (!todos) {
+      return res.status(404).json({ message: "Todos not found" });
+    }
+
+    const tasks = await Task.find({ lessonId: task.lessonId });
+
+    res.status(201).json({
+      todos: todos,
+      index: [task.index, tasks?.length],
+      message: "Todos",
+    });
   } catch (err) {
-    res.status(500).json({ message: "Failed to load" });
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -151,11 +166,9 @@ exports.getPhases = async (req, res) => {
     const skill = await Skill.findById(req.params.id);
     if (!skill) return res.status(404).json({ message: "Skill not found" });
 
-    const phases = await Phase.find({ skillId: req.params.id });
+    const phases = await Phase.find({ skillId: skill.id });
     if (!phases) {
-      return res
-        .status(404)
-        .json({ message: "No phases found for that skill" });
+      return res.status(404).json({ message: "Phases not found" });
     }
     res.status(201).json({
       skill: { title: skill.title, phases: phases },

@@ -7,13 +7,18 @@ export default function Sidebar() {
   const activeLink = 'bg-blue-100 text-blue-600 font-medium shadow-sm';
 
   const navItems = [
-    { to: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} /> },
-    { to: '/skills', label: 'Skills', icon: <Code2 size={18} /> },
-    { to: '/progress', label: 'Progress', icon: <BarChart3 size={18} /> },
+    {
+      to: "/dashboard",
+      label: "Dashboard",
+      icon: <LayoutDashboard size={18} />,
+    },
+    { to: "/skills", label: "Skills", icon: <Code2 size={18} /> },
+    { to: "/explore", label: "Exlpore", icon: <Code2 size={18} /> },
+    { to: "/progress", label: "Progress", icon: <BarChart3 size={18} /> },
   ];
 
   return (
-    <div className="h-full p-6 bg-white border-r border-gray-200 w-[50%] md:w-[10%] z-200 absolute">
+    <div className="h-full p-6 bg-white border-r border-gray-200 w-full z-60 absolute">
       <nav className="space-y-2">
         {navItems.map(({ to, label, icon }) => (
           <NavLink

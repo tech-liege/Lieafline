@@ -3,9 +3,10 @@ import { jwtDecode } from "jwt-decode";
 import { getUser } from "../services/userApi";
 import { toast } from "react-toastify";
 import usePolling from "../hooks/usePolling";
+import mulSkillSample from "../utils/mulSkillsample.json";
 import skillSample from "../utils/skillsample.json";
 import phaseSample from "../utils/phasesample.json";
-import todoSample from "../utils/todosample.json";
+import mulTodoSample from "../utils/mulTodosample.json";
 
 const AuthContext = createContext();
 const VarContext = createContext();
@@ -21,15 +22,15 @@ export function AuthProvider({ children }) {
   const AUTH_SERVER_URL = import.meta.env.VITE_AUTH_SERVER_URL;
   const USER_SERVER_URL = import.meta.env.VITE_USER_SERVER_URL;
 
-  if (token) {
-    try {
-      const { exp } = jwtDecode(token);
-      console.log(exp);
-    } catch {
-      localStorage.removeItem("token"); // invalid token format
-      setToken("");
-    }
-  }
+  // if (token) {
+  //   try {
+  //     const { exp } = jwtDecode(token);
+  //     console.log(exp);
+  //   } catch {
+  //     localStorage.removeItem("token"); // invalid token format
+  //     setToken("");
+  //   }
+  // }
 
   usePolling(() => {
     fetch(`${BASE_SERVER_URL}/health`, {
@@ -110,12 +111,14 @@ export function VarProvider({ children }) {
   const [inLoadingText, setInLoadingText] = useState(false);
   const [isSideActive, setIsSideActive] = useState(false);
   const [inFullScreen, setInFullScreen] = useState(false);
+  const [showFSHeader, setShowFSHeader] = useState(false);
   const [fullScreenHeader, setFullScreenHeader] = useState("Full Screen");
   const notifications = ["Verily", "are", "kipade"];
 
-  const toggleInFullScreen = (mode, header = "") => {
+  const toggleInFullScreen = (mode, header = "", showHeader = false) => {
     if (mode === true || mode == false) {
       setInFullScreen(mode);
+      setShowFSHeader(showHeader);
       setFullScreenHeader(header);
     } else {
       setInFullScreen(false);
@@ -133,7 +136,7 @@ export function VarProvider({ children }) {
     }
   };
 
-  const toggleInLoading = (mode, text = "") => {
+  const toggleInLoading = (mode, text = "Fetching Data...") => {
     if (mode === true || mode == false) {
       setInLoading(mode);
       setInLoadingText(text);
@@ -155,6 +158,7 @@ export function VarProvider({ children }) {
         toggleSidebar,
         inFullScreen,
         fullScreenHeader,
+        showFSHeader,
         toggleInFullScreen,
         loading,
         loadingText,
@@ -162,9 +166,10 @@ export function VarProvider({ children }) {
         inLoading,
         inLoadingText,
         toggleInLoading,
+        mulSkillSample,
         skillSample,
         phaseSample,
-        todoSample,
+        mulTodoSample,
       }}
     >
       {children}

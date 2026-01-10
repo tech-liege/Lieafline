@@ -9,18 +9,18 @@ import DeleteSkill from "../pages/DeleteSkill";
 import Phases from "../pages/Phases";
 import Progress from "../pages/Progress";
 import Profile from "../pages/Profile";
+import Lesson from "../pages/Lesson";
 import App from "../App";
 import ErrorPage from "../pages/ErrorPage";
 import Dashboard from "../pages/Dashboard";
 import About from "../pages/About";
-import ForgotPassword from "../pages/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword";
+import ForgotPassword from "../pages/ForgotPassword";
 import Settings from "../pages/Settings";
-import PrivateRoute from "../component/PrivateRoute";
 import PublicOnly from "../component/PublicOnly";
+import PrivateRoute from "../component/PrivateRoute";
 import Render from "../component/Render";
 import { AuthProvider, VarProvider } from "../context/Contexts";
-import Lesson from "../pages/Lesson";
 
 export const router = createBrowserRouter([
   {
@@ -126,7 +126,7 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: "phases",
+        path: "phases/:phaseId",
         element: (
           <PrivateRoute>
             <Render />
@@ -134,16 +134,20 @@ export const router = createBrowserRouter([
         ),
         children: [
           {
-            path: ":phaseId",
+            index: true,
             element: <Phases />,
+          },
+          {
+            path: "lesson/:taskId",
+            element: <Lesson />,
           },
         ],
       },
       {
-        path: "lesson/:lessonId",
+        path: "explore",
         element: (
           <PrivateRoute>
-            <Lesson />
+            <ExploreSkills />
           </PrivateRoute>
         ),
       },

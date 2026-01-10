@@ -1,4 +1,4 @@
-function ProgressBar({ value = 0, disabled = false }) {
+function ProgressBar({ value = 0, disabled = false, showPer = true }) {
   const clamped = Math.max(0, Math.min(100, value));
   return (
     <div className="w-full">
@@ -16,7 +16,9 @@ function ProgressBar({ value = 0, disabled = false }) {
           style={{ width: `${clamped}%` }}
         />
       </div>
-      <div className="mt-1 text-right text-xs text-gray-500">{clamped}%</div>
+      {showPer && (
+        <div className="mt-1 text-right text-xs text-gray-500">{clamped}%</div>
+      )}
     </div>
   );
 }

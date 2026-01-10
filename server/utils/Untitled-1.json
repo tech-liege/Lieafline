@@ -1,0 +1,284 @@
+{
+  "version": "2026.2",
+  "phasestrategy": "Minimal-complete",
+  "domains": [
+    {
+      "domain": "Software Engineering",
+      "courses": [
+        {
+          "course": "Frontend Engineering",
+          "phases": [
+            {
+              "title": "Web Foundations (HTML, CSS, Accessibility)",
+              "entryLevel": "beginner"
+            },
+            {
+              "title": "JavaScript for User Interfaces",
+              "entryLevel": "beginner"
+            },
+            {
+              "title": "Modern Frontend Frameworks",
+              "entryLevel": "intermediate"
+            },
+            {
+              "title": "Frontend Performance & Architecture",
+              "entryLevel": "advanced"
+            }
+          ]
+        },
+        {
+          "course": "Backend Engineering",
+          "phases": [
+            {
+              "title": "Backend Fundamentals & HTTP",
+              "entryLevel": "beginner"
+            },
+            {
+              "title": "Databases & Data Modeling",
+              "entryLevel": "beginner"
+            },
+            {
+              "title": "API Design & Authentication",
+              "entryLevel": "intermediate"
+            },
+            { "title": "Scalable Backend Systems", "entryLevel": "advanced" }
+          ]
+        },
+        {
+          "course": "Full-Stack Engineering",
+          "phases": [
+            {
+              "title": "Frontend-Backend Integration",
+              "entryLevel": "intermediate"
+            },
+            {
+              "title": "State Management & Data Flow",
+              "entryLevel": "intermediate"
+            },
+            {
+              "title": "Full-Stack Project Architecture",
+              "entryLevel": "advanced"
+            }
+          ]
+        },
+        {
+          "course": "Systems Programming",
+          "phases": [
+            {
+              "title": "Low-Level Programming Basics",
+              "entryLevel": "beginner"
+            },
+            { "title": "Memory & Concurrency", "entryLevel": "intermediate" },
+            {
+              "title": "Operating System Interfaces",
+              "entryLevel": "advanced"
+            }
+          ]
+        },
+        {
+          "course": "Mobile Application Development",
+          "phases": [
+            {
+              "title": "Mobile Development Foundations",
+              "entryLevel": "beginner"
+            },
+            {
+              "title": "Cross-Platform or Native Development",
+              "entryLevel": "intermediate"
+            },
+            {
+              "title": "Mobile Performance & Deployment",
+              "entryLevel": "advanced"
+            }
+          ]
+        },
+        {
+          "course": "Software Architecture",
+          "phases": [
+            {
+              "title": "Design Patterns & Principles",
+              "entryLevel": "intermediate"
+            },
+            {
+              "title": "Distributed Systems Design",
+              "entryLevel": "advanced"
+            },
+            {
+              "title": "Scalable Architecture Case Studies",
+              "entryLevel": "advanced"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "domain": "Artificial Intelligence & Autonomy",
+      "courses": [
+        {
+          "course": "Machine Learning Foundations",
+          "phases": [
+            { "title": "Math & Statistics for ML", "entryLevel": "beginner" },
+            {
+              "title": "Classical Machine Learning",
+              "entryLevel": "beginner"
+            },
+            {
+              "title": "Model Evaluation & Optimization",
+              "entryLevel": "intermediate"
+            }
+          ]
+        },
+        {
+          "course": "Deep Learning",
+          "phases": [
+            {
+              "title": "Neural Network Fundamentals",
+              "entryLevel": "intermediate"
+            },
+            {
+              "title": "Deep Learning Architectures",
+              "entryLevel": "intermediate"
+            },
+            {
+              "title": "Training & Optimization at Scale",
+              "entryLevel": "advanced"
+            }
+          ]
+        },
+        {
+          "course": "Large Language Models (LLMs)",
+          "phases": [
+            {
+              "title": "LLM Fundamentals & Prompting",
+              "entryLevel": "beginner"
+            },
+            {
+              "title": "LLM Fine-Tuning & RAG Systems",
+              "entryLevel": "intermediate"
+            },
+            {
+              "title": "Production LLM Applications",
+              "entryLevel": "advanced"
+            }
+          ]
+        },
+        {
+          "course": "Agentic AI Systems",
+          "phases": [
+            { "title": "Autonomous Agent Design", "entryLevel": "advanced" },
+            {
+              "title": "Tool-Using & Multi-Agent Systems",
+              "entryLevel": "advanced"
+            },
+            { "title": "Agent Safety & Evaluation", "entryLevel": "advanced" }
+          ]
+        },
+        {
+          "course": "AI Infrastructure & MLOps",
+          "phases": [
+            {
+              "title": "ML Deployment Fundamentals",
+              "entryLevel": "intermediate"
+            },
+            {
+              "title": "Model Monitoring & CI/CD",
+              "entryLevel": "intermediate"
+            },
+            {
+              "title": "Scalable AI Infrastructure",
+              "entryLevel": "advanced"
+            }
+          ]
+        },
+        {
+          "course": "AI Safety & Governance",
+          "phases": [
+            { "title": "AI Risk & Alignment", "entryLevel": "advanced" },
+            {
+              "title": "Model Governance & Auditing",
+              "entryLevel": "advanced"
+            },
+            {
+              "title": "Regulation-Aware AI Systems",
+              "entryLevel": "advanced"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "domain": "Cloud Infrastructure & DevOps",
+      "courses": [
+        {
+          "course": "Cloud Fundamentals",
+          "phases": [
+            {
+              "title": "Cloud Computing Essentials",
+              "entryLevel": "beginner"
+            },
+            { "title": "Core Cloud Services", "entryLevel": "beginner" },
+            {
+              "title": "Cloud Cost & Resource Management",
+              "entryLevel": "intermediate"
+            }
+          ]
+        },
+        {
+          "course": "Infrastructure as Code",
+          "phases": [
+            { "title": "IaC Fundamentals", "entryLevel": "beginner" },
+            {
+              "title": "Declarative Infrastructure Design",
+              "entryLevel": "intermediate"
+            },
+            { "title": "Infrastructure Automation", "entryLevel": "advanced" }
+          ]
+        },
+        {
+          "course": "DevOps Engineering",
+          "phases": [
+            { "title": "CI/CD Pipelines", "entryLevel": "beginner" },
+            {
+              "title": "Containerization & Orchestration",
+              "entryLevel": "intermediate"
+            },
+            { "title": "DevOps at Scale", "entryLevel": "advanced" }
+          ]
+        },
+        {
+          "course": "Site Reliability Engineering",
+          "phases": [
+            {
+              "title": "Reliability Engineering Basics",
+              "entryLevel": "intermediate"
+            },
+            {
+              "title": "Observability & Incident Response",
+              "entryLevel": "advanced"
+            },
+            { "title": "High-Availability Systems", "entryLevel": "advanced" }
+          ]
+        },
+        {
+          "course": "Cloud Security",
+          "phases": [
+            {
+              "title": "Cloud Security Fundamentals",
+              "entryLevel": "beginner"
+            },
+            {
+              "title": "Identity & Access Management",
+              "entryLevel": "intermediate"
+            },
+            {
+              "title": "Secure Cloud Architectures",
+              "entryLevel": "advanced"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

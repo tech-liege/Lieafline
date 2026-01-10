@@ -1,12 +1,12 @@
 [
   {
-    "ofType": "read",
+    "format": "read",
     "notes": "notes to read for the first sample todo of the first sample task of the first sample lesson of the first sample modules of the first sample phase of the sample skill",
     "videos": "",
     "q_a": []
   },
   {
-    "ofType": "qustion",
+    "format": "question",
     "notes": "",
     "videos": "",
     "q_a": [
@@ -19,7 +19,8 @@
           "c": "option C",
           "d": "option D"
         },
-        "answer": "a"
+        "answer": "a",
+        "correction": "The correct answer ic the correct answer because it is correct"
       },
       {
         "nature": "default",
@@ -30,7 +31,8 @@
           "c": "option C",
           "d": "option D"
         },
-        "answer": "d"
+        "answer": "d",
+        "correction": "The correct answer ic the correct answer because it is correct"
       },
       {
         "nature": "default",
@@ -41,7 +43,8 @@
           "c": "option C",
           "d": "option D"
         },
-        "answer": "a"
+        "answer": "a",
+        "correction": "The correct answer ic the correct answer because it is correct"
       },
       {
         "nature": "default",
@@ -52,7 +55,8 @@
           "c": "option C",
           "d": "option D"
         },
-        "answer": "d"
+        "answer": "d",
+        "correction": "The correct answer ic the correct answer because it is correct"
       },
       {
         "nature": "default",
@@ -63,12 +67,13 @@
           "c": "option C",
           "d": "option D"
         },
-        "answer": "a"
+        "answer": "a",
+        "correction": "The correct answer ic the correct answer because it is correct"
       }
     ]
   },
   {
-    "ofType": "video",
+    "format": "video",
     "notes": "",
     "videos": "https://www.urltovideo.watch",
     "q_a": []

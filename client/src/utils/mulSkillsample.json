@@ -1,0 +1,32 @@
+[
+  {
+    "id": "6546bh48845bfy",
+    "title": "Sample Skill 1",
+    "description": "Sample description for sample skill 1",
+    "tags": ["sample", "tags", "for", "sample", "skill", "1"],
+    "category": "sampleCategory1",
+    "niche": "sampleNiche1",
+    "private": false,
+    "createdBy": "6d8h549ujg9urjj6595ht99"
+  },
+  {
+    "id": "75632ft38tg87s",
+    "title": "Sample Skill 2",
+    "description": "Sample description for sample skill 2",
+    "tags": ["sample", "tags", "for", "sample", "skill", "2"],
+    "category": "sampleCategory2",
+    "niche": "sampleNiche2",
+    "private": false,
+    "createdBy": "6d8h549ujg9urjj6595ht99"
+  },
+  {
+    "id": "4t67gretre476t47",
+    "title": "Sample Skill 3",
+    "description": "Sample description for sample skill 3",
+    "tags": ["sample", "tags", "for", "sample", "skill", "3"],
+    "category": "sampleCategory3",
+    "niche": "sampleNiche3",
+    "private": false,
+    "createdBy": "6d8h549ujg9urjj6595ht99"
+  }
+]

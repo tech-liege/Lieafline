@@ -13,7 +13,7 @@ export default function Phases() {
   const { phaseId } = useParams();
 
   useEffect(() => {
-    toggleInLoading(true, "Fetching Data...");
+    toggleInLoading(true);
     async function fetchData() {
       try {
         const data = await getExtPhase(SKILL_SERVER_URL, token, phaseId);

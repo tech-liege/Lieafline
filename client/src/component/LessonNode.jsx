@@ -25,15 +25,18 @@ export default function LessonNode({
   return (
     <div
       onClick={
-        !locked &&
-        (showDialogue ? toggleDialogue("off") : toggleDialogue(index))
+        !locked
+          ? showDialogue
+            ? toggleDialogue("off")
+            : toggleDialogue(index)
+          : undefined
       }
-      className="relative"
+      className="relative before:-left-23 before:top-30 before:md:left-33 before:md:top-0 before:bg-red-500 before:w-[10rem] before:h-[10rem] before:z-200"
     >
       <div
         className={
           (locked
-            ? " border-0 bg-gray-400 cursor-default "
+            ? " border-0 bg-gray-400 cursor-default border-hidden "
             : getAveragePercent(lesson.progress) +
               " bg-emerald-600 hover:shadow-xl hover:bg-white hover:text-emerald-600 transition-colors ") +
           " p-3 w-30 h-30 rounded-full border-4 text-white font-semibold shadow-lg btn rotate-45"
@@ -45,7 +48,7 @@ export default function LessonNode({
       </div>
       <div
         className={
-          " absolute left-33 top-[0] w-70 h-fit p-5 m-5 z-50 rounded-2xl border-2 border-white shadow-sm bg-green-100 hover:bg-emerald-100 text-gray-900  " +
+          " absolute -left-23 top-30 md:left-33 md:top-0 w-70 h-fit p-5 m-5 z-50 rounded-2xl border-2 border-white shadow-sm bg-green-100 hover:bg-emerald-100 text-gray-900 callout-left md:callout-top " +
           (showDialogue ? " block " : " hidden ")
         }
       >
@@ -56,7 +59,7 @@ export default function LessonNode({
         </span>
         <div className="mt-4 flex justify-end items-end h-20">
           <Link
-            to={`/lesson/${lesson.tasks[tInd]?.id}`}
+            to={`./lesson/${lesson.tasks[tInd]?.id}`}
             className={`text-sm md:text-lg font-medium px-4 py-2 btn rounded-lg transition-colors bg-emerald-600 text-white hover:bg-emerald-700`}
           >
             Continue

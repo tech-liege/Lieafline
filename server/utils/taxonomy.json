@@ -1,0 +1,48 @@
+{
+  "version": "2026.1",
+  "platform": "Leafline",
+  "domains": [
+    {
+      "index": 0,
+      "domain": "Software Engineering",
+      "demandLevel": "Very High",
+      "description": "Core software development skills powering nearly all modern technology systems."
+    },
+    {
+      "index": 1,
+      "domain": "Artificial Intelligence & Autonomy",
+      "demandLevel": "Very High",
+      "description": "Machine intelligence systems, autonomous agents, and AI-driven products."
+    },
+    {
+      "index": 2,
+      "domain": "Cloud Infrastructure & DevOps",
+      "demandLevel": "High",
+      "description": "Scalable infrastructure, deployment automation, and reliability engineering."
+    },
+    {
+      "index": 3,
+      "domain": "Cybersecurity",
+      "demandLevel": "High",
+      "description": "Protecting systems, networks, and data from digital threats."
+    },
+    {
+      "index": 4,
+      "domain": "Data Engineering & Analytics",
+      "demandLevel": "Moderate to High",
+      "description": "Building systems for data storage, processing, and insight generation."
+    },
+    {
+      "index": 5,
+      "domain": "Embedded Systems & Robotics",
+      "demandLevel": "Moderate",
+      "description": "Hardware-software integration and intelligent physical systems."
+    },
+    {
+      "index": 6,
+      "domain": "Computer Graphics & Immersive Systems",
+      "demandLevel": "Moderate",
+      "description": "Visual computing, simulations, and immersive digital environments."
+    }
+  ]
+}

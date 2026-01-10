@@ -13,7 +13,7 @@ function Skills() {
   const [CUSkills, setCUSkills] = useState([]);
 
   const { token, SKILL_SERVER_URL } = useAuth();
-  const { toggleLoading, skillSample } = useVar();
+  const { toggleLoading, mulSkillSample, skillSample } = useVar();
   const { skillId } = useParams();
 
   useEffect(() => {
@@ -31,13 +31,13 @@ function Skills() {
           setCUSkills(data.skills);
         } else {
           setSkill(skillSample);
-          setCUSkills([skillSample]);
+          setCUSkills(mulSkillSample);
         }
       } catch (error) {
         console.error(error.message || error);
         toast.error("Failed to load skills. Please try again.");
         setSkill(skillSample);
-        setCUSkills([skillSample]);
+        setCUSkills(mulSkillSample);
       } finally {
         toggleLoading(false);
       }
@@ -66,7 +66,7 @@ function Skills() {
   };
 
   // 🌳 Single Skill View
-  if (skill) {
+  if (skillId && skill) {
     return (
       <main className="flex-1 p-6 min-h-screen w-full">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 w-full">

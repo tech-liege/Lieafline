@@ -15,10 +15,14 @@ const q_aSchema = new mongoose.Schema({
     maxlength: 1,
     required: true,
   },
+  correction: {
+    type: String, //Why the correct answer is correct
+    required: true,
+  },
 });
 
 const todoSchema = new mongoose.Schema({
-  format: [String], // read/video/question
+  format: String, // read/video/question
   notes: String,
   videos: [String],
   q_a: [q_aSchema],

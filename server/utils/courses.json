@@ -1,0 +1,301 @@
+{
+  "version": "2026.1",
+  "phasestrategy": "Minimal-complete",
+  "domains": [
+    {
+      "domain": "Software Engineering",
+      "courses": [
+        {
+          "course": "Frontend Engineering",
+          "phases": [
+            "Web Foundations (HTML, CSS, Accessibility)",
+            "JavaScript for User Interfaces",
+            "Modern Frontend Frameworks",
+            "Frontend Performance & Architecture"
+          ]
+        },
+        {
+          "course": "Backend Engineering",
+          "phases": [
+            "Backend Fundamentals & HTTP",
+            "Databases & Data Modeling",
+            "API Design & Authentication",
+            "Scalable Backend Systems"
+          ]
+        },
+        {
+          "course": "Full-Stack Engineering",
+          "phases": [
+            "Frontend-Backend Integration",
+            "State Management & Data Flow",
+            "Full-Stack Project Architecture"
+          ]
+        },
+        {
+          "course": "Systems Programming",
+          "phases": [
+            "Low-Level Programming Basics",
+            "Memory & Concurrency",
+            "Operating System Interfaces"
+          ]
+        },
+        {
+          "course": "Mobile Application Development",
+          "phases": [
+            "Mobile Development Foundations",
+            "Cross-Platform or Native Development",
+            "Mobile Performance & Deployment"
+          ]
+        },
+        {
+          "course": "Software Architecture",
+          "phases": [
+            "Design Patterns & Principles",
+            "Distributed Systems Design",
+            "Scalable Architecture Case Studies"
+          ]
+        }
+      ]
+    },
+
+    {
+      "domain": "Artificial Intelligence & Autonomy",
+      "courses": [
+        {
+          "course": "Machine Learning Foundations",
+          "phases": [
+            "Math & Statistics for ML",
+            "Classical Machine Learning",
+            "Model Evaluation & Optimization"
+          ]
+        },
+        {
+          "course": "Deep Learning",
+          "phases": [
+            "Neural Network Fundamentals",
+            "Deep Learning Architectures",
+            "Training & Optimization at Scale"
+          ]
+        },
+        {
+          "course": "Large Language Models (LLMs)",
+          "phases": [
+            "LLM Fundamentals & Prompting",
+            "LLM Fine-Tuning & RAG Systems",
+            "Production LLM Applications"
+          ]
+        },
+        {
+          "course": "Agentic AI Systems",
+          "phases": [
+            "Autonomous Agent Design",
+            "Tool-Using & Multi-Agent Systems",
+            "Agent Safety & Evaluation"
+          ]
+        },
+        {
+          "course": "AI Infrastructure & MLOps",
+          "phases": [
+            "ML Deployment Fundamentals",
+            "Model Monitoring & CI/CD",
+            "Scalable AI Infrastructure"
+          ]
+        },
+        {
+          "course": "AI Safety & Governance",
+          "phases": [
+            "AI Risk & Alignment",
+            "Model Governance & Auditing",
+            "Regulation-Aware AI Systems"
+          ]
+        }
+      ]
+    },
+
+    {
+      "domain": "Cloud Infrastructure & DevOps",
+      "courses": [
+        {
+          "course": "Cloud Fundamentals",
+          "phases": [
+            "Cloud Computing Essentials",
+            "Core Cloud Services",
+            "Cloud Cost & Resource Management"
+          ]
+        },
+        {
+          "course": "Infrastructure as Code",
+          "phases": [
+            "IaC Fundamentals",
+            "Declarative Infrastructure Design",
+            "Infrastructure Automation"
+          ]
+        },
+        {
+          "course": "DevOps Engineering",
+          "phases": [
+            "CI/CD Pipelines",
+            "Containerization & Orchestration",
+            "DevOps at Scale"
+          ]
+        },
+        {
+          "course": "Site Reliability Engineering",
+          "phases": [
+            "Reliability Engineering Basics",
+            "Observability & Incident Response",
+            "High-Availability Systems"
+          ]
+        },
+        {
+          "course": "Cloud Security",
+          "phases": [
+            "Cloud Security Fundamentals",
+            "Identity & Access Management",
+            "Secure Cloud Architectures"
+          ]
+        }
+      ]
+    },
+
+    {
+      "domain": "Cybersecurity",
+      "courses": [
+        {
+          "course": "Cybersecurity Fundamentals",
+          "phases": [
+            "Security Principles & Threat Models",
+            "Network & System Security",
+            "Basic Incident Response"
+          ]
+        },
+        {
+          "course": "Offensive Security",
+          "phases": [
+            "Ethical Hacking Foundations",
+            "Web & Network Penetration Testing",
+            "Advanced Exploitation Techniques"
+          ]
+        },
+        {
+          "course": "Defensive Security",
+          "phases": [
+            "Security Monitoring & Detection",
+            "Incident Handling & Forensics",
+            "Threat Intelligence"
+          ]
+        },
+        {
+          "course": "Application Security",
+          "phases": [
+            "Secure Coding Practices",
+            "Vulnerability Assessment",
+            "Application Security Testing"
+          ]
+        },
+        {
+          "course": "Cloud & Infrastructure Security",
+          "phases": [
+            "Infrastructure Hardening",
+            "Zero Trust Architectures",
+            "Cloud Threat Mitigation"
+          ]
+        }
+      ]
+    },
+
+    {
+      "domain": "Data Engineering & Analytics",
+      "courses": [
+        {
+          "course": "Data Fundamentals",
+          "phases": ["Data & SQL Basics", "Data Analysis Foundations"]
+        },
+        {
+          "course": "Data Engineering",
+          "phases": [
+            "Data Pipelines & ETL",
+            "Data Warehousing",
+            "Scalable Data Systems"
+          ]
+        },
+        {
+          "course": "Big Data Systems",
+          "phases": [
+            "Distributed Data Processing",
+            "Big Data Architecture Design"
+          ]
+        },
+        {
+          "course": "Analytics Engineering",
+          "phases": ["Analytics Modeling", "Metrics & Transformation Pipelines"]
+        },
+        {
+          "course": "Real-Time Data Systems",
+          "phases": [
+            "Streaming Data Fundamentals",
+            "Event-Driven Architectures"
+          ]
+        }
+      ]
+    },
+
+    {
+      "domain": "Embedded Systems & Robotics",
+      "courses": [
+        {
+          "course": "Embedded Programming",
+          "phases": [
+            "Embedded Systems Fundamentals",
+            "Microcontroller Programming"
+          ]
+        },
+        {
+          "course": "IoT Systems",
+          "phases": ["IoT Architecture", "Connected Device Systems"]
+        },
+        {
+          "course": "Robotics Software",
+          "phases": ["Robot Control Systems", "Perception & Planning"]
+        },
+        {
+          "course": "Autonomous Systems",
+          "phases": ["Autonomy Fundamentals", "Navigation & Decision Systems"]
+        },
+        {
+          "course": "Edge Computing",
+          "phases": ["Edge System Design", "Edge AI & Optimization"]
+        }
+      ]
+    },
+
+    {
+      "domain": "Computer Graphics & Immersive Systems",
+      "courses": [
+        {
+          "course": "Computer Graphics Fundamentals",
+          "phases": ["Graphics Math & Rendering", "Modern Rendering Pipelines"]
+        },
+        {
+          "course": "Game Engine Development",
+          "phases": ["Game Engine Architecture", "Real-Time Systems"]
+        },
+        {
+          "course": "AR/VR Development",
+          "phases": [
+            "Spatial Computing Basics",
+            "Immersive Application Development"
+          ]
+        },
+        {
+          "course": "Simulation & Physics Engines",
+          "phases": ["Physics Simulation", "High-Fidelity Systems"]
+        },
+        {
+          "course": "GPU Programming",
+          "phases": ["Parallel GPU Computing", "High-Performance Graphics"]
+        }
+      ]
+    }
+  ]
+}

@@ -43,7 +43,7 @@ export default function ModuleMap({ module, index }) {
                 key={lesson.id || lesson.title}
                 lesson={lesson}
                 tInd={1}
-                index={index}
+                index={index} 
                 showDialogue={showDialogue === index}
                 toggleDialogue={toggleDialogue}
                 locked={lesson.locked}

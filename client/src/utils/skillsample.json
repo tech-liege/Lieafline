@@ -1,24 +1,50 @@
 {
   "id": "6546bh48845bfy",
-  "title": "Sample Skill",
-  "description": "Sample description for sample skill",
-  "tags": ["sample", "tags", "for", "sample", "skill"],
-  "category": "sampleCategory",
-  "niche": "sampleNiche",
+  "title": "Frontend Engineering",
+  "description": "A comprehensive skill path covering everything from web basics to modern frontend frameworks, performance optimization, and architecture best practices.",
+  "tags": [
+    "frontend",
+    "web development",
+    "javascript",
+    "react",
+    "html",
+    "css",
+    "performance"
+  ],
+  "category": "Web Development",
+  "niche": "Frontend",
   "phases": [
     {
-      "id": "u67th6jjgjyt",
-      "title": "Sample Phase 1",
-      "description": "Sample description for sample phase 1",
+      "id": "5tg4et45yyg4ryhr",
+      "title": "Web Foundations (HTML, CSS, Accessibility)",
+      "description": "Learn the building blocks of the web including HTML, CSS, and making websites accessible.",
+      "index": 0,
       "locked": false,
       "progress": 40
     },
     {
-      "id": "456rhy56",
-      "title": "Sample Phase 2",
-      "description": "Sample description for sample phase 2",
+      "id": "65465756htyuye4u",
+      "title": "JavaScript for User Interfaces",
+      "description": "Learn JavaScript fundamentals to create dynamic and interactive web pages.",
+      "index": 1,
       "locked": true,
-      "progress": 2
+      "progress": 0
+    },
+    {
+      "id": "56if4f6u4596u45",
+      "title": "Modern Frontend Frameworks",
+      "description": "Explore frameworks like React to build component-based UIs efficiently.",
+      "index": 2,
+      "locked": true,
+      "progress": 0
+    },
+    {
+      "id": "99464f05t9u9g45",
+      "title": "Frontend Performance & Architecture",
+      "description": "Learn best practices for building fast, scalable, and maintainable frontend applications.",
+      "index": 3,
+      "locked": true,
+      "progress": 0
     }
   ],
   "private": false,
