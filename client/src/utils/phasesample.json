@@ -16,32 +16,7 @@
           "tasks": [
             {
               "xp": 50,
-              "index": 0,
-              "todos": [
-                {
-                  "format": "read",
-                  "notes": "Read about HTML document structure, doctype, head, and body tags.",
-                  "index": 0
-                },
-                {
-                  "format": "question",
-                  "q_a": [
-                    {
-                      "nature": "multiple-choice",
-                      "question": "Which tag is used to define a paragraph in HTML?",
-                      "options": {
-                        "a": "<p>",
-                        "b": "<div>",
-                        "c": "<span>",
-                        "d": "<h1>"
-                      },
-                      "answer": "a",
-                      "correction": "The <p> tag defines a paragraph, while <div> is a container and <span> is inline."
-                    }
-                  ],
-                  "index": 1
-                }
-              ]
+              "index": 0
             }
           ]
         },
@@ -50,15 +25,7 @@
           "tasks": [
             {
               "xp": 30,
-              "index": 0,
-              "todos": [
-                {
-                  "format": "video",
-                  "videos": ["https://www.youtube.com/watch?v=pQN-pnXPaVg"],
-                  "notes": "Watch a tutorial on semantic HTML elements.",
-                  "index": 0
-                }
-              ]
+              "index": 0
             }
           ]
         }
@@ -74,14 +41,7 @@
           "tasks": [
             {
               "xp": 50,
-              "index": 0,
-              "todos": [
-                {
-                  "format": "read",
-                  "notes": "Read about selectors, colors, fonts, and the box model in CSS.",
-                  "index": 0
-                }
-              ]
+              "index": 0
             }
           ]
         }

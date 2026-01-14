@@ -51,7 +51,7 @@ export default function App() {
               : "p-1 md:p-2"
           }`}
         >
-          <div className="w-full rounded-2xl mx-auto min-h-[80vh]">
+          <div className="w-full rounded-2xl mx-auto min-h-[77vh]">
             {inFullScreen && showFSHeader && (
               <div className="bg-green-700 text-white font-bold text-center text-2xl p-1 md:p-2 rounded-t-2xl">
                 {fullScreenHeader}

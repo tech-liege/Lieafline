@@ -1,81 +1,60 @@
 [
   {
     "format": "read",
-    "notes": "notes to read for the first sample todo of the first sample task of the first sample lesson of the first sample modules of the first sample phase of the sample skill",
-    "videos": "",
-    "q_a": []
+    "notes": "Read about HTML document structure, doctype, head, and body tags.",
+    "index": 0
   },
   {
     "format": "question",
-    "notes": "",
-    "videos": "",
     "q_a": [
       {
-        "nature": "default",
-        "question": "What is the anser for Q1 of STo1 of STa1 of SL1 of SM1 of SP1 of SS1",
-        "option": {
-          "a": "option A",
-          "b": "option B",
-          "c": "option C",
-          "d": "option D"
+        "nature": "multiple-choice",
+        "question": "Which tag is used to define a paragraph in HTML?",
+        "options": {
+          "a": "<p>",
+          "b": "<div>",
+          "c": "<span>",
+          "d": "<h1>"
         },
         "answer": "a",
-        "correction": "The correct answer ic the correct answer because it is correct"
+        "correction": "The <p> tag defines a paragraph, while <div> is a container and <span> is inline."
       },
       {
-        "nature": "default",
-        "question": "What is the anser for Q2 of STo1 of STa1 of SL1 of SM1 of SP1 of SS1",
-        "option": {
-          "a": "option A",
-          "b": "option B",
-          "c": "option C",
-          "d": "option D"
+        "nature": "multiple-choice",
+        "question": "Which tag can be used to define an header in HTML?",
+        "options": {
+          "a": "<p>",
+          "b": "<div>",
+          "c": "<span>",
+          "d": "<h1>"
         },
         "answer": "d",
-        "correction": "The correct answer ic the correct answer because it is correct"
+        "correction": "The <h1> tag can be used to define a header, while <div> is a container and <span> is inline."
       },
       {
-        "nature": "default",
-        "question": "What is the anser for Q3 of STo1 of STa1 of SL1 of SM1 of SP1 of SS1",
-        "option": {
-          "a": "option A",
-          "b": "option B",
-          "c": "option C",
-          "d": "option D"
+        "nature": "multiple-choice",
+        "question": "Which is an example of a meta tag in HTML?",
+        "options": {
+          "a": "<meta />",
+          "b": "<div>",
+          "c": "<span>",
+          "d": "<h1>"
         },
         "answer": "a",
-        "correction": "The correct answer ic the correct answer because it is correct"
-      },
-      {
-        "nature": "default",
-        "question": "What is the anser for Q4 of STo1 of STa1 of SL1 of SM1 of SP1 of SS1",
-        "option": {
-          "a": "option A",
-          "b": "option B",
-          "c": "option C",
-          "d": "option D"
-        },
-        "answer": "d",
-        "correction": "The correct answer ic the correct answer because it is correct"
-      },
-      {
-        "nature": "default",
-        "question": "What is the anser for Q5 of STo1 of STa1 of SL1 of SM1 of SP1 of SS1",
-        "option": {
-          "a": "option A",
-          "b": "option B",
-          "c": "option C",
-          "d": "option D"
-        },
-        "answer": "a",
-        "correction": "The correct answer ic the correct answer because it is correct"
+        "correction": "The <meta /> tag is a meta tag, while <div> is a container and <span> is inline."
       }
-    ]
+    ],
+    "index": 1
   },
   {
     "format": "video",
-    "notes": "",
-    "videos": "https://www.urltovideo.watch",
-    "q_a": []
+    "videos": ["https://www.youtube.com/watch?v=pQN-pnXPaVg"],
+    "notes": "Watch a tutorial on semantic HTML elements.",
+    "index": 2
+  },
+  {
+    "format": "read",
+    "notes": "Read about selectors, colors, fonts, and the box model in CSS.",
+    "index": 3
   }
 ]

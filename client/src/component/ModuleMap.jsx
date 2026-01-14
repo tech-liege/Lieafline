@@ -2,18 +2,15 @@ import { LucideAlbum } from "lucide-react";
 import LessonNode from "./LessonNode";
 import { useState } from "react";
 
-export default function ModuleMap({ module, index }) {
+export default function ModuleMap({
+  module,
+  index,
+  toggleDialogue,
+  showDialogue,
+}) {
   const [showGuide, setshowGuide] = useState(false);
-  const [showDialogue, setshowDialogue] = useState(99);
   const toggleGuide = () => {
     setshowGuide(!showGuide);
-  };
-  const toggleDialogue = (index) => () => {
-    if (Number.isInteger(index)) {
-      setshowDialogue(index);
-    } else {
-      setshowDialogue(99);
-    }
   };
   return (
     <main className="flex-1 min-h-fit w-full">
@@ -38,13 +35,16 @@ export default function ModuleMap({ module, index }) {
           <div className="">{module.note}</div>
         ) : (
           <section className="relative flex flex-col items-center gap-30 mt-8 before:absolute before:left-[50%] before:top-[-20%] before:h-[140%] before:w-[5px] before:bg-emerald-400">
-            {module.lessons?.map((lesson, index) => (
+            {module.lessons?.map((lesson, lInd) => (
               <LessonNode
                 key={lesson.id || lesson.title}
                 lesson={lesson}
                 tInd={1}
-                index={index} 
-                showDialogue={showDialogue === index}
+                mInd={index}
+                index={lInd}
+                showDialogue={
+                  showDialogue[0] === index && showDialogue[1] === lInd
+                }
                 toggleDialogue={toggleDialogue}
                 locked={lesson.locked}
               />

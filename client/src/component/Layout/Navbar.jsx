@@ -20,8 +20,8 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full px-10 bg-white border-b border-gray-200 shadow-sm fixed z-200">
-      <div className="px-10 md:px-20 flex justify-between items-center h-16">
+    <nav className="w-full bg-white border-b border-gray-200 shadow-sm fixed z-200">
+      <div className="px-3 md:px-15 flex justify-between items-center h-16">
         {/* Left Section */}
         <div className="flex items-center gap-2 ">
           {token && (

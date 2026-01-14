@@ -38,6 +38,15 @@ export default function Todo({ todo, index, active, toggleActive, isLast }) {
               className={"w-full" + (!(todo.format === "question") && "hidden")}
             >
               Options & Answer
+              <input
+                type="text"
+                name="answer"
+                placeholder="Anser"
+                className="input rounded-2xl"
+                onChange={(e) => () => {
+                  setAnswer(e.target.value);
+                }}
+              />
             </div>
           </div>
           <div

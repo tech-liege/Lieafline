@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export default function LessonNode({
   lesson,
   tInd,
+  mInd,
   index,
   showDialogue,
   toggleDialogue,
@@ -27,8 +28,8 @@ export default function LessonNode({
       onClick={
         !locked
           ? showDialogue
-            ? toggleDialogue("off")
-            : toggleDialogue(index)
+            ? toggleDialogue(99, 99)
+            : toggleDialogue(mInd, index)
           : undefined
       }
       className="relative before:-left-23 before:top-30 before:md:left-33 before:md:top-0 before:bg-red-500 before:w-[10rem] before:h-[10rem] before:z-200"

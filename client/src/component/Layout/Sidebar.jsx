@@ -1,20 +1,32 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Code2, BarChart3 } from "lucide-react";
+import { LayoutDashboard, Code2, BarChart3, Telescope } from "lucide-react";
 
 export default function Sidebar() {
   const baseLink =
-    'flex items-center gap-3 px-4 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200';
-  const activeLink = 'bg-blue-100 text-blue-600 font-medium shadow-sm';
+    "flex items-center gap-3 px-4 py-2.5 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200";
+  const activeLink = "bg-blue-100 text-blue-600 font-medium shadow-sm";
 
   const navItems = [
     {
       to: "/dashboard",
       label: "Dashboard",
-      icon: <LayoutDashboard size={18} />,
+      icon: <LayoutDashboard size={20} strokeWidth={1.5} />,
     },
-    { to: "/skills", label: "Skills", icon: <Code2 size={18} /> },
-    { to: "/explore", label: "Exlpore", icon: <Code2 size={18} /> },
-    { to: "/progress", label: "Progress", icon: <BarChart3 size={18} /> },
+    {
+      to: "/skills",
+      label: "Skills",
+      icon: <Code2 size={20} strokeWidth={1.5} />,
+    },
+    {
+      to: "/explore",
+      label: "Explore",
+      icon: <Telescope size={20} strokeWidth={1.5} />,
+    },
+    {
+      to: "/progress",
+      label: "Progress",
+      icon: <BarChart3 size={20} strokeWidth={1.5} />,
+    },
   ];
 
   return (
