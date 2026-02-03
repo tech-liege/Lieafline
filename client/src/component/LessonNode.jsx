@@ -1,6 +1,5 @@
 import { Star } from "lucide-react";
 import { Link } from "react-router-dom";
-import SVG from "./SVG";
 
 export default function LessonNode({
   lesson,
