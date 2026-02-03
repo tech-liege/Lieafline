@@ -139,9 +139,9 @@ exports.getDomains = async (req, res) => {
   }
 };
 
-exports.getTodos = async (req, res) => {
+exports.getTask = async (req, res) => {
   try {
-    const task = await Task.findById(req.params.id);
+    const task = await Task.findById(req.params.id).select("-lessonId");
     if (!task) return res.status(404).json({ message: "Task not found" });
 
     const todos = await ToDo.find({ taskId: task.id });
@@ -149,12 +149,14 @@ exports.getTodos = async (req, res) => {
       return res.status(404).json({ message: "Todos not found" });
     }
 
+    task.todos = todos;
+
     const tasks = await Task.find({ lessonId: task.lessonId });
 
     res.status(201).json({
-      todos: todos,
-      index: [task.index, tasks?.length],
-      message: "Todos",
+      task: task,
+      l: tasks?.length,
+      message: "Single Task",
     });
   } catch (err) {
     res.status(500).json({ error: err.message });

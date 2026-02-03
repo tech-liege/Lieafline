@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { getExtPhase } from "../services/skillApi";
 import ModuleMap from "../component/ModuleMap";
 
-export default function Phases() {
+export default function Phase() {
   const [phase, setPhase] = useState({});
   const [showDialogue, setshowDialogue] = useState([99, 99]);
 
@@ -48,23 +48,19 @@ export default function Phases() {
       <h2 className="text-lg font-semibold text-gray-800 mb-4">
         Phase {phase.index + 1} - {phase.title}
       </h2>
-      <div className="min-h-fit max-w-full border border-dashed border-gray-300 rounded-3xl flex items-center justify-center bg-gray-50">
-        <main className="flex-1 max-w-full min-h-screen">
-          <div className="max-w-full space-y-8">
-            <div className="flex flex-col gap-6 max-w-full rounded-3xl border-4 border-emerald-100 mx-auto pb-10 overflow-y-hidden">
-              {phase.modules?.map((module, ind) => (
-                <ModuleMap
-                  key={module.id || module.title}
-                  module={module}
-                  index={ind}
-                  toggleDialogue={toggleDialogue}
-                  showDialogue={showDialogue}
-                />
-              ))}
-            </div>
-          </div>
-        </main>
-      </div>
+      <main className="flex-1 w-full overflow-y-auto">
+        <div className="flex flex-col gap-6 w-full rounded-3xl border-4 border-emerald-100 mx-auto pb-10">
+          {phase.modules?.map((module, ind) => (
+            <ModuleMap
+              key={module.id || module.title}
+              module={module}
+              index={ind}
+              toggleDialogue={toggleDialogue}
+              showDialogue={showDialogue}
+            />
+          ))}
+        </div>
+      </main>
     </section>
   );
 }

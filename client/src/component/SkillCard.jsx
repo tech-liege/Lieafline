@@ -1,4 +1,4 @@
-import { Archive, BookmarkPlus } from "lucide-react";
+import { Archive, BookmarkPlus, EllipsisVertical } from "lucide-react";
 import ProgressBar from "./ProgressBar";
 import { Link } from "react-router-dom";
 
@@ -6,7 +6,7 @@ function SkillCard({
   id,
   title,
   description,
-  progress = 0,
+  progress = 10,
   tags = [],
   bookmark,
   archive,
@@ -23,7 +23,9 @@ function SkillCard({
 
       {/* Description */}
       {description && (
-        <p className="mb-3 text-sm text-gray-600">{description}</p>
+        <div className="mb-5 text-sm text-gray-600 truncate h-4">
+          {description}
+        </div>
       )}
 
       {/* Progress */}
@@ -58,6 +60,11 @@ function SkillCard({
           title="Archive"
         >
           <Archive size={16} />
+        </button>
+      </div>
+      <div className="absolute right-3 top-3 items-center gap-2 rounded-md bg-white/70 p-1 shadow-sm backdrop-blur lg:hidden">
+        <button type="button">
+          <EllipsisVertical />
         </button>
       </div>
     </Link>

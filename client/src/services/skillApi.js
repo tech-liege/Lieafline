@@ -67,8 +67,8 @@ export const getExtPhase = (url, token, phaseId) =>
     headers: getHeaders(token),
   }).then((res) => res.json());
 
-export const getTodos = (url, token, taskId) =>
-  fetch(`${url}/getTodos/${taskId}`, {
+export const getTask = (url, token, taskId) =>
+  fetch(`${url}/getTask/${taskId}`, {
     method: "GET",
     headers: getHeaders(token),
   }).then((res) => res.json());

@@ -45,7 +45,7 @@ export default function PhaseCard({
       {/* Action */}
       <div className="mt-4 flex justify-end">
         <Link
-          to={`/phases/${id}`}
+          to={`/phase/${id}`}
           className={`text-sm md:text-lg font-medium px-4 py-2 rounded-lg transition-colors
             ${
               locked

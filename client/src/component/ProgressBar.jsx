@@ -4,13 +4,13 @@ function ProgressBar({ value = 0, disabled = false, showPer = true }) {
     <div className="w-full">
       <div
         className={
-          "h-2 w-full rounded " +
-          (disabled ? " bg-gray-300" : " bg-gray-200 dark:bg-gray-800")
+          "h-2 w-full columns-auto rounded " +
+          (disabled ? " bg-gray-400" : " bg-[#37464F]")
         }
       >
         <div
           className={
-            "h-2 rounded transition-[width] duration-300 " +
+            "h-2 max-w-full min-w-4 rounded columns-auto transition-[width] duration-500 " +
             (disabled ? " bg-gray-500" : " bg-emerald-500")
           }
           style={{ width: `${clamped}%` }}

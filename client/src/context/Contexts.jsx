@@ -150,6 +150,9 @@ export function VarProvider({ children }) {
     setIsSideActive(!isSideActive);
   };
 
+  const md = window.innerWidth >= 768;
+  const lg = window.innerWidth >= 1024;
+
   return (
     <VarContext.Provider
       value={{
@@ -170,6 +173,8 @@ export function VarProvider({ children }) {
         skillSample,
         phaseSample,
         mulTodoSample,
+        md,
+        lg,
       }}
     >
       {children}

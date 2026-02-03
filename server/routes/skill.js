@@ -14,7 +14,7 @@ const {
   getNiches,
   getExtPhase,
   getPhases,
-  getTodos,
+  getTask,
 } = require("../controllers/skillController");
 
 const router = express.Router();
@@ -29,6 +29,6 @@ router.get("/getDomains", authM, getDomains);
 router.get("/getNiches", authM, getNiches);
 router.get("/getExtPhase/:id", authM, getExtPhase);
 router.get("/getPhases/:id", authM, getPhases);
-router.get("/getTodos/:id", authM, getTodos);
+router.get("/getTask/:id", authM, getTask);
 
 module.exports = router;

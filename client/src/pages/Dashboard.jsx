@@ -47,7 +47,7 @@ export default function Dashboard() {
               <ChevronRight
                 strokeWidth={1}
                 size={80}
-                className="absolute z-51 my-20"
+                className="absolute z-301 my-20"
               />
             </Link>
           </div>
@@ -66,6 +66,10 @@ export default function Dashboard() {
     },
     {
       header: "Discover Pathways",
+      body: <div className=""></div>,
+    }, // left
+    {
+      header: "Streak", //in navbar too
       body: <div className=""></div>,
     },
   ];

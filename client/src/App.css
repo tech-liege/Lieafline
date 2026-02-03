@@ -1,3 +1,66 @@
 button{
   @apply cursor-pointer;
 }
+/* ******* */
+/* devlist */
+/* ******* */
+
+/* bottomstrip */
+div#session\/PlayerFooter._3rB4d._1VTif._2HXQ9.cssInspectorSelected {
+	background-color: #131F24;
+	border-top: 1.33333px solid #37464F;
+	box-sizing: border-box;
+	columns: auto;
+	cursor: default;
+	max-height: 140px;
+	min-height: 140px;
+	overflow: hidden;
+	position: absolute;
+	transition: max-height 0.3s ease-in-out;
+}
+
+/* Final todo */
+/* text div */
+div#session\/PlayerFooter._3rB4d._1VTif._2HXQ9.cssInspectorSelected {
+	background-color: #131F24;
+	border-top: 1.33333px solid #37464F;
+	box-sizing: border-box;
+	columns: auto;
+	cursor: default;
+	max-height: 140px;
+	min-height: 140px;
+	overflow: hidden;
+	position: absolute;
+	transition: max-height 0.3s ease-in-out;
+}
+/* text head */
+div._3z6AH.cssInspectorSelected {
+	-webkit-font-smoothing: antialiased;
+	box-sizing: border-box;
+	color: #FFC700;
+	columns: auto;
+	cursor: default;
+	font-family: din-round, sans-serif;
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 20px;
+	text-align: center;
+}
+
+/* continue button */
+button._1rcV8._1VYyp._1ursp._7jW2t._3DbUj._38g3s._2oGJR.cssInspectorSelected {
+	align-items: center;
+	appearance: button;
+	border-bottom: 4px solid #00000000;
+	border-radius: 16px;
+	box-sizing: border-box;
+	columns: auto;
+	cursor: pointer;
+	display: inline-flex;
+	filter: brightness(1.1);
+	justify-content: center;
+	min-width: 150px;
+	padding: 0px 16px;
+	position: relative;
+	transform: matrix(1, 0, 0, 1, 0, 0);
+}

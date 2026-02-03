@@ -6,7 +6,7 @@ import ExploreSkills from "../pages/ExploreSkills";
 import CreateSkill from "../pages/CreateSkill";
 import EditSkill from "../pages/EditSkill";
 import DeleteSkill from "../pages/DeleteSkill";
-import Phases from "../pages/Phases";
+import Phase from "../pages/Phase";
 import Progress from "../pages/Progress";
 import Profile from "../pages/Profile";
 import Lesson from "../pages/Lesson";
@@ -126,7 +126,7 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: "phases/:phaseId",
+        path: "phase/:phaseId",
         element: (
           <PrivateRoute>
             <Render />
@@ -135,7 +135,7 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Phases />,
+            element: <Phase />,
           },
           {
             path: "lesson/:taskId",

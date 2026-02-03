@@ -1,31 +1,24 @@
 const mongoose = require("mongoose");
 
-const q_aSchema = new mongoose.Schema({
-  nature: { type: String, required: true }, // default=multichoice/bool/etc..
-  question: { type: String, required: true },
-  options: {
-    a: { type: String, required: true },
-    b: { type: String, required: true },
-    c: String,
-    d: String,
-  },
-  answer: {
-    // either 'a', 'b', 'c' or 'd'
-    type: String,
-    maxlength: 1,
-    required: true,
-  },
-  correction: {
-    type: String, //Why the correct answer is correct
-    required: true,
-  },
-});
-
 const todoSchema = new mongoose.Schema({
   format: String, // read/video/question
-  notes: String,
-  videos: [String],
-  q_a: [q_aSchema],
+  notes: String || HTMLElement,
+  video: String,
+  q_a: {
+    nature: { type: String, required: true }, // default=multichoice/bool/etc..
+    question: { type: String, required: true },
+    options: [String],
+    answer: {
+      // index of answer
+      type: Number,
+      maxlength: 1,
+      required: true,
+    },
+    correction: {
+      type: String, //Why the correct answer is correct
+      required: true,
+    },
+  },
   index: Number,
   taskId: { type: mongoose.Schema.Types.ObjectId, ref: "Task" },
 });

@@ -26,34 +26,39 @@ export default function App() {
   } = useVar();
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-800">
+    <div className="min-h-screen flex flex-col bg-white text-gray-800">
       {/* Navbar */}
       {!inFullScreen && <Navbar />}
 
       {/* Main Layout */}
-      <div className={"flex flex-1 " + (!inFullScreen && "mt-16")}>
+      <div className="flex flex-1 ">
         {/* Sidebar (only when logged in) */}
-        {token && isSideActive && !inFullScreen && (
+        {token && !inFullScreen && (
           <aside
-            className="fixed block h-full w-[50%] md:w-[15rem] not-md:z-100 transition-all"
-            onClick={window.innerWidth < 768 ? toggleSidebar : undefined}
+            className={
+              "fixed block md:border-r-2 md:border-[#e5e7eb6d] not-md:z-100 transition-all duration-300 overflow-y-clip" +
+              (isSideActive
+                ? " h-full w-[50%] md:w-[15rem]"
+                : " h-[5rem] md:h-full w-[5rem]")
+            }
           >
             <Sidebar />
-            <BackgroundOverlay className="md:hidden" />
+            {isSideActive && <BackgroundOverlay className="md:hidden" />}
           </aside>
         )}
 
         {/* Main Content Area */}
         <main
-          className={`flex flex-1 bg-gray-100 min-h-fit min-w-fit rounded-t-3xl shadow-md transition-all duration-75 ${
+          className={`flex flex-1 bg-white min-h-fit min-w-fit rounded-t-3xl transition-all duration-75 ${
             !inFullScreen
-              ? "p-6 md:p-8 " + (isSideActive && " md:ml-[15rem]")
+              ? "p-6 mt-16 md:p-8 " +
+                (isSideActive ? " md:ml-[15rem]" : " md:ml-[5rem]")
               : "p-1 md:p-2"
           }`}
         >
           <div className="w-full rounded-2xl mx-auto min-h-[77vh]">
             {inFullScreen && showFSHeader && (
-              <div className="bg-green-700 text-white font-bold text-center text-2xl p-1 md:p-2 rounded-t-2xl">
+              <div className="fixed top-0 left-0 bg-emerald-700 w-full text-white font-bold text-center text-2xl p-1 md:p-2">
                 {fullScreenHeader}
               </div>
             )}
@@ -69,6 +74,15 @@ export default function App() {
                     {inLoadingText}
                   </div>
                 </div>
+              </div>
+            ) : inFullScreen ? (
+              <div
+                className={
+                  "w-full h-[95dvh] " +
+                  (showFSHeader ? " mt-5 md:mt-10" : " mt-3 md:mt-5")
+                }
+              >
+                <Outlet />
               </div>
             ) : (
               <Outlet />

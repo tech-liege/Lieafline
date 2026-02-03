@@ -1,60 +1,55 @@
-[
-  {
-    "format": "read",
-    "notes": "Read about HTML document structure, doctype, head, and body tags.",
-    "index": 0
-  },
-  {
-    "format": "question",
-    "q_a": [
-      {
+{
+  "xp": 30,
+  "index": 1,
+  "todos": [
+    {
+      "format": "read",
+      "note": "Read about HTML document structure, doctype, head, and body tags.",
+      "index": 0
+    },
+    {
+      "format": "question",
+      "q_a": {
         "nature": "multiple-choice",
         "question": "Which tag is used to define a paragraph in HTML?",
-        "options": {
-          "a": "<p>",
-          "b": "<div>",
-          "c": "<span>",
-          "d": "<h1>"
-        },
-        "answer": "a",
+        "options": ["<p>", "<div>", "<span>", "<h1>"],
+        "answer": 0,
         "correction": "The <p> tag defines a paragraph, while <div> is a container and <span> is inline."
       },
-      {
+      "index": 1
+    },
+    {
+      "format": "question",
+      "q_a": {
         "nature": "multiple-choice",
         "question": "Which tag can be used to define an header in HTML?",
-        "options": {
-          "a": "<p>",
-          "b": "<div>",
-          "c": "<span>",
-          "d": "<h1>"
-        },
-        "answer": "d",
+        "options": ["<p>", "<div>", "<span>", "<h1>"],
+        "answer": 3,
         "correction": "The <h1> tag can be used to define a header, while <div> is a container and <span> is inline."
       },
-      {
+      "index": 2
+    },
+    {
+      "format": "question",
+      "q_a": {
         "nature": "multiple-choice",
         "question": "Which is an example of a meta tag in HTML?",
-        "options": {
-          "a": "<meta />",
-          "b": "<div>",
-          "c": "<span>",
-          "d": "<h1>"
-        },
-        "answer": "a",
+        "options": ["<meta />", "<div>", "<span>", "<h1>"],
+        "answer": 0,
         "correction": "The <meta /> tag is a meta tag, while <div> is a container and <span> is inline."
-      }
-    ],
-    "index": 1
-  },
-  {
-    "format": "video",
-    "videos": ["https://www.youtube.com/watch?v=pQN-pnXPaVg"],
-    "notes": "Watch a tutorial on semantic HTML elements.",
-    "index": 2
-  },
-  {
-    "format": "read",
-    "notes": "Read about selectors, colors, fonts, and the box model in CSS.",
-    "index": 3
-  }
-]
+      },
+      "index": 3
+    },
+    {
+      "format": "video",
+      "video": "https://www.youtube.com/watch?v=pQN-pnXPaVg",
+      "note": "Watch a tutorial on semantic HTML elements.",
+      "index": 4
+    },
+    {
+      "format": "read",
+      "note": "Read about selectors, colors, fonts, and the box model in CSS.",
+      "index": 5
+    }
+  ]
+}

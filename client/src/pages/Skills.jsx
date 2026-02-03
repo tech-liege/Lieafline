@@ -7,6 +7,7 @@ import { useAuth, useVar } from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { archiveSkill, bookmarkSkill } from "../services/userApi";
+import { Plus } from "lucide-react";
 
 function Skills() {
   const [skill, setSkill] = useState(null);
@@ -111,10 +112,13 @@ function Skills() {
         <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <h1 className="text-2xl font-bold text-gray-800">My Skills</h1>
           <Link
-            to="/exploreSkill"
+            to="/explore"
             className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 text-white text-sm font-medium px-4 py-2 shadow-sm hover:bg-emerald-600 transition-colors"
           >
-            <span className="text-lg font-bold leading-none">+</span> Add Skill
+            <span className="text-lg font-bold leading-none">
+              <Plus />
+            </span>{" "}
+            Add Skill
           </Link>
         </header>
         {/* Skill Grid */}
@@ -133,11 +137,13 @@ function Skills() {
           <section className="flex flex-col items-center justify-center h-[60vh] text-gray-500">
             <p className="text-sm">No skills added yet.</p>
             <Link
-              to="/exploreSkill"
+              to="/explore"
               className="mt-4 inline-flex items-center gap-2 rounded-lg bg-emerald-500 text-white text-sm font-medium px-4 py-2 shadow-sm hover:bg-emerald-600 transition-colors"
             >
-              <span className="text-lg font-bold leading-none">+</span> Add
-              Skill
+              <span className="text-lg font-bold leading-none">
+                <Plus />
+              </span>{" "}
+              Add Skill
             </Link>
           </section>
         )}
