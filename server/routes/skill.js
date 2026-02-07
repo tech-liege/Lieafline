@@ -1,5 +1,3 @@
-const User = require('../model/User.js');
-const Skill = require('../model/Skill.js');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { authM } = require('../middleware/authM.js');
