@@ -9,7 +9,6 @@ const {
   deleteSkill,
   updateSkill,
   getDomains,
-  getNiches,
   getExtPhase,
   getPhases,
   getTask,
@@ -24,7 +23,6 @@ router.patch("/:id", authM, updateSkill);
 router.get("/user/:userId", authM, getUserSkills);
 router.get("/:id", authM, getSkillById);
 router.get("/getDomains", authM, getDomains);
-router.get("/getNiches", authM, getNiches);
 router.get("/getExtPhase/:id", authM, getExtPhase);
 router.get("/getPhases/:id", authM, getPhases);
 router.get("/getTask/:id", authM, getTask);
