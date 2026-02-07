@@ -5,6 +5,7 @@ const {
   getUserSettings,
   updateUserSettings,
   bookmarkSkill,
+  increaseStreak,
 } = require("../controllers/userController");
 const { authM } = require('../middleware/authM');
 
