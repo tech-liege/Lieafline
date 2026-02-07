@@ -6,7 +6,6 @@ const Task = require("../model/Skill/Task");
 const ToDo = require("../model/Skill/ToDo");
 const User = require("../model/User");
 const Taxonomy = require("../utils/taxonomy.json");
-const niches = require("../utils/niches.json");
 
 // ✅ Create a new skill
 exports.createSkill = async (req, res) => {
