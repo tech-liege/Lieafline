@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Todo({
   todo,
@@ -103,7 +102,7 @@ export default function Todo({
         </div>
         <div
           className={
-            "w-full fixed left-0 bottom-0 grid grid-cols-3 p-3 md:p-6 h-30  " +
+            "w-full absolute left-0 bottom-0 grid grid-cols-3 p-3 md:p-6 h-30 border-t border-[#37464F]  " +
             (done
               ? correct
                 ? "bg-success text-success-content"

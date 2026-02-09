@@ -103,7 +103,7 @@ export default function App() {
         autoClose={3000}
         theme="light"
         toastClassName="!bg-emerald-50 !text-gray-800 !shadow-md !rounded-xl"
-        newestOnTop={false}
+        stacked
       />
       <Analytics />
       {/* <div>
