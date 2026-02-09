@@ -1,75 +1,170 @@
-# 🌱 Lieafline
+# 🌱 Lieafline  
+**Gamified skill-tracking platform that visualizes learning as structured growth**
 
-**Lieafline** is a **gamified skill-tracking web app** that turns your learning journey into a dynamic, visual experience — like a growing tree of knowledge 🌳. Inspired by the balance of **growth** and **structure**, Lieafline helps you map out your skills, track your progress, and stay motivated like a boss.
+[![Status](https://img.shields.io/badge/status-building-darkorange)]()
+[![Stack](https://img.shields.io/badge/stack-React%20%7C%20Node%20%7C%20JS-blue)]()
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)]()
 
----
+Lieafline is a full-stack web app that transforms skill development into a visual progression system.  
+Instead of static task lists, users grow a structured skill path as they learn and complete milestones.
 
-## 🚀 Features
-
-- 🧠 **Skill Mapping** – Visually track and organize your learning progress across categories.
-- 🧩 **Gamified Experience** – Earn points, unlock achievements, and grow your personal knowledge tree.
-- 📅 **Daily Tasks & Goals** – Stay consistent with custom goals and deadlines.
-- 📊 **Progress Visualization** – Get clear, satisfying visual feedback as you grow.
-- 🖼️ **Beautiful UI** – Clean, minimal, and responsive design.
+Built to explore scalable frontend architecture, clean APIs, and long-term product design.
 
 ---
 
-## 📸 Preview
-
-> *(Add screenshots here)*  
-Coming soon...
-
----
-
-## ⚙️ Tech Stack
-
-### Frontend:
-- **React.js**
-- **Tailwind CSS**
-- **React Router**
-- **Framer Motion**
-
-### Backend:
-- **Node.js**
-- **Express.js**
-- **MongoDB (Mongoose)**
-- **JWT Auth**
+## 🚀 Live Demo
+- **App:** [Add link]  
+- **Demo video:** [Add link]
 
 ---
 
-## 🛠️ Installation
+## 🧠 Core Features
+- Visual skill progression system  
+- Task + milestone tracking  
+- Persistent user progress  
+- Authentication system  
+- Responsive dashboard  
+- REST API integration  
+- Modular component architecture  
+- Scalable data models  
 
-### 📦 Backend
+---
 
+## 🛠 Tech Stack
+
+### Frontend
+- React  
+- TypeScript  
+- Tailwind / CSS (edit if needed)  
+- Vite (or Webpack)
+
+### Backend
+- Node.js  
+- Express  
+- MongoDB (or your DB)  
+- REST API
+
+### Tooling
+- Git  
+- ESLint + Prettier  
+- Docker (if used)
+
+---
+
+## 🏗 Architecture Overview
+
+```
+client/
+ ├── components/
+ ├── pages/
+ ├── hooks/
+ └── services/api/
+
+server/
+ ├── controllers/
+ ├── routes/
+ ├── models/
+ ├── middleware/
+ └── config/
+```
+
+**Design goals**
+- Feature-based structure  
+- Scalable API layer  
+- Clear separation of concerns  
+- Easy future expansion (AI, analytics, real-time)
+
+---
+
+## ✨ Key Engineering Focus
+- Maintainable code structure  
+- Real-world API patterns  
+- Component reusability  
+- Performance-conscious rendering  
+- Production-style Git workflow  
+
+---
+
+## 📦 Getting Started
+
+### Clone
 ```bash
-cd server
+git clone https://github.com/tech-liege/lieafline.git
+cd lieafline
+```
+
+### Install
+```bash
 npm install
+```
+
+### Run frontend
+```bash
 npm run dev
 ```
-### Frontend
 
-``` bash
-cd client
-npm install
-npm start
+### Run backend
+```bash
+npm run server
 ```
 
-🌐 Live Demo
-Frontend: *(comming soon...)*
-Backend: *(comming soon...)*
+### Environment variables
+Create `.env` in root:
 
-🧑‍💻 Author
-Daniel Oluwatobiloba Idowu
-📧 danielidowu938@gmail.com
-📍 Oreyo, Ikorodu, Lagos
+```
+PORT=
+MONGO_URI=
+JWT_SECRET=
+```
 
-📜 License
-MIT License. Feel free to fork, modify, or collab — just don’t steal it and act like you built it from scratch 😎.
+---
 
-📌 Project Status
-🚧 In Progress
+## 📸 Screenshots
+[coming soon...]
 
-🎯 Goal: Full-stack MVP by December 31st, 2025
+```
+![Dashboard](./screenshots/dashboard.png)
+![Skill Map](./screenshots/map.png)
+![Mobile](./screenshots/mobile.png)
+```
 
-✨ Slogan
-"Track growth. Level up. Stay rooted."
+---
+
+## 🗺 Roadmap
+- Real-time sync  
+- AI-generated learning paths  
+- Team learning mode  
+- Analytics dashboard  
+- Notifications  
+- Mobile optimization  
+
+---
+
+## 🎯 Project Vision
+Most tools track tasks.  
+Lieafline tracks **growth**.
+
+The goal is to build a platform where learning progress is structured, visual, and motivating enough to keep people consistent long-term.
+
+This is being developed as a real product, not just a demo project.
+
+---
+
+## 👨‍💻 Author
+**Daniel Idowu**  
+GitHub: https://github.com/tech-liege  
+X: https://x.com/tech_liege
+
+---
+
+## 🧪 Future Enhancements
+- WebSocket updates  
+- AI recommendations  
+- Plugin system  
+- Public skill trees  
+- Performance metrics  
+
+---
+
+## ⭐ If you like the project
+Star the repo or follow the journey.
